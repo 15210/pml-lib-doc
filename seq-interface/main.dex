@@ -1,5 +1,5 @@
-\begin{chapter}[Sequences]
-\label{ch:sequence}
+\begin{chapter}[Sequence Interface]
+\label{ch:seq-interface}
 \begin{preamble}
 The \sml{SEQUENCE} signature is a comprehensive interface for a
 persistent sequence type.
@@ -9,9 +9,73 @@ persistent sequence type.
 % element of $s$, respectively.
 \end{preamble}
 
-\begin{section}[Interface]
+\begin{section}[Summary]
+\begin{gram}
+\begin{verbatim}
+signature SEQUENCE =
+sig
+  type 'a t
+  type 'a seq = 'a t
+  type 'a ord = 'a * 'a -> order
+  datatype 'a listview = NIL | CONS of 'a * 'a seq
+  datatype 'a treeview = EMPTY | ONE of 'a | PAIR of 'a seq * 'a seq
 
-\begin{subsection}[Types]
+  exception Range
+  exception Size
+
+  val nth : 'a seq -> int -> 'a
+  val length : 'a seq -> int
+  val toList : 'a seq -> 'a list
+  val toString : ('a -> string) -> 'a seq -> string
+  val equal : ('a * 'a -> bool) -> 'a seq * 'a seq -> bool
+
+  val empty : unit -> 'a seq
+  val singleton : 'a -> 'a seq
+  val tabulate : (int -> 'a) -> int -> 'a seq
+  val fromList : 'a list -> 'a seq
+
+  val rev : 'a seq -> 'a seq
+  val append : 'a seq * 'a seq -> 'a seq
+  val flatten : 'a seq seq -> 'a seq
+
+  val filter : ('a -> bool) -> 'a seq -> 'a seq
+  val map : ('a -> 'b) -> 'a seq -> 'b seq
+  val zip : 'a seq * 'b seq -> ('a * 'b) seq
+  val zipWith : ('a * 'b -> 'c) -> 'a seq * 'b seq -> 'c seq
+
+  val enum : 'a seq -> (int * 'a) seq
+  val filterIdx : (int * 'a -> bool) -> 'a seq -> 'a seq
+  val mapIdx : (int * 'a -> 'b) -> 'a seq -> 'b seq
+  val update : 'a seq * (int * 'a) -> 'a seq
+  val inject : 'a seq * (int * 'a) seq -> 'a seq
+
+  val subseq : 'a seq -> int * int -> 'a seq
+  val take : 'a seq -> int -> 'a seq
+  val drop : 'a seq -> int -> 'a seq
+  val splitHead : 'a seq -> 'a listview
+  val splitMid : 'a seq -> 'a treeview
+
+  val iterate : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b
+  val iteratePrefixes : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b seq * 'b
+  val iteratePrefixesIncl : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b seq
+  val reduce : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a
+  val scan : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a seq * 'a
+  val scanIncl : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a seq
+
+  val sort : 'a ord -> 'a seq -> 'a seq
+  val merge : 'a ord -> 'a seq * 'a seq -> 'a seq
+  val collect : 'a ord -> ('a * 'b) seq -> ('a * 'b seq) seq
+  val collate : 'a ord -> 'a seq ord
+  val argmax : 'a ord -> 'a seq -> int
+
+  val $ : 'a -> 'a seq
+  val % : 'a list -> 'a seq
+end
+\end{verbatim}
+\end{gram}
+\end{section}
+
+\begin{section}[Types]
 
 \begin{gram}
 \begin{verbatim}
@@ -45,9 +109,9 @@ This is largely a syntactic convenience for 2-way divide-and-conquer algorithms
 on sequences. See~\ref{gr:splitMid}.
 \end{gram}
 
-\end{subsection}
+\end{section}
 
-\begin{subsection}[Exceptions]
+\begin{section}[Exceptions]
 
 \begin{gram}
 \begin{verbatim}
@@ -63,11 +127,11 @@ exception Size
 The \sml{Size} exception is raised whenever a function is given a negative size.
 \end{gram}
 
-\end{subsection}
+\end{section}
 
-\begin{subsection}[Values]
+\begin{section}[Values]
 
-\begin{gram}[Nth]
+\begin{gram}[nth]
 \label{gr:nth}
 \begin{verbatim}
 val nth : 'a seq -> int -> 'a
@@ -76,7 +140,7 @@ val nth : 'a seq -> int -> 'a
 Raises \sml{Range} if $i$ is out-of-bounds.
 \end{gram}
 
-\begin{gram}[Length]
+\begin{gram}[length]
 \label{gr:length}
 \begin{verbatim}
 val length : 'a seq -> int
@@ -84,7 +148,7 @@ val length : 'a seq -> int
 \sml{length s} evaluates to $|s|$, the number of elements in $s$.
 \end{gram}
 
-\begin{gram}[ToList]
+\begin{gram}[toList]
 \label{gr:toList}
 \begin{verbatim}
 val toList : 'a seq -> 'a list
@@ -93,7 +157,7 @@ Produces an index-preserving list representation of a sequence.
 \end{gram}
 
 \begin{group}
-\begin{gram}[ToString]
+\begin{gram}[toString]
 \label{gr:toString}
 \begin{verbatim}
 val toString : ('a -> string) -> 'a seq -> string
@@ -106,7 +170,7 @@ element of $s$ is converted to a string via $f$.
 \end{example}
 \end{group}
 
-\begin{gram}[Equal]
+\begin{gram}[equal]
 \label{gr:equal}
 \begin{verbatim}
 val equal : ('a * 'a -> bool) -> 'a seq * 'a seq -> bool
@@ -115,7 +179,7 @@ val equal : ('a * 'a -> bool) -> 'a seq * 'a seq -> bool
 in the same order. Individual element pairs are compared for equality with $f$.
 \end{gram}
 
-\begin{gram}[Empty]
+\begin{gram}[empty]
 \label{gr:empty}
 \begin{verbatim}
 val empty : unit -> 'a seq
@@ -123,7 +187,7 @@ val empty : unit -> 'a seq
 Construct an empty sequence.
 \end{gram}
 
-\begin{gram}[Singleton]
+\begin{gram}[singleton]
 \label{gr:singleton}
 \begin{verbatim}
 val singleton : 'a -> 'a seq
@@ -131,7 +195,7 @@ val singleton : 'a -> 'a seq
 \sml{singleton x} evaluates to $\seq{x}$.
 \end{gram}
 
-\begin{gram}[Tabulate]
+\begin{gram}[tabulate]
 \label{gr:tabulate}
 \begin{verbatim}
 val tabulate : (int -> 'a) -> int -> 'a seq
@@ -140,7 +204,7 @@ val tabulate : (int -> 'a) -> int -> 'a seq
 element is given by $f(i)$. Raises \sml{Size} if $n < 0$.
 \end{gram}
 
-\begin{gram}[FromList]
+\begin{gram}[fromList]
 \label{gr:fromList}
 \begin{verbatim}
 val fromList : 'a list -> 'a seq
@@ -148,7 +212,7 @@ val fromList : 'a list -> 'a seq
 Produces an index-preserving sequence from a list.
 \end{gram}
 
-\begin{gram}[Rev]
+\begin{gram}[rev]
 \label{gr:rev}
 \begin{verbatim}
 val rev : 'a seq -> 'a seq
@@ -157,7 +221,7 @@ val rev : 'a seq -> 'a seq
 is equivalent to \sml{nth s (length s - i - 1)}.
 \end{gram}
 
-\begin{gram}[Append]
+\begin{gram}[append]
 \label{gr:append}
 \begin{verbatim}
 val append : 'a seq * 'a seq -> 'a seq
@@ -166,7 +230,7 @@ Concatenate two sequences.
 \end{gram}
 
 \begin{group}
-\begin{gram}[Flatten]
+\begin{gram}[flatten]
 \label{gr:flatten}
 \begin{verbatim}
 val flatten : 'a seq seq -> 'a seq
@@ -178,7 +242,7 @@ Flattening $\seq{\seq{1,2},\seq{},\seq{3}}$ results in $\seq{1,2,3}$.
 \end{example}
 \end{group}
 
-\begin{gram}[Filter]
+\begin{gram}[filter]
 \label{gr:filter}
 \begin{verbatim}
 val filter : ('a -> bool) -> 'a seq -> 'a seq
@@ -187,7 +251,7 @@ val filter : ('a -> bool) -> 'a seq -> 'a seq
 element satisfying the predicate $p$.
 \end{gram}
 
-\begin{gram}[Map]
+\begin{gram}[map]
 \label{gr:map}
 \begin{verbatim}
 val map : ('a -> 'b) -> 'a seq -> 'b seq
@@ -196,7 +260,7 @@ val map : ('a -> 'b) -> 'a seq -> 'b seq
 to \sml{tabulate (f o nth s) (length s)}.
 \end{gram}
 
-\begin{gram}[Zip]
+\begin{gram}[zip]
 \label{gr:zip}
 \begin{verbatim}
 val zip : 'a seq * 'b seq -> ('a * 'b) seq
@@ -205,7 +269,7 @@ val zip : 'a seq * 'b seq -> ('a * 'b) seq
 element is the pair $(s[i], t[i])$.
 \end{gram}
 
-\begin{gram}[ZipWith]
+\begin{gram}[zipWith]
 \label{gr:zipWith}
 \begin{verbatim}
 val zipWith : ('a * 'b -> 'c) -> 'a seq * 'b seq -> 'c seq
@@ -213,7 +277,7 @@ val zipWith : ('a * 'b -> 'c) -> 'a seq * 'b seq -> 'c seq
 \sml{zipWith f (s, t)} is logically equivalent to \sml{map f (zip (s, t))}.
 \end{gram}
 
-\begin{gram}[Enum]
+\begin{gram}[enum]
 \label{gr:enum}
 \begin{verbatim}
 val enum : 'a seq -> (int * 'a) seq
@@ -223,7 +287,7 @@ index. It is logically equivalent to
 \sml{tabulate (fn i => (i, nth s i)) (length s)}.
 \end{gram}
 
-\begin{gram}[FilterIdx]
+\begin{gram}[filterIdx]
 \label{gr:filterIdx}
 \begin{verbatim}
 val filterIdx : (int * 'a -> bool) -> 'a seq -> 'a seq
@@ -231,10 +295,10 @@ val filterIdx : (int * 'a -> bool) -> 'a seq -> 'a seq
 Similar to~\ref{gr:filter}, but also provides the
 index of each element to the predicate.
 \sml{filterIdx f s} is logically equivalent to
-\sml{filter f (enum s)}.
+\sml{map (fn (\_, x) => x) (filter f (enum s))}.
 \end{gram}
 
-\begin{gram}[MapIdx]
+\begin{gram}[mapIdx]
 \label{gr:mapIdx}
 \begin{verbatim}
 val mapIdx : (int * 'a -> 'b) -> 'a seq -> 'b seq
@@ -243,7 +307,7 @@ Similar to~\ref{gr:map}, but also provides the index of each element.
 \sml{mapIdx f s} is logically equivalent to \sml{map f (enum s)}.
 \end{gram}
 
-\begin{gram}[Update]
+\begin{gram}[update]
 \label{gr:update}
 \begin{verbatim}
 val update : 'a seq * (int * 'a) -> 'a seq
@@ -255,7 +319,7 @@ it raises \sml{Range}, otherwise it is logically equivalent to
 \end{gram}
 
 \begin{group}
-\begin{gram}[Inject]
+\begin{gram}[inject]
 \label{gr:inject}
 \begin{verbatim}
 val inject : 'a seq * (int * 'a) seq -> 'a seq
@@ -272,7 +336,7 @@ equivalent to \sml{iterate update s u}.
 \end{note}
 \end{group}
 
-\begin{gram}[Subseq]
+\begin{gram}[subseq]
 \label{gr:subseq}
 \begin{verbatim}
 val subseq : 'a seq -> int * int -> 'a seq
@@ -282,7 +346,7 @@ at index $i$ with length $n$. Raises \sml{Size} if $n < 0$. Raises \sml{Range}
 if the subsequence is out-of-bounds.
 \end{gram}
 
-\begin{gram}[Take]
+\begin{gram}[take]
 \label{gr:take}
 \begin{verbatim}
 val take : 'a seq -> int -> 'a seq
@@ -291,7 +355,7 @@ val take : 'a seq -> int -> 'a seq
 equivalent to \sml{subseq s (0, n)}.
 \end{gram}
 
-\begin{gram}[Drop]
+\begin{gram}[drop]
 \label{gr:drop}
 \begin{verbatim}
 val drop : 'a seq -> int -> 'a seq
@@ -300,7 +364,7 @@ val drop : 'a seq -> int -> 'a seq
 to \sml{subseq s (n, length s - n)}.
 \end{gram}
 
-\begin{gram}[SplitHead]
+\begin{gram}[splitHead]
 \label{gr:splitHead}
 \begin{verbatim}
 val splitHead : 'a seq -> 'a listview
@@ -309,7 +373,7 @@ val splitHead : 'a seq -> 'a listview
 logically equivalent to \sml{CONS (nth s 0, drop s 1)}.
 \end{gram}
 
-\begin{gram}[SplitMid]
+\begin{gram}[splitMid]
 \label{gr:splitMid}
 \begin{verbatim}
 val splitMid : 'a seq -> 'a treeview
@@ -320,7 +384,7 @@ concatenation is $s$. The sizes of $l$ and $r$ are implementation-defined.
 \end{gram}
 
 \begin{group}
-\begin{gram}[Iterate]
+\begin{gram}[iterate]
 \label{gr:iterate}
 \begin{verbatim}
 val iterate : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b
@@ -339,7 +403,7 @@ When $s$ is empty, it returns $b$.
 \end{example}
 \end{group}
 
-\begin{gram}[IteratePrefixes]
+\begin{gram}[iteratePrefixes]
 \label{gr:iteratePrefixes}
 \begin{verbatim}
 val iteratePrefixes : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b seq * 'b
@@ -352,7 +416,7 @@ That is, it produces the iteration of $f$ for each prefix of $s$.
 \end{gram}
 
 \begin{group}
-\begin{gram}[IteratePrefixesIncl]
+\begin{gram}[iteratePrefixesIncl]
 \label{gr:iteratePrefixesIncl}
 \begin{verbatim}
 val iteratePrefixesIncl : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b seq
@@ -371,7 +435,7 @@ The return type of~\ref{gr:iteratePrefixesIncl} is slightly different than
 \end{group}
 
 \begin{group}
-\begin{gram}[Reduce]
+\begin{gram}[reduce]
 \label{gr:reduce}
 \begin{verbatim}
 val reduce : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a
@@ -389,7 +453,7 @@ $f$ is associative and $b$ is a corresponding identity.
 \end{note}
 \end{group}
 
-\begin{gram}[Scan]
+\begin{gram}[scan]
 \label{gr:scan}
 \begin{verbatim}
 val scan : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a seq * 'a
@@ -398,7 +462,7 @@ For an associative function $f$ and corresponding identity $b$, \sml{scan f b s}
 is logically equivalent to \sml{iteratePrefixes f b s}.
 \end{gram}
 
-\begin{gram}[ScanIncl]
+\begin{gram}[scanIncl]
 \label{gr:scanIncl}
 \begin{verbatim}
 val scanIncl : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a seq
@@ -407,7 +471,7 @@ For an associative function $f$ and corresponding identity $b$, \sml{scanIncl f 
 is logically equivalent to \sml{iteratePrefixesIncl f b s}.
 \end{gram}
 
-\begin{gram}[Sort]
+\begin{gram}[sort]
 \label{gr:sort}
 \begin{verbatim}
 val sort : 'a ord -> 'a seq -> 'a seq
@@ -418,7 +482,7 @@ by $c$ will appear in the same relative order in the output as they were
 in the input.
 \end{gram}
 
-\begin{gram}[Merge]
+\begin{gram}[merge]
 \label{gr:merge}
 \begin{verbatim}
 val merge : 'a ord -> 'a seq * 'a seq -> 'a seq
@@ -428,7 +492,7 @@ For sequences $s$ and $t$ already sorted with respect to $c$,
 \end{gram}
 
 \begin{group}
-\begin{gram}[Collect]
+\begin{gram}[collect]
 \label{gr:collect}
 \begin{verbatim}
 val collect : 'a ord -> ('a * 'b) seq -> ('a * 'b seq) seq
@@ -444,7 +508,7 @@ $\seq{(1,\seq{8}), (2, \seq{6}), (3,\seq{7,5})}$.
 \end{example}
 \end{group}
 
-\begin{gram}[Collate]
+\begin{gram}[collate]
 \label{gr:collate}
 \begin{verbatim}
 val collate : 'a ord -> 'a seq ord
@@ -453,7 +517,7 @@ val collate : 'a ord -> 'a seq ord
 from $c$.
 \end{gram}
 
-\begin{gram}[Argmax]
+\begin{gram}[argmax]
 \label{gr:argmax}
 \begin{verbatim}
 val argmax : 'a ord -> 'a seq -> int
@@ -476,15 +540,6 @@ val % : 'a list -> 'a seq
 An alias for~\ref{gr:fromList}.
 \end{gram}
 
-\end{subsection}
-
-\end{section}
-
-\begin{section}[Implementations]
-\begin{subsection}[ArraySequence]
-\end{subsection}
-\begin{subsection}[TreeSequence]
-\end{subsection}
 \end{section}
 
 \end{chapter}
