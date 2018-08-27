@@ -169,7 +169,7 @@ $\displaystyle \bigO{\log{|s|}}$ \\
 \end{tabular}
 \end{costspec}
 
-\begin{costspec}[Other Operations]
+\begin{costspec}[Miscellaneous]
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 %
@@ -181,16 +181,13 @@ $\sml{enum}~s$ &
 $\displaystyle \bigO{|s|}$ &
 $\displaystyle \bigO 1$ \\
 %
-\end{tabular}
-\end{costspec}
-
-\begin{costspec}[List Conversion]
-\begin{tabular}{c|c|c}
-& \textbf{Work} & \textbf{Span} \\
+$\sml{toList}~s$ &
+$\bigO{|s|}$ &
+$\bigO{|s|}$ \\
 %
-$\sml{toList}~s$ & $\bigO{|s|}$ & $\bigO{|s|}$ \\
-%
-$\sml{fromList}~l$ & $\bigO{|l|}$ & $\bigO{|l|}$ \\
+$\sml{fromList}~l$ &
+$\bigO{|l|}$ &
+$\bigO{|l|}$ \\
 %
 \end{tabular}
 \end{costspec}
