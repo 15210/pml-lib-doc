@@ -80,7 +80,7 @@ $\displaystyle \bigO{|s| + |t|}$ &
 $\displaystyle \bigO 1$ \\
 %
 $\sml{flatten}~s$ &
-$\displaystyle \bigO{\sum_{x \in s} \left(1 + |s|\right)}$ &
+$\displaystyle \bigO{|s| + \sum_{x \in s} |x|}$ &
 $\displaystyle \bigO{\log{|s|}}$
 %
 \end{tabular}
@@ -95,25 +95,27 @@ $\displaystyle \bigO{\min(|s|,|t|)}$ &
 $\displaystyle \bigO 1$ \\
 %
 $\sml{zipWith}~f~(s,t)$ &
-$\displaystyle \sum_{i = 0}^{\min(|s|,|t|)-1} \WW{f(s_i,t_i)}$ &
-$\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \SS{f(s_i,t_i)}$
+$\displaystyle \sum_{i = 0}^{\min(|s|,|t|)-1} \WW{f(s[i],t[i])}$ &
+$\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \SS{f(s[i],t[i])}$
 %
 \end{tabular}
 \end{costspec}
 
 \begin{group}
 \begin{costspec}[Iteration]
+In the following, $b_i$ is the result of the iteration after the first $i$
+elements.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 %
 $\sml{iterate}~f~b_0~s$ &
-$\displaystyle \sum_{i = 0}^{|s|-1} \WW{f(b_i, s_i)}$ &
-$\displaystyle \sum_{i = 0}^{|s|-1} \SS{f(b_i, s_i)}$
+$\displaystyle \sum_{i = 0}^{|s|-1} \WW{f(b_i, s[i])}$ &
+$\displaystyle \sum_{i = 0}^{|s|-1} \SS{f(b_i, s[i])}$
 \end{tabular}
 \end{costspec}
 \begin{note}
 $\sml{iteratePrefixes}$ and $\sml{iteratePrefixesIncl}$ have the same cost
-specification
+specification.
 \end{note}
 \end{group}
 
@@ -123,7 +125,7 @@ refer directly to the implementation.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 %
-$\{\sml{reduce},\sml{scan},\sml{scanIncl}\}~f~b_0~s$ &
+$\{\sml{reduce},\sml{scan},\sml{scanIncl}\}~f~b~s$ &
 $\displaystyle \bigO{|s|}$ &
 $\displaystyle \bigO{\log{|s|}}$
 %
