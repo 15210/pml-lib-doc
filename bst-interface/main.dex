@@ -1,7 +1,7 @@
 \begin{chapter}[BST Interface]
 \label{ch:bst-interface}
 \begin{preamble}
-The BST signature is a minimalistic interface for a binary search tree, which
+The \sml{BST} signature is a minimalistic interface for a binary search tree, which
 stores a set of key-value pairs. The key type is ordered and fixed by the
 \sml{Key} substructure while the value type is polymorphic.
 \end{preamble}
