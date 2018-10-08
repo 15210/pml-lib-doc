@@ -351,7 +351,7 @@ if the subsequence is out-of-bounds.
 \begin{verbatim}
 val take : 'a seq -> int -> 'a seq
 \end{verbatim}
-\sml{take n s} takes the prefix of $s$ of length $n$. It is logically
+\sml{take s n} takes the prefix of $s$ of length $n$. It is logically
 equivalent to \sml{subseq s (0, n)}.
 \end{gram}
 
@@ -360,7 +360,7 @@ equivalent to \sml{subseq s (0, n)}.
 \begin{verbatim}
 val drop : 'a seq -> int -> 'a seq
 \end{verbatim}
-\sml{drop n s} drops the prefix of $s$ of length $n$. It is logically equivalent
+\sml{drop s n} drops the prefix of $s$ of length $n$. It is logically equivalent
 to \sml{subseq s (n, length s - n)}.
 \end{gram}
 
