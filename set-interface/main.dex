@@ -1,0 +1,199 @@
+\begin{chapter}[Set Interface]
+\label{ch:set-interface}
+\begin{preamble}
+The \sml{SET} interface specifies an unordered collection of items. Sets do not
+contain duplicates, and are not polymorphic: the type of their elements is
+given by the \sml{Key} substructure.
+\end{preamble}
+
+\begin{section}[Summary]
+\begin{gram}
+\begin{verbatim}
+signature SET =
+sig
+  structure Key : EQKEY
+  structure Seq : SEQUENCE
+
+  type t
+  type set = t
+
+  val size : set -> int
+  val toString : set -> string
+  val toSeq : set -> Key.t Seq.t
+
+  val empty : unit -> set
+  val singleton : Key.t -> set
+  val fromSeq : Key.t Seq.t -> set
+
+  val find : set -> Key.t -> bool
+  val insert : set * Key.t -> set
+  val delete : set * Key.t -> set
+
+  val filterKey : (Key.t -> bool) -> set -> set
+
+  val reduceKey : (Key.t * Key.t -> Key.t) -> Key.t -> set -> Key.t
+  val iterateKey : ('a * Key.t -> 'a) -> 'a -> set -> 'a
+
+  val union : set * set -> set
+  val intersection : set * set -> set
+  val difference : set * set -> set
+
+  val $ : Key.t -> set
+end
+\end{verbatim}
+\end{gram}
+\end{section}
+
+\begin{section}[Substructures]
+
+\begin{gram}
+\begin{verbatim}
+structure Key : EQKEY
+\end{verbatim}
+The \sml{Key} substructure defines the type of elements in a set, which may be
+compared for equality.
+\end{gram}
+
+\begin{gram}
+\begin{verbatim}
+structure Seq : SEQUENCE
+\end{verbatim}
+The \sml{Seq} substructure defines the underlying sequence type, so that we
+may convert sets to and from sequences.
+\end{gram}
+
+\end{section}
+
+\begin{section}[Types]
+
+\begin{gram}
+\begin{verbatim}
+type t
+type set = t
+\end{verbatim}
+The abstract set type. The alias \sml{set} is for readability in the
+signature.
+\end{gram}
+
+\end{section}
+
+\begin{section}[Values]
+
+\begin{gram}[size]
+\begin{verbatim}
+val size : set -> int
+\end{verbatim}
+The number of elements in a set.
+\end{gram}
+
+\begin{gram}[toString]
+\begin{verbatim}
+val toString : set -> string
+\end{verbatim}
+Evaluates to a string representation of the set. Each element is converted to
+a string via \sml{Key.toString}.
+\end{gram}
+
+\begin{gram}[toSeq]
+\begin{verbatim}
+val toSeq : set -> Key.t Seq.t
+\end{verbatim}
+Return a sequence of all keys in a set. The ordering of the elements in the
+returned sequence is implementation-defined.
+\end{gram}
+
+\begin{gram}[empty]
+\begin{verbatim}
+val empty : unit -> set
+\end{verbatim}
+Construct the empty set.
+\end{gram}
+
+\begin{gram}[singleton]
+\label{gr:set-interface:singleton}
+\begin{verbatim}
+val singleton : Key.t -> set
+\end{verbatim}
+Construct the singleton set containing only the provided key.
+\end{gram}
+
+\begin{gram}[fromSeq]
+\begin{verbatim}
+val fromSeq : Key.t Seq.t -> set
+\end{verbatim}
+Return the set of all elements of a sequence.
+\end{gram}
+
+\begin{gram}[find]
+\begin{verbatim}
+val find : set -> Key.t -> bool
+\end{verbatim}
+\sml{find s k} returns whether or not $k$ is a member of the set $s$.
+\end{gram}
+
+\begin{gram}[insert]
+\begin{verbatim}
+val insert : set * Key.t -> set
+\end{verbatim}
+\sml{insert (s, k)} evaluates to the set $s \cup \{k\}$.
+\end{gram}
+
+\begin{gram}[delete]
+\begin{verbatim}
+val delete : set * Key.t -> set
+\end{verbatim}
+\sml{delete (s, k)} evaluates to the set $s \setminus \{k\}$.
+\end{gram}
+
+\begin{gram}[filterKey]
+\begin{verbatim}
+val filterKey : (Key.t -> bool) -> set -> set
+\end{verbatim}
+\sml{filterKey p s} evaluates to the set $\{x \in s \mathbin| p(x) \}$
+\end{gram}
+
+\begin{gram}[reduceKey]
+\begin{verbatim}
+val reduceKey : (Key.t * Key.t -> Key.t) -> Key.t -> set -> Key.t
+\end{verbatim}
+\sml{reduceKey f b s} is logically equivalent to \sml{Seq.reduce f b (toSeq s)}.
+\end{gram}
+
+\begin{gram}[iterateKey]
+\begin{verbatim}
+val iterateKey : ('a * Key.t -> 'a) -> 'a -> set -> 'a
+\end{verbatim}
+\sml{iterateKey f b s} is logically equivalent to \sml{Seq.iterate f b (toSeq s)}.
+\end{gram}
+
+\begin{gram}[union]
+\begin{verbatim}
+val union : set * set -> set
+\end{verbatim}
+\sml{union a b} evaluates to the set $a \cup b$.
+\end{gram}
+
+\begin{gram}[intersection]
+\begin{verbatim}
+val intersection : set * set -> set
+\end{verbatim}
+\sml{intersection a b} evaluates to the set $a \cap b$.
+\end{gram}
+
+\begin{gram}[difference]
+\begin{verbatim}
+val difference : set * set -> set
+\end{verbatim}
+\sml{difference a b} evaluates to the set $a \setminus b$.
+\end{gram}
+
+\begin{gram}[\$]
+\begin{verbatim}
+val $ : Key.t -> set
+\end{verbatim}
+An alias for \ref{gr:set-interface:singleton}.
+\end{gram}
+
+\end{section}
+
+\end{chapter}
