@@ -1,5 +1,5 @@
-\begin{chapter}[Set Interface]
-\label{ch:set-interface}
+\begin{chapter}[OrdSet Interface]
+\label{ch:ordset-interface}
 \begin{preamble}
 The \sml{ORDSET} interface specifies an ordered collection of items. These sets
 do not contain duplicates, and are not polymorphic: the type of their
@@ -7,10 +7,13 @@ elements is given by the \sml{Key} substructure.
 \end{preamble}
 
 \begin{note}
-The \sml{ORDSET} signature is identical to \sml{SET} except for (a) the
-inclusion of the ordered sets functions, and (b) the \sml{Key} substructure
-now ascribes to \sml{ORDKEY}. Also note that the \sml{toSeq} function now
-specifies that it returns keys in sorted order.
+The \sml{ORDSET} signature is identical to \sml{SET} except for the following.
+\begin{itemize}
+  \item The \sml{Key} substructure now ascribes to \sml{ORDKEY}.
+  \item There is additional functionality relying upon the ordering of keys,
+  such as \sml{split}, \sml{join}, and \sml{getRange}.
+  \item The \sml{toSeq} function now specifies that it returns keys in sorted order.
+\end{itemize}
 \end{note}
 
 \begin{section}[Summary]
@@ -76,15 +79,15 @@ end
 structure Key : ORDKEY
 \end{verbatim}
 The \sml{Key} substructure defines the type of elements in a set, which are
-totally ordered.
+totally ordered according to the provided comparison function.
 \end{gram}
 
 \begin{gram}
 \begin{verbatim}
 structure Seq : SEQUENCE
 \end{verbatim}
-The \sml{Seq} substructure defines the underlying sequence type, so that we
-may convert sets to and from sequences.
+The \sml{Seq} substructure defines a sequence type for use with
+\ref{gr:ordset-interface:toSeq} and \ref{gr:ordset-interface:fromSeq}.
 \end{gram}
 
 \end{section}
@@ -131,6 +134,7 @@ a string via \sml{Key.toString}.
 \end{gram}
 
 \begin{gram}[toSeq]
+\label{gr:ordset-interface:toSeq}
 \begin{verbatim}
 val toSeq : set -> Key.t Seq.t
 \end{verbatim}
@@ -153,6 +157,7 @@ Construct the singleton set containing only the provided key.
 \end{gram}
 
 \begin{gram}[fromSeq]
+\label{gr:ordset-interface:fromSeq}
 \begin{verbatim}
 val fromSeq : Key.t Seq.t -> set
 \end{verbatim}
@@ -255,7 +260,7 @@ val prev : set * Key.t -> Key.t option
 \begin{verbatim}
 val next : set * Key.t -> Key.t option
 \end{verbatim}
-\sml{prev (s, k)} evaluates to $\min \{ k' \in s \mathbin| k' > k \}$, or
+\sml{next (s, k)} evaluates to $\min \{ k' \in s \mathbin| k' > k \}$, or
 \sml{NONE} if there is no such element.
 \end{gram}
 
@@ -274,6 +279,7 @@ val join : set * set -> set
 \end{verbatim}
 For sets $a$ and $b$ where the largest element of $a$ is strictly smaller than
 the smallest element of $b$, \sml{join (a, b)} evaluates to $a \cup b$.
+Otherwise it raises \sml{Order}.
 \end{gram}
 
 \begin{gram}[getRange]
@@ -296,13 +302,17 @@ the number of elements in $s$ which are strictly smaller than $k$.
 \begin{verbatim}
 val select : set * int -> Key.t option
 \end{verbatim}
-\sml{select (s, i)} returns the
+\sml{select (s, i)} returns the $i^\text{th}$ smallest element of $s$, or
+\sml{NONE} if either $i < 0$ or $i \geq |s|$.
 \end{gram}
 
 \begin{gram}[splitRank]
 \begin{verbatim}
 val splitRank : set * int -> set * set
 \end{verbatim}
+\sml{splitRank (s, i)} evalutes to $(\ell,r)$ where $\ell$ is the set of the
+$i$ smallest elements of $s$, and $r$ is the set of the $|s|-i$ largest
+elements of $s$. Raises \sml{Fail} if either $i < 0$ or $i \geq |s|$.
 \end{gram}
 
 
