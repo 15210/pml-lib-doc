@@ -1,25 +1,37 @@
-\begin{chapter}[Table Interface]
-\label{ch:table-interface}
+\begin{chapter}[OrdTable Interface]
+\label{ch:ordtable-interface}
 \begin{preamble}
-The \sml{TABLE} interface specifies a mapping from keys to values, written
+The \sml{ORDTABLE} interface specifies a mapping from keys to values, written
 $\{k_1 \mapsto v_1, k_2 \mapsto v_2, \ldots\}$. Tables do not have duplicate
 keys, so there is a unique associated value for each key in the domain of
 a table. The key type is given by the \sml{Key} substructure, and the value
 type is polymorphic.
 \end{preamble}
 
+\begin{note}
+The \sml{ORDTABLE} signature is identical to \sml{TABLE} except for the following.
+\begin{itemize}
+  \item The \sml{Key} substructure now ascribes to \sml{ORDKEY}.
+  \item There is additional functionality relying upon the ordering of keys,
+  such as \sml{split}, \sml{join}, and \sml{getRange}.
+  \item The \sml{toSeq} function now specifies that it returns keys in sorted order.
+\end{itemize}
+\end{note}
+
 \begin{section}[Summary]
 \begin{gram}
 \begin{verbatim}
-signature TABLE =
+signature ORDTABLE =
 sig
-  structure Key : EQKEY
+  structure Key : ORDKEY
   structure Seq : SEQUENCE
 
   type 'a t
   type 'a table = 'a t
 
-  structure Set : SET where Key = Key and Seq = Seq
+  structure Set : ORDSET where Key = Key and Seq = Seq
+
+  exception Order
 
   val size : 'a table -> int
   val domain : 'a table -> Set.t
@@ -55,6 +67,22 @@ sig
   val subtract : 'a table * Set.t -> 'a table
 
   val $ : (Key.t * 'a) -> 'a table
+
+  (* ordered tables begins here *)
+  val first : 'a table -> (Key.t * 'a) option
+  val last : 'a table -> (Key.t * 'a) option
+
+  val prev : 'a table * Key.t -> (Key.t * 'a) option
+  val next : 'a table * Key.t -> (Key.t * 'a) option
+
+  val split : 'a table * Key.t -> 'a table * 'a option * 'a table
+  val join : 'a table * 'a table -> 'a table
+
+  val getRange : 'a table -> Key.t * Key.t -> 'a table
+
+  val rank : 'a table * Key.t -> int
+  val select : 'a table * int -> (Key.t * 'a) option
+  val splitRank : 'a table * int -> 'a table * 'a table
 end
 \end{verbatim}
 \end{gram}
@@ -64,10 +92,10 @@ end
 
 \begin{gram}
 \begin{verbatim}
-structure Key : EQKEY
+structure Key : ORDKEY
 \end{verbatim}
-The \sml{Key} substructure defines the type of keys in a table, which may be
-compared for equality.
+The \sml{Key} substructure defines the type of keys in a table, which are
+totally ordered according to the provided comparison function.
 \end{gram}
 
 \begin{gram}
@@ -80,10 +108,10 @@ may convert tables to and from sequences.
 
 \begin{gram}
 \begin{verbatim}
-structure Set : SET
+structure Set : ORDSET
 \end{verbatim}
-The \sml{Set} substructure contains operations on sets with elements of type
-\sml{Key.t}.
+The \sml{Set} substructure contains operations on ordered sets with elements of
+type \sml{Key.t}.
 \end{gram}
 
 \end{section}
@@ -97,6 +125,17 @@ type 'a table = 'a t
 \end{verbatim}
 The abstract table type with values of type \sml{'a}. The alias \sml{table} is
 for readability in the signature.
+\end{gram}
+
+\end{section}
+
+\begin{section}[Exceptions]
+
+\begin{gram}
+\begin{verbatim}
+exception Order
+\end{verbatim}
+\sml{Order} is raised when the ordering invariant would be violated.
 \end{gram}
 
 \end{section}
@@ -137,8 +176,7 @@ to a string via \sml{Key.toString} and each value is converted via $f$.
 \begin{verbatim}
 val toSeq : 'a table -> (Key.t * 'a) Seq.t
 \end{verbatim}
-Return a sequence of all key-value pairs in a table. The order of the sequence
-is implementation-defined.
+Return a sequence of all key-value pairs in a table, sorted by key.
 \end{gram}
 
 \begin{gram}[find]
@@ -184,7 +222,7 @@ Construct the empty table.
 \end{gram}
 
 \begin{gram}[singleton]
-\label{gr:table-interface:singleton}
+\label{gr:ordtable-interface:singleton}
 \begin{verbatim}
 val singleton : Key.t * 'a -> 'a table
 \end{verbatim}
@@ -315,7 +353,92 @@ The name is motivated by the notion of a domain subtraction on a function.
 \begin{verbatim}
 val $ : (Key.t * 'a) -> 'a table
 \end{verbatim}
-An alias for \ref{gr:table-interface:singleton}.
+An alias for \ref{gr:ordtable-interface:singleton}.
+\end{gram}
+
+\begin{gram}[first]
+\begin{verbatim}
+val first : 'a table -> (Key.t * 'a) option
+\end{verbatim}
+Return the smallest key (together with its associated value) of a table, or
+\sml{NONE} if the table is empty.
+\end{gram}
+
+\begin{gram}[last]
+\begin{verbatim}
+val last : 'a table -> (Key.t * 'a) option
+\end{verbatim}
+Return the largest key (together with its associated value) of a table, or
+\sml{NONE} if the table is empty.
+\end{gram}
+
+\begin{gram}[prev]
+\begin{verbatim}
+val prev : 'a table * Key.t -> (Key.t * 'a) option
+\end{verbatim}
+\sml{prev (t, k)} returns the largest key (together with its associated value)
+in $t$
+which is strictly smaller than $k$, or \sml{NONE} if there is no such key.
+\end{gram}
+
+\begin{gram}[next]
+\begin{verbatim}
+val next : 'a table * Key.t -> (Key.t * 'a) option
+\end{verbatim}
+\sml{next (t, k)} returns the smallest key (together with its associated value)
+in $t$
+which is strictly greater than $k$, or \sml{NONE} if there is no such key.
+\end{gram}
+
+\begin{gram}[split]
+\begin{verbatim}
+val split : 'a table * Key.t -> 'a table * 'a option * 'a table
+\end{verbatim}
+\sml{split (t, k)} evaluates to $(\ell, v, r)$ where $\ell$ consists of all
+key-value pairs with keys strictly smaller than $k$, $r$ consists of all key-value
+pairs with keys strictly greater than $k$, and $v$ is $k$'s associated value
+in $t$ (or \sml{NONE} if $k$ is not present in $t$).
+\end{gram}
+
+\begin{gram}[join]
+\begin{verbatim}
+val join : 'a table * 'a table -> 'a table
+\end{verbatim}
+Given tables $a$ and $b$ where all keys in $a$ are strictly smaller than all
+keys in $b$, \sml{join (a, b)} evaluates to $a \cup b$. Otherwise, it raises
+\sml{Order}.
+\end{gram}
+
+\begin{gram}[getRange]
+\begin{verbatim}
+val getRange : 'a table -> Key.t * Key.t -> 'a table
+\end{verbatim}
+\sml{getRange t (x, y)} evaluates to $\{(k \mapsto v) \in t \mathbin| x \leq k \leq y\}$
+\end{gram}
+
+\begin{gram}[rank]
+\begin{verbatim}
+val rank : 'a table * Key.t -> int
+\end{verbatim}
+\sml{rank (t, k)} evaluates to the number of keys in $t$ which are strictly
+smaller than $k$.
+\end{gram}
+
+\begin{gram}[select]
+\begin{verbatim}
+val select : 'a table * int -> (Key.t * 'a) option
+\end{verbatim}
+\sml{select (t, i)} evaluates to the $i^\text{th}$ smallest key (and its
+associated value), or \sml{NONE} if either $i < 0$ or $i \geq |t|$.
+\end{gram}
+
+\begin{gram}[splitRank]
+\begin{verbatim}
+val splitRank : 'a table * int -> 'a table * 'a table
+\end{verbatim}
+\sml{splitRank (t, i)} evalutes to $(\ell,r)$ where $\ell$ consists of the $i$
+keys of $t$, and $r$ is the set of the $|t|-i$ largest
+keys of $t$. Raises \sml{Fail} if either $i < 0$ or $i \geq |t|$.
 \end{gram}
 
 \end{section}
