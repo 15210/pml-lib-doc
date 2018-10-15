@@ -15,7 +15,12 @@ Functions \sml{range} and \sml{toSeq} produce elements in key-sorted order.
 
 \begin{gram}
 The following costs assume that the work and span of \sml{Key.compare}
-and \sml{Key.hash} (and $f$, in the case of \sml{insertWith}) are constant.
+and \sml{Key.hash} are constant.
+\end{gram}
+
+\begin{gram}
+The following costs also apply to the substructure \sml{Set}, which implements
+the set type with \sml{unit table}.
 \end{gram}
 
 \begin{costspec}[Constant-Work Operations]
@@ -27,6 +32,7 @@ $\sml{singleton}~T$ & $\bigO 1$ & $\bigO 1$ \\
 \end{costspec}
 
 \begin{costspec}[Single-Element Operations]
+In the case of \sml{insertWith}, we assume the cost of $f$ is constant.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{find}~T~k$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
