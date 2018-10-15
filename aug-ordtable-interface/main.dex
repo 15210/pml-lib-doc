@@ -1,0 +1,526 @@
+\begin{chapter}[Augmented OrdTable Interface]
+\label{ch:aug-ordtable-interface}
+\begin{preamble}
+The \sml{AUG\_ORDTABLE} interface specifies a mapping from keys to values,
+augmented with
+efficient retrieval of reduced values for ranges of keys. Tables do not have
+duplicate
+keys, so there is a unique associated value for each key in the domain of
+a table. The key type is given by the \sml{Key} substructure. The value type
+is given by the \sml{Val} substructure.
+\end{preamble}
+
+\begin{note}
+The \sml{AUG\_ORDTABLE} signature is nearly identical to \sml{ORDTABLE} except
+for the following.
+\begin{itemize}
+  \item Tables are no longer polymorphic in the type of values associated with
+  keys.
+  \item There is now a \ref{gr:aug-ordtable-interface:Val} substructure which
+  fixes the value type, and specifies how reduced values are computed.
+  \item The \ref{gr:aug-ordtable-interface:reduceVal} function retrieves
+  reduced values.
+  \item The functions \sml{collect} and \sml{iteratePrefixes} have been
+  removed, since these rely upon a polymorphic value type.
+\end{itemize}
+\end{note}
+
+\begin{section}[Augmented, Ordered Tables]
+
+\begin{subsection}[Summary]
+
+\begin{gram}
+\begin{verbatim}
+signature AUG_ORDTABLE =
+sig
+  structure Key : ORDKEY
+  structure Val : MONOID
+  structure Seq : SEQUENCE
+
+  type t
+  type table = t
+
+  structure Set : ORDSET where Key = Key and Seq = Seq
+
+  exception Order
+
+  val size : table -> int
+  val domain : table -> Set.t
+  val range : table -> Val.t Seq.t
+  val toString : table -> string
+  val toSeq : table -> (Key.t * Val.t) Seq.t
+
+  val find : table -> Key.t -> Val.t option
+  val insert : table * (Key.t * Val.t) -> table
+  val insertWith : (Val.t * Val.t -> Val.t) -> table * (Key.t * Val.t) -> table
+  val delete : table * Key.t -> table
+
+  val empty : unit -> table
+  val singleton : Key.t * Val.t -> table
+  val tabulate : (Key.t -> Val.t) -> Set.t -> table
+  val fromSeq : (Key.t * Val.t) Seq.t -> table
+
+  val map : (Val.t -> Val.t) -> table -> table
+  val mapKey : (Key.t * Val.t -> Val.t) -> table -> table
+  val filter : (Val.t -> bool) -> table -> table
+  val filterKey : (Key.t * Val.t -> bool) -> table -> table
+
+  val reduce : (Val.t * Val.t -> Val.t) -> Val.t -> table -> Val.t
+  val iterate : ('a * Val.t -> 'a) -> 'a -> table -> 'a
+
+  val union : (Val.t * Val.t -> Val.t) -> table * table -> table
+  val intersection : (Val.t * Val.t -> Val.t) -> table * table -> table
+  val difference : table * table -> table
+
+  val restrict : table * Set.t -> table
+  val subtract : table * Set.t -> table
+
+  val $ : (Key.t * Val.t) -> table
+
+  (* ordered table functions *)
+  val first : table -> (Key.t * Val.t) option
+  val last : table -> (Key.t * Val.t) option
+
+  val prev : table * Key.t -> (Key.t * Val.t) option
+  val next : table * Key.t -> (Key.t * Val.t) option
+
+  val split : table * Key.t -> table * Val.t option * table
+  val join : table * table -> table
+
+  val getRange : table -> Key.t * Key.t -> table
+
+  val rank : table * Key.t -> int
+  val select : table * int -> (Key.t * Val.t) option
+  val splitRank : table * int -> table * table
+
+  (* augmentation *)
+  val reduceVal : table -> Val.t
+end
+\end{verbatim}
+\end{gram}
+\end{subsection}
+
+\begin{subsection}[Substructures]
+
+\begin{gram}[Key]
+\begin{verbatim}
+structure Key : ORDKEY
+\end{verbatim}
+The \sml{Key} substructure defines the type of keys in a table, which are
+totally ordered according to the provided comparison function.
+\end{gram}
+
+\begin{gram}[Val]
+\label{gr:aug-ordtable-interface:Val}
+\begin{verbatim}
+structure Val : MONOID
+\end{verbatim}
+The \sml{Val} substructure defines the type of values in a table, which
+ascribe to \ref{gr:aug-ordtable-interface:MONOID}, specifying how reduced
+values are computed.
+\end{gram}
+
+\begin{gram}[Seq]
+\begin{verbatim}
+structure Seq : SEQUENCE
+\end{verbatim}
+The \sml{Seq} substructure defines the underlying sequence type, so that we
+may convert tables to and from sequences.
+\end{gram}
+
+\begin{gram}[Set]
+\begin{verbatim}
+structure Set : ORDSET
+\end{verbatim}
+The \sml{Set} substructure contains operations on ordered sets with elements of
+type \sml{Key.t}.
+\end{gram}
+
+\end{subsection}
+
+\begin{subsection}[Types]
+
+\begin{gram}
+\begin{verbatim}
+type t
+type table = t
+\end{verbatim}
+The abstract table type with keys of type \sml{Key.t} and values of type
+\sml{Val.t}. The alias \sml{table} is for readability in the signature.
+\end{gram}
+
+\end{subsection}
+
+\begin{subsection}[Exceptions]
+
+\begin{gram}
+\begin{verbatim}
+exception Order
+\end{verbatim}
+\sml{Order} is raised when the ordering invariant would be violated.
+\end{gram}
+
+\end{subsection}
+
+\begin{subsection}[Values]
+
+\begin{gram}[size]
+\begin{verbatim}
+val size : table -> int
+\end{verbatim}
+The number of key-value pairs in a table.
+\end{gram}
+
+\begin{gram}[domain]
+\begin{verbatim}
+val domain : table -> Set.t
+\end{verbatim}
+Return the set of all keys in a table.
+\end{gram}
+
+\begin{gram}[range]
+\begin{verbatim}
+val range : table -> Val.t Seq.t
+\end{verbatim}
+Return a sequence of all values in a table. The order of the elements is
+implementation-defined.
+\end{gram}
+
+\begin{gram}[toString]
+\begin{verbatim}
+val toString : table -> string
+\end{verbatim}
+\sml{toString t} returns a string representation of $t$. Each key is converted
+to a string via \sml{Key.toString} and each value is converted via
+\sml{Val.toString}.
+\end{gram}
+
+\begin{gram}[toSeq]
+\begin{verbatim}
+val toSeq : table -> (Key.t * Val.t) Seq.t
+\end{verbatim}
+Return a sequence of all key-value pairs in a table, sorted by key.
+\end{gram}
+
+\begin{gram}[find]
+\begin{verbatim}
+val find : table -> Key.t -> Val.t option
+\end{verbatim}
+\sml{find t k} returns \sml{SOME v} if $(k \mapsto v) \in t$, and \sml{NONE}
+otherwise.
+\end{gram}
+
+\begin{gram}[insert]
+\begin{verbatim}
+val insert : table * (Key.t * Val.t) -> table
+\end{verbatim}
+\sml{insert (t, (k, v))} returns $t \cup \{k \mapsto v\}$. If $k$ is already
+in $t$, then the new value $v$ is given precedence. It is logically equivalent
+to \sml{insertWith (fn (\_, v) => v) (t, (k, v))}.
+\end{gram}
+
+\begin{gram}[insertWith]
+\begin{verbatim}
+val insertWith : (Val.t * Val.t -> Val.t) -> table * (Key.t * Val.t) -> table
+\end{verbatim}
+\sml{insertWith f (t, (k, v))} returns $t \cup \{k \mapsto v\}$ if $k$ is not
+already a member of $t$, and otherwise it returns $t \cup \{k \mapsto f(v',v)\}$
+where $k \mapsto v'$ is already in $t$.
+\end{gram}
+
+\begin{gram}[delete]
+\begin{verbatim}
+val delete : table * Key.t -> table
+\end{verbatim}
+\sml{delete (t, k)} removes the key $k$ from $t$ only if $k$ is a member of $t$.
+That is, if $(k \mapsto v) \in t$ then it returns
+$t \setminus \{(k \mapsto v)\}$, otherwise it returns $t$.
+\end{gram}
+
+\begin{gram}[empty]
+\begin{verbatim}
+val empty : unit -> table
+\end{verbatim}
+Construct the empty table.
+\end{gram}
+
+\begin{gram}[singleton]
+\label{gr:aug-ordtable-interface:singleton}
+\begin{verbatim}
+val singleton : Key.t * Val.t -> table
+\end{verbatim}
+\sml{singleton (k, v)} constructs the singleton table $\{k \mapsto v\}$.
+\end{gram}
+
+\begin{gram}[tabulate]
+\begin{verbatim}
+val tabulate : (Key.t -> Val.t) -> Set.t -> table
+\end{verbatim}
+\sml{tabulate f s} evaluates to the table $\{(k \mapsto f(k)) : k \in s\}$.
+\end{gram}
+
+\begin{gram}[fromSeq]
+\begin{verbatim}
+val fromSeq : (Key.t * Val.t) Seq.t -> table
+\end{verbatim}
+Return the table representation of a sequence of key-value pairs. If there are
+duplicate keys, then it takes the value associated with the first occurence in
+the sequence.
+\end{gram}
+
+\begin{gram}[map]
+\begin{verbatim}
+val map : (Val.t -> Val.t) -> table -> table
+\end{verbatim}
+\sml{map f t} evaluates to $\{k \mapsto f(v) : (k \mapsto v) \in t\}$.
+\end{gram}
+
+\begin{gram}[mapKey]
+\begin{verbatim}
+val mapKey : (Key.t * Val.t -> Val.t) -> table -> table
+\end{verbatim}
+\sml{mapKey f t} evaluates to $\{k \mapsto f(k, v) : (k \mapsto v) \in t\}$.
+\end{gram}
+
+\begin{gram}[filter]
+\begin{verbatim}
+val filter : (Val.t -> bool) -> table -> table
+\end{verbatim}
+\sml{filter p t} produces a table containing all $(k \mapsto v) \in t$ which
+satisfies $p(v)$.
+\end{gram}
+
+\begin{gram}[filterKey]
+\begin{verbatim}
+val filterKey : (Key.t * Val.t -> bool) -> table -> table
+\end{verbatim}
+\sml{filterKey p t} produces a table containing all $(k \mapsto v) \in t$ which
+satisfies $p(k,v)$.
+\end{gram}
+
+\begin{gram}[reduce]
+\begin{verbatim}
+val reduce : (Val.t * Val.t -> Val.t) -> Val.t -> table -> Val.t
+\end{verbatim}
+\sml{reduce f b t} is logically equivalent to \sml{Seq.reduce f b (range t)}.
+\end{gram}
+
+\begin{gram}[iterate]
+\begin{verbatim}
+val iterate : ('a * Val.t -> 'a) -> 'a -> table -> 'a
+\end{verbatim}
+\sml{iterate f b t} is logically equivalent to \sml{Seq.iterate f b (range t)}.
+\end{gram}
+
+\begin{gram}[union]
+\begin{verbatim}
+val union : (Val.t * Val.t -> Val.t) -> (table * table) -> table
+\end{verbatim}
+\sml{union f (a, b)} evaluates to $a \cup b$. For keys $k$ where $(k \mapsto v) \in a$
+and $(k \mapsto w) \in b$, the result contains $k \mapsto f(v,w)$.
+\end{gram}
+
+\begin{gram}[intersection]
+\begin{verbatim}
+val intersection : (Val.t * Val.t -> Val.t) -> table * table -> table
+\end{verbatim}
+\sml{intersection f (a, b)} evaluates to $a \cap b$. Every intersecting key
+$k$ is mapped to $f(v,w)$ where $(k \mapsto v) \in a$ and $(k \mapsto w) \in b$.
+\end{gram}
+
+\begin{gram}[difference]
+\begin{verbatim}
+val difference : table * table -> table
+\end{verbatim}
+\sml{difference (a, b)} evaluates to $a \setminus b$. The values in the output
+are taken from $a$.
+\end{gram}
+
+\begin{gram}[restrict]
+\begin{verbatim}
+val restrict : table * Set.t -> table
+\end{verbatim}
+\sml{restrict (t, s)} returns the table of $\{(k \mapsto v) \in t \mathbin| k \in s\}$.
+It is therefore essentially an intersection. The name is motivated by the
+notion of restricting a function to a smaller domain, where we interpret a table
+as a function.
+\end{gram}
+
+\begin{gram}[subtract]
+\begin{verbatim}
+val subtract : table * Set.t -> table
+\end{verbatim}
+\sml{subtract (t, s)} returns the table of
+$\{(k \mapsto v) \in t \mathbin| k \not\in s\}$.
+The name is motivated by the notion of a domain subtraction on a function.
+\end{gram}
+
+\begin{gram}[\$]
+\begin{verbatim}
+val $ : (Key.t * Val.t) -> table
+\end{verbatim}
+An alias for \ref{gr:aug-ordtable-interface:singleton}.
+\end{gram}
+
+\begin{gram}[first]
+\begin{verbatim}
+val first : table -> (Key.t * Val.t) option
+\end{verbatim}
+Return the smallest key (together with its associated value) of a table, or
+\sml{NONE} if the table is empty.
+\end{gram}
+
+\begin{gram}[last]
+\begin{verbatim}
+val last : table -> (Key.t * Val.t) option
+\end{verbatim}
+Return the largest key (together with its associated value) of a table, or
+\sml{NONE} if the table is empty.
+\end{gram}
+
+\begin{gram}[prev]
+\begin{verbatim}
+val prev : table * Key.t -> (Key.t * Val.t) option
+\end{verbatim}
+\sml{prev (t, k)} returns the largest key (together with its associated value)
+in $t$
+which is strictly smaller than $k$, or \sml{NONE} if there is no such key.
+\end{gram}
+
+\begin{gram}[next]
+\begin{verbatim}
+val next : table * Key.t -> (Key.t * Val.t) option
+\end{verbatim}
+\sml{next (t, k)} returns the smallest key (together with its associated value)
+in $t$
+which is strictly greater than $k$, or \sml{NONE} if there is no such key.
+\end{gram}
+
+\begin{gram}[split]
+\begin{verbatim}
+val split : table * Key.t -> table * Val.t option * table
+\end{verbatim}
+\sml{split (t, k)} evaluates to $(\ell, v, r)$ where $\ell$ consists of all
+key-value pairs with keys strictly smaller than $k$, $r$ consists of all key-value
+pairs with keys strictly greater than $k$, and $v$ is $k$'s associated value
+in $t$ (or \sml{NONE} if $k$ is not present in $t$).
+\end{gram}
+
+\begin{gram}[join]
+\begin{verbatim}
+val join : table * table -> table
+\end{verbatim}
+Given tables $a$ and $b$ where all keys in $a$ are strictly smaller than all
+keys in $b$, \sml{join (a, b)} evaluates to $a \cup b$. Otherwise, it raises
+\sml{Order}.
+\end{gram}
+
+\begin{gram}[getRange]
+\begin{verbatim}
+val getRange : table -> Key.t * Key.t -> table
+\end{verbatim}
+\sml{getRange t (x, y)} evaluates to $\{(k \mapsto v) \in t \mathbin| x \leq k \leq y\}$
+\end{gram}
+
+\begin{gram}[rank]
+\begin{verbatim}
+val rank : table * Key.t -> int
+\end{verbatim}
+\sml{rank (t, k)} evaluates to the number of keys in $t$ which are strictly
+smaller than $k$.
+\end{gram}
+
+\begin{gram}[select]
+\begin{verbatim}
+val select : table * int -> (Key.t * Val.t) option
+\end{verbatim}
+\sml{select (t, i)} evaluates to the $i^\text{th}$ smallest key (and its
+associated value), or \sml{NONE} if either $i < 0$ or $i \geq |t|$.
+\end{gram}
+
+\begin{gram}[splitRank]
+\begin{verbatim}
+val splitRank : table * int -> table * table
+\end{verbatim}
+\sml{splitRank (t, i)} evalutes to $(\ell,r)$ where $\ell$ consists of the $i$
+keys of $t$, and $r$ is the set of the $|t|-i$ largest
+keys of $t$. Raises \sml{Fail} if either $i < 0$ or $i \geq |t|$.
+\end{gram}
+
+\begin{gram}[reduceVal]
+\label{gr:aug-ordtable-interface:reduceVal}
+\begin{verbatim}
+val reduceVal : table -> Val.t
+\end{verbatim}
+\sml{reduceVal t} is logically equivalent to
+\sml{Seq.reduce Val.f Val.I (range t)}. See
+\ref{gr:aug-ordtable-interface:MONOID} below for more information.
+\end{gram}
+
+\end{subsection}
+
+\end{section}
+
+\begin{section}[Reduced Values as Monoids]
+
+\begin{subsection}[Summary]
+
+\begin{gram}
+The value type of an augmented ordered table ascribes to \sml{MONOID}, which
+specifies an abstract type $t$ together with an identity $I$, an
+\emph{associative} combination function $f$, and a \sml{toString} function for
+convenience. The reduced value of a table is given by ``summing'' all values in
+the table, with respect to $f$.
+\end{gram}
+
+\begin{gram}[MONOID]
+\label{gr:aug-ordtable-interface:MONOID}
+\begin{verbatim}
+signature MONOID =
+sig
+  type t
+  val I : t
+  val f : t * t -> t
+  val toString : t -> string
+end
+\end{verbatim}
+\end{gram}
+
+\end{subsection}
+
+\begin{subsection}[Types and Values]
+
+\begin{gram}
+\begin{verbatim}
+type t
+\end{verbatim}
+The abstract type of the monoid.
+\end{gram}
+
+\begin{gram}[I]
+\begin{verbatim}
+val I : t
+\end{verbatim}
+The identity of the monoid. Must satisfy $f(I, x) = x = f(x, I)$ for all
+monoid elements $x$.
+\end{gram}
+
+\begin{gram}[f]
+\begin{verbatim}
+val f : t * t -> t
+\end{verbatim}
+The associative combination function of the monoid.
+\end{gram}
+
+\begin{gram}[toString]
+\begin{verbatim}
+val toString : t -> string
+\end{verbatim}
+Return a string representation.
+\end{gram}
+
+\end{subsection}
+
+\end{section}
+
+\end{chapter}
