@@ -1,0 +1,124 @@
+\begin{chapter}[Single-Threaded Sequence Interface]
+\label{ch:st-seq-interface}
+\begin{preamble}
+The \sml{ST\_SEQUENCE} signature is a minimalistic interface for a
+single-threaded sequence type. Single-threaded sequences differ from normal
+sequences in that they are only meant to be used in a single-threaded
+manner: updates should only be made on a ``most recent'' version. However,
+operations on single-threaded sequences are always well-defined, regardless of
+context.
+\end{preamble}
+
+\begin{section}[Summary]
+\begin{gram}
+\begin{verbatim}
+signature ST_SEQUENCE =
+sig
+  structure Seq : SEQUENCE
+
+  type 'a t
+  type 'a stseq = 'a t
+
+  exception Range
+
+  val fromSeq : 'a Seq.t -> 'a stseq
+  val toSeq : 'a stseq -> 'a Seq.t
+  val nth : 'a stseq -> int -> 'a
+
+  val update : ('a stseq * (int * 'a)) -> 'a stseq
+  val inject : ('a stseq * (int * 'a) Seq.t) -> 'a stseq
+end
+\end{verbatim}
+\end{gram}
+\end{section}
+
+\begin{section}[Substructures]
+
+\begin{gram}[Seq]
+\label{gr:st-seq-interface:Seq}
+\begin{verbatim}
+structure Seq : SEQUENCE
+\end{verbatim}
+Defines the underlying sequence type to and from which single-threaded
+sequences can be converted.
+\end{gram}
+
+\end{section}
+
+\begin{section}[Types]
+
+\begin{gram}
+\begin{verbatim}
+type 'a t
+type 'a stseq = 'a t
+\end{verbatim}
+The abstract single-threaded sequence type \sml{'a t} has elements of type
+\sml{'a}. The alias \sml{'a stseq} is for readability.
+\end{gram}
+
+\end{section}
+
+\begin{section}[Exceptions]
+
+\begin{gram}
+\begin{verbatim}
+exception Range
+\end{verbatim}
+The \sml{Range} exception is raised whenever an invalid index into a sequence
+is used.
+\end{gram}
+
+\end{section}
+
+\begin{section}[Values]
+
+\begin{gram}[fromSeq]
+\label{gr:st-seq-interface:fromSeq}
+\begin{verbatim}
+val fromSeq : 'a Seq.t -> 'a stseq
+\end{verbatim}
+Convert a sequence to a single-threaded sequence.
+\end{gram}
+
+\begin{gram}[toSeq]
+\label{gr:st-seq-interface:toSeq}
+\begin{verbatim}
+val toSeq : 'a stseq -> 'a Seq.t
+\end{verbatim}
+Convert a single-threaded sequence to a standard sequence.
+\end{gram}
+
+\begin{gram}[nth]
+\label{gr:st-seq-interface:nth}
+\begin{verbatim}
+val nth : 'a stseq -> int -> 'a
+\end{verbatim}
+\sml{nth s i} returns the $i^\text{th}$ element of $s$. Raises \sml{Range}
+if $i$ is out-of-bounds.
+\end{gram}
+
+\begin{gram}[update]
+\label{gr:st-seq-interface:update}
+\begin{verbatim}
+val update : ('a stseq * (int * 'a)) -> 'a stseq
+\end{verbatim}
+\sml{update (s, (i, x))} evaluates to a new single-threaded sequence where
+the $i^\text{th}$ element of $s$ has been replaced by $x$, but all other
+elements are the same as in $s$. Raises \sml{Range} if $i$ is out-of-bounds.
+\end{gram}
+
+\begin{gram}[inject]
+\label{gr:st-seq-interface:inject}
+\begin{verbatim}
+val inject : ('a stseq * (int * 'a) Seq.t) -> 'a stseq
+\end{verbatim}
+\sml{inject (s, u)} evaluates to a new single-threaded sequence where, for
+each $(i,x) \in u$, the $i^\text{th}$ element of $s$ has been replaced by $x$,
+but all other elements are the same as in $s$. If there are duplicate indices
+in $u$, one of them ``wins'' non-deterministically, and the others are ignored.
+Raises \sml{Range} if any of the indices in $u$ is out-of-bounds.
+\end{gram}
+
+\end{section}
+
+\end{chapter}
