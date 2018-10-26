@@ -1,0 +1,20 @@
+PANDOC = pandoc --verbose
+PARSE = $(METAL_HOME)/dex/parse.py
+MLXDEX = $(METAL_HOME)/dex/mlxdex.py
+PEXIFY = python $(METAL_HOME)/dex/pexify.py
+
+LATEX_PREAMBLE=../latex/preamble.tex
+
+.PHONY: phony
+
+main.mlx: main.dex phony
+	$(MLXDEX) main.dex $(LATEX_PREAMBLE)
+
+main.html: main.dex phony
+	@mkdir -p build
+	$(PEXIFY) main.dex # generates main_pandoc.tex
+	@mv main_pandoc.tex build/
+	cat $(LATEX_PREAMBLE) build/main_pandoc.tex > build/main_pandoc_with_preamble.tex
+	$(PANDOC) -f latex --mathjax -s build/main_pandoc_with_preamble.tex > main.html
+
+phony:
