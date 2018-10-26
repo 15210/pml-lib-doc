@@ -1,0 +1,153 @@
+\begin{chapter}[Priority Queue Interface]
+\label{ch:pq-interface}
+\begin{preamble}
+A priority queue is a multiset of key-value pairs which prioritizes access to
+its minimum key. The key type is ordered and fixed by the
+\ref{gr:pq-interface:Key} substructure while the value type is polymorphic.
+\end{preamble}
+
+\begin{section}[Summary]
+\begin{gram}
+\begin{verbatim}
+signature PQ =
+sig
+  structure Key : ORDKEY
+
+  type 'a t
+  type 'a pq = 'a t
+
+  val empty : unit -> 'a pq
+  val singleton : (Key.t * 'a) -> 'a pq
+  val fromList : (Key.t * 'a) list -> 'a pq
+
+  val size : 'a pq -> int
+  val findMin : 'a pq -> (Key.t * 'a) option
+
+  val insert : 'a pq * (Key.t * 'a) -> 'a pq
+  val deleteMin : 'a pq -> (Key.t * 'a) option * 'a pq
+  val meld : 'a pq * 'a pq -> 'a pq
+
+  val $ : (Key.t * 'a) -> 'a pq
+  val % : (Key.t * 'a) list -> 'a pq
+end
+\end{verbatim}
+\end{gram}
+\end{section}
+
+\begin{section}[Substructures]
+
+\begin{gram}[Key]
+\label{gr:pq-interface:Key}
+\begin{verbatim}
+structure Key : ORDKEY
+\end{verbatim}
+The \sml{Key} substructure defines the key type of priority queues, providing
+comparison and other useful functions.
+\end{gram}
+
+\end{section}
+
+\begin{section}[Types]
+
+\begin{gram}
+\begin{verbatim}
+type 'a t
+type 'a pq = 'a t
+\end{verbatim}
+The abstract priority queue type \sml{'a t} is a multiset of pairs
+$(k,v)$ where $k$ is a key of type \sml{Key.t} and $v$ is a value of
+type \sml{'a}. The alias \sml{'a pq} is for readability in the signature.
+\end{gram}
+
+\end{section}
+
+\begin{section}[Values]
+
+\begin{gram}[empty]
+\label{gr:pq-interface:empty}
+\begin{verbatim}
+val empty : unit -> 'a pq
+\end{verbatim}
+Construct an empty priority queue.
+\end{gram}
+
+\begin{gram}[singleton]
+\label{gr:pq-interface:singleton}
+\begin{verbatim}
+val singleton : (Key.t * 'a) -> 'a pq
+\end{verbatim}
+Construct a priority queue containing a single given $(k,v)$ pair.
+\end{gram}
+
+\begin{gram}[fromList]
+\label{gr:pq-interface:fromList}
+\begin{verbatim}
+val fromList : (Key.t * 'a) list -> 'a pq
+\end{verbatim}
+Construct a priority queue from all $(k,v)$ pairs in a list.
+\end{gram}
+
+\begin{gram}[size]
+\label{gr:pq-interface:size}
+\begin{verbatim}
+val size : 'a pq -> int
+\end{verbatim}
+Returns the number of $(k,v)$ pairs in a priority queue.
+\end{gram}
+
+\begin{gram}[findMin]
+\label{gr:pq-interface:findMin}
+\begin{verbatim}
+val findMin : 'a pq -> (Key.t * 'a) option
+\end{verbatim}
+If $q$ is empty, \sml{findMin q} evaluates to $\sml{NONE}$. Otherwise
+it evaluates to $\sml{SOME}(k,v)$ where $(k,v) \in q$ is the pair with
+minimum $k$. If there
+are multiple minimum $k$, then any one of them is returned.
+\end{gram}
+
+\begin{gram}[insert]
+\label{gr:pq-interface:insert}
+\begin{verbatim}
+val insert : 'a pq * (Key.t * 'a) -> 'a pq
+\end{verbatim}
+Inserts one $(k,v)$ pair into a priority queue.
+\end{gram}
+
+\begin{gram}[deleteMin]
+\label{gr:pq-interface:deleteMin}
+\begin{verbatim}
+val deleteMin : 'a pq -> (Key.t * 'a) option * 'a pq
+\end{verbatim}
+If $q$ is empty, \sml{deleteMin q} evaluates to $(\sml{NONE}, q)$. Otherwise
+it evaluates to $(\sml{SOME}(k,v), q')$ where $(k,v) \in q$ is the pair with
+minimum $k$, and $q' = q \setminus (k,v)$ is the rest of the queue. If there
+are multiple minimum $k$, then any one of them is returned.
+\end{gram}
+
+\begin{gram}[meld]
+\label{gr:pq-interface:meld}
+\begin{verbatim}
+val meld : 'a pq * 'a pq -> 'a pq
+\end{verbatim}
+\sml{meld (a, b)} unions two priority queues, evaluating to a priority queue
+containing all $(k,v)$ pairs from both $a$ and $b$.
+\end{gram}
+
+\begin{gram}[\$]
+\begin{verbatim}
+val $ : (Key.t * 'a) -> 'a pq
+\end{verbatim}
+An alias for \ref{gr:pq-interface:singleton}.
+\end{gram}
+
+\begin{gram}[\%]
+\begin{verbatim}
+val % : (Key.t * 'a) list -> 'a pq
+\end{verbatim}
+An alias for \ref{gr:pq-interface:fromList}.
+\end{gram}
+
+\end{section}
+
+\end{chapter}
