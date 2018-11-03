@@ -1,0 +1,174 @@
+\begin{chapter}[Random Interface]
+\label{ch:random-interface}
+\begin{preamble}
+The \sml{RANDOM210} signature is an interface for a seeded (deterministic)
+pseudorandom number generator which is usable in a parallel context, since
+seeds may be split to be used in conjunction with parallel primitives.
+
+It is important to note that every seed must only be ``used'' once. We say that
+a seed which has already been used to generate random data is no longer 
+``fresh''. We can generate a new fresh seed from an old one through calls to
+\ref{gr:random-interface:next} or one of the splitting functions
+(\ref{gr:random-interface:split}, \ref{gr:random-interface:split3},
+\ref{gr:random-interface:splitTab}). If the seeds are not used in the
+intended manner as described below, the quality of the resulting randomness
+may suffer.
+\end{preamble}
+
+\begin{section}[Summary]
+\begin{gram}
+\begin{verbatim}
+signature RANDOM210 =
+sig
+  type rand
+  val fromInt : int -> rand
+
+  val next : rand -> rand
+  val split : rand -> rand * (rand * rand)
+  val split3 : rand -> rand * (rand * rand * rand)
+  val splitTab : rand * int -> rand * (int -> rand)
+
+  val bool : rand -> bool
+  val biasedBool : (int * int) -> rand -> bool
+  val int : rand -> int
+  val boundedInt : (int * int) -> rand -> int
+  val real : rand -> real
+  val boundedReal : (real * real) -> rand -> real
+  val char : rand -> char
+  val boundedChar : (char * char) -> rand -> char
+end
+\end{verbatim}
+\end{gram}
+\end{section}
+
+\begin{section}[Types]
+
+\begin{gram}
+\begin{verbatim}
+type rand
+\end{verbatim}
+The abstract seed type.
+\end{gram}
+
+\end{section}
+
+\begin{section}[Values]
+
+\begin{gram}[fromInt]
+\label{gr:random-interface:fromInt}
+\begin{verbatim}
+val fromInt : int -> rand
+\end{verbatim}
+Construct a seed from an arbitrary integer.
+\end{gram}
+
+\begin{gram}[next]
+\label{gr:random-interface:next}
+\begin{verbatim}
+val next : rand -> rand
+\end{verbatim}
+Produce a fresh seed from an old one.
+\end{gram}
+
+\begin{gram}[split]
+\label{gr:random-interface:split}
+\begin{verbatim}
+val split : rand -> rand * (rand * rand)
+\end{verbatim}
+\sml{split r} evaluates to three fresh seeds $(r', (r_1, r_2))$. This function
+is intended to be used in conjunction with \sml{Primitives.par}, where $r_1$ and $r_2$ can
+be passed to two parallel subcomputations, and $r'$ can be used in the
+continuation after the two parallel computations have completed.
+\end{gram}
+
+\begin{gram}[split3]
+\label{gr:random-interface:split3}
+\begin{verbatim}
+val split3 : rand -> rand * (rand * rand * rand)
+\end{verbatim}
+\sml{split3 r} evaluates to four fresh seeds $(r', (r_1, r_2, r_3))$. This
+function is intended to be used in conjunction with \sml{Primitives.par3}, and is otherwise
+similar to \ref{gr:random-interface:split}.
+\end{gram}
+
+\begin{gram}[splitTab]
+\label{gr:random-interface:splitTab}
+\begin{verbatim}
+val splitTab : rand * int -> rand * (int -> rand)
+\end{verbatim}
+\sml{splitTab (r, n)} evalutes to $(r', f)$ where $r'$ is a fresh seed, as is
+each $f(i)$ for $0 \leq i < n$. This function is intended to be used in
+conjunction with primitives such as \sml{Primitives.parTab} or
+\sml{ArraySequence.tabulate}, where the seed $f(i)$ is given to the $i^\text{th}$
+subcomputation.
+\end{gram}
+
+\begin{gram}[bool]
+\label{gr:random-interface:bool}
+\begin{verbatim}
+val bool : rand -> bool
+\end{verbatim}
+Produces a uniformly random bool.
+\end{gram}
+
+\begin{gram}[biasedBool]
+\label{gr:random-interface:biasedBool}
+\begin{verbatim}
+val biasedBool : (int * int) -> rand -> bool
+\end{verbatim}
+\sml{biasedBool (h, t) r} uses the seed $r$ to produce a biased random bool
+with probability of \sml{true} being $\frac h {h+t}$.
+\end{gram}
+
+\begin{gram}[int]
+\label{gr:random-interface:int}
+\begin{verbatim}
+val int : rand -> int
+\end{verbatim}
+Produces a uniformly random integer.
+\end{gram}
+
+\begin{gram}[boundedInt]
+\label{gr:random-interface:boundedInt}
+\begin{verbatim}
+val boundedInt : (int * int) -> rand -> int
+\end{verbatim}
+\sml{boundedInt (a, b) r} uses the seed $r$ to produce a uniformly random
+integer $x$ bounded by $a \leq x < b$.
+\end{gram}
+
+\begin{gram}[real]
+\label{gr:random-interface:real}
+\begin{verbatim}
+val real : rand -> real
+\end{verbatim}
+(Missing specification...)
+\end{gram}
+
+\begin{gram}[boundedReal]
+\label{gr:random-interface:boundedReal}
+\begin{verbatim}
+val boundedReal : (real * real) -> rand -> real
+\end{verbatim}
+(Missing specification...)
+\end{gram}
+
+\begin{gram}[char]
+\label{gr:random-interface:char}
+\begin{verbatim}
+val char : rand -> char
+\end{verbatim}
+(Missing specification...)
+\end{gram}
+
+\begin{gram}[boundedChar]
+\label{gr:random-interface:boundedChar}
+\begin{verbatim}
+val boundedChar : (char * char) -> rand -> char
+\end{verbatim}
+(Missing specification...)
+\end{gram}
+
+\end{section}
+
+\end{chapter}
