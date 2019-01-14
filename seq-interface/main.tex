@@ -151,7 +151,7 @@ val toList : 'a seq -> 'a list
 Produces an index-preserving list representation of a sequence.
 \end{gram}
 
-\begin{group}
+\begin{flex}
 \begin{gram}[toString]
 \label{gr:toString}
 \begin{verbatim}
@@ -163,7 +163,7 @@ element of $s$ is converted to a string via $f$.
 \begin{example}
 \sml{toString Int.toString (fromList [1,2,3])} evaluates to \sml{"<1,2,3>"}.
 \end{example}
-\end{group}
+\end{flex}
 
 \begin{gram}[equal]
 \label{gr:equal}
@@ -224,7 +224,7 @@ val append : 'a seq * 'a seq -> 'a seq
 Concatenate two sequences.
 \end{gram}
 
-\begin{group}
+\begin{flex}
 \begin{gram}[flatten]
 \label{gr:flatten}
 \begin{verbatim}
@@ -235,7 +235,7 @@ Concatenate many sequences into one, in the order they are given.
 \begin{example}
 Flattening $\seq{\seq{1,2},\seq{},\seq{3}}$ results in $\seq{1,2,3}$.
 \end{example}
-\end{group}
+\end{flex}
 
 \begin{gram}[filter]
 \label{gr:filter}
@@ -313,7 +313,7 @@ it raises \sml{Range}, otherwise it is logically equivalent to
 \sml{tabulate (fn j => if i = j then x else nth s j) (length s)}.
 \end{gram}
 
-\begin{group}
+\begin{flex}
 \begin{gram}[inject]
 \label{gr:inject}
 \begin{verbatim}
@@ -329,7 +329,7 @@ Raises \sml{Range} if any $(i,\_) \in u$ is out-of-bounds.
 When all indices in $u$ are distinct, \sml{inject (s, u)} is logically
 equivalent to \sml{iterate update s u}.
 \end{note}
-\end{group}
+\end{flex}
 
 \begin{gram}[subseq]
 \label{gr:subseq}
@@ -378,7 +378,7 @@ $s = \seq{x}$, and \sml{PAIR (l, r)} otherwise where $l$ and $r$ are non-empty a
 concatenation is $s$. The sizes of $l$ and $r$ are implementation-defined.
 \end{gram}
 
-\begin{group}
+\begin{flex}
 \begin{gram}[iterate]
 \label{gr:iterate}
 \begin{verbatim}
@@ -396,7 +396,7 @@ When $s$ is empty, it returns $b$.
 \begin{example}
 \sml{iterate op+ 13 (fromList [1,2,3])} evaluates to \sml{19}.
 \end{example}
-\end{group}
+\end{flex}
 
 \begin{gram}[iteratePrefixes]
 \label{gr:iteratePrefixes}
@@ -410,7 +410,7 @@ val iteratePrefixes : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b seq * 'b
 That is, it produces the iteration of $f$ for each prefix of $s$.
 \end{gram}
 
-\begin{group}
+\begin{flex}
 \begin{gram}[iteratePrefixesIncl]
 \label{gr:iteratePrefixesIncl}
 \begin{verbatim}
@@ -427,9 +427,9 @@ It is logically equivalent to
 The return type of~\ref{gr:iteratePrefixesIncl} is slightly different than
 \ref{gr:iteratePrefixes}.
 \end{note}
-\end{group}
+\end{flex}
 
-\begin{group}
+\begin{flex}
 \begin{gram}[reduce]
 \label{gr:reduce}
 \begin{verbatim}
@@ -446,7 +446,7 @@ where $l = \sml{take s (n div 2)}$ and $r = \sml{drop s (n div 2)}$.
 \sml{reduce f b s} is logically equivalent to \sml{iterate f b s} when
 $f$ is associative and $b$ is a corresponding identity.
 \end{note}
-\end{group}
+\end{flex}
 
 \begin{gram}[scan]
 \label{gr:scan}
@@ -486,7 +486,7 @@ For sequences $s$ and $t$ already sorted with respect to $c$,
 \sml{merge c (s, t)} is logically equivalent to \sml{sort c (append (s, t))}.
 \end{gram}
 
-\begin{group}
+\begin{flex}
 \begin{gram}[collect]
 \label{gr:collect}
 \begin{verbatim}
@@ -501,7 +501,7 @@ retain their relative ordering from $s$.
 Collecting $\seq{(3,7),(2,6),(1,8),(3,5)}$ produces
 $\seq{(1,\seq{8}), (2, \seq{6}), (3,\seq{7,5})}$.
 \end{example}
-\end{group}
+\end{flex}
 
 \begin{gram}[collate]
 \label{gr:collate}

@@ -518,6 +518,20 @@ Produces an index-preserving list representation of a sequence.
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- gram -->
+<block name='group'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -573,6 +587,8 @@ element of $s$ is converted to a string via $f$.
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- example -->
+
+</block> <!-- group -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -779,6 +795,20 @@ Concatenate two sequences.
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- gram -->
+<block name='group'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -833,6 +863,8 @@ Flattening $\seq{\seq{1,2},\seq{},\seq{3}}$ results in $\seq{1,2,3}$.
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- example -->
+
+</block> <!-- group -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1077,6 +1109,20 @@ it raises \sml{Range}, otherwise it is logically equivalent to
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- gram -->
+<block name='group'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1136,6 +1182,8 @@ equivalent to \sml{iterate update s u}.
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- note -->
+
+</block> <!-- group -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1288,6 +1336,20 @@ concatenation is $s$. The sizes of $l$ and $r$ are implementation-defined.
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- gram -->
+<block name='group'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1371,6 +1433,8 @@ When $s$ is empty, it returns $b$.
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- example -->
+
+</block> <!-- group -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1404,6 +1468,20 @@ That is, it produces the iteration of $f$ for each prefix of $s$.
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- gram -->
+<block name='group'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1464,6 +1542,22 @@ The return type of~\ref{gr:iteratePrefixesIncl} is slightly different than
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- note -->
+
+</block> <!-- group -->
+<block name='group'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1524,6 +1618,8 @@ $f$ is associative and $b$ is a corresponding identity.
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- note -->
+
+</block> <!-- group -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1646,6 +1742,20 @@ For sequences $s$ and $t$ already sorted with respect to $c$,
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- gram -->
+<block name='group'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1704,6 +1814,8 @@ $\seq{(1,\seq{8}), (2, \seq{6}), (3,\seq{7,5})}$.
 ]]>
 </field> <!-- body_src -->
 </atom> <!-- example -->
+
+</block> <!-- group -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
