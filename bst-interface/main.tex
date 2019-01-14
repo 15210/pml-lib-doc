@@ -1,0 +1,136 @@
+\chapter{BST Interface}
+\label{ch:bst-interface}
+\begin{preamble}
+The \sml{BST} signature is a minimalistic interface for a binary search tree, which
+stores a set of key-value pairs. The key type is ordered and fixed by the
+\sml{Key} substructure while the value type is polymorphic.
+\end{preamble}
+
+\section{Summary}
+\begin{gram}
+\begin{verbatim}
+signature BST =
+sig
+  structure Key : ORDKEY
+
+  type 'a t
+  type 'a bst = 'a t
+
+  datatype 'a view =
+    LEAF
+  | NODE of { key : Key.t
+            , value : 'a
+            , left : 'a bst
+            , right : 'a bst }
+
+  exception Order
+
+  val expose : 'a bst -> 'a view
+  val size : 'a bst -> int
+
+  val empty : unit -> 'a bst
+  val singleton : Key.t * 'a -> 'a bst
+
+  val join : 'a bst * 'a bst -> 'a bst
+  val joinMid : 'a bst * (Key.t * 'a) * 'a bst -> 'a bst
+
+  val split : 'a bst * Key.t -> 'a bst * 'a option * 'a bst
+
+  val $ : Key.t * 'a -> 'a bst
+end
+\end{verbatim}
+\end{gram}
+
+\section{Types}
+
+\begin{gram}
+\begin{verbatim}
+type 'a t
+type 'a bst = 'a t
+\end{verbatim}
+The abstract tree type \sml{'a t} maps keys of type \sml{Key.t} to values of
+type \sml{'a}. The alias \sml{'a bst} is for readability.
+\end{gram}
+
+\begin{gram}
+\begin{verbatim}
+datatype 'a view = LEAF | NODE of {key : Key.t, value : 'a, left : 'a bst, right : 'a bst}
+\end{verbatim}
+A one-layer view of a tree, which is either a leaf (containing no data) or an
+interior node with a key, value, and two children.
+\end{gram}
+
+\section{Exceptions}
+
+\begin{gram}
+\begin{verbatim}
+exception Order
+\end{verbatim}
+\sml{Order} is raised when the ordering invariant would be violated.
+\end{gram}
+
+
+\section{Values}
+
+\begin{gram}[expose]
+\begin{verbatim}
+val expose : 'a bst -> 'a view
+\end{verbatim}
+View the root node of the tree.
+\end{gram}
+
+\begin{gram}[size]
+\begin{verbatim}
+val size : 'a bst -> int
+\end{verbatim}
+Return the number of nodes in the tree.
+\end{gram}
+
+\begin{gram}[empty]
+\begin{verbatim}
+val empty : unit -> 'a bst
+\end{verbatim}
+Construct an empty tree.
+\end{gram}
+
+\begin{gram}[singleton]
+\begin{verbatim}
+val singleton : Key.t * 'a -> 'a bst
+\end{verbatim}
+Construct a tree containing a single node with the given key and value.
+\end{gram}
+
+\begin{gram}[join]
+\begin{verbatim}
+val join : 'a bst * 'a bst -> 'a bst
+\end{verbatim}
+When given $A$ and $B$ where the largest key in $A$ is strictly smaller than
+the smallest key in $B$, \sml{join(A,B)} is the union of all key-value pairs
+from both $A$ and $B$. Raises \sml{Order} otherwise.
+\end{gram}
+
+\begin{gram}[joinMid]
+\begin{verbatim}
+val joinMid : 'a bst * (Key.t * 'a) * 'a bst -> 'a bst
+\end{verbatim}
+\sml{joinMid(A, (k,v), B)} is logically equivalent to
+\sml{join(A, join(singleton(k,v), B))}.
+\end{gram}
+
+\begin{gram}[split]
+\begin{verbatim}
+val split : 'a bst * Key.t -> 'a bst * 'a option * 'a bst
+\end{verbatim}
+\sml{split(T,k)} evaluates to $(L,v,R)$ where $L$ contains all keys from $T$
+which are smaller than $k$, $R$ contains all keys larger than
+$k$, and $v$ is the value associated with $k$ (or \sml{NONE} if $k$ is not
+in $T$).
+\end{gram}
+
+\begin{gram}[\$]
+\begin{verbatim}
+val $ : Key.t * 'a -> 'a bst
+\end{verbatim}
+An alias for singleton.
+\end{gram}
+
