@@ -1,0 +1,524 @@
+<block name='chapter'>
+<field name='title'>
+<![CDATA[
+BST Interface
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+BST Interface
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+ch:bst-interface
+</field> <!-- label -->
+<atom name='preamble'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>The <code>BST</code> signature is a minimalistic interface for a binary search tree, which stores a set of key-value pairs. The key type is ordered and fixed by the <code>Key</code> substructure while the value type is polymorphic.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+The \sml{BST} signature is a minimalistic interface for a binary search tree, which
+stores a set of key-value pairs. The key type is ordered and fixed by the
+\sml{Key} substructure while the value type is polymorphic.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- preamble -->
+
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Summary
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Summary
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>signature BST =  
+sig  
+  structure Key : ORDKEY  
+  
+  type &#39;a t  
+  type &#39;a bst = &#39;a t  
+  
+  datatype &#39;a view =  
+    LEAF  
+  | NODE of { key : Key.t  
+            , value : &#39;a  
+            , left : &#39;a bst  
+            , right : &#39;a bst }  
+  
+  exception Order  
+  
+  val expose : &#39;a bst -&gt; &#39;a view  
+  val size : &#39;a bst -&gt; int  
+  
+  val empty : unit -&gt; &#39;a bst  
+  val singleton : Key.t * &#39;a -&gt; &#39;a bst  
+  
+  val join : &#39;a bst * &#39;a bst -&gt; &#39;a bst  
+  val joinMid : &#39;a bst * (Key.t * &#39;a) * &#39;a bst -&gt; &#39;a bst  
+  
+  val split : &#39;a bst * Key.t -&gt; &#39;a bst * &#39;a option * &#39;a bst  
+  
+  val $ : Key.t * &#39;a -&gt; &#39;a bst  
+end  </code></pre>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+signature BST =
+sig
+  structure Key : ORDKEY
+
+  type 'a t
+  type 'a bst = 'a t
+
+  datatype 'a view =
+    LEAF
+  | NODE of { key : Key.t
+            , value : 'a
+            , left : 'a bst
+            , right : 'a bst }
+
+  exception Order
+
+  val expose : 'a bst -> 'a view
+  val size : 'a bst -> int
+
+  val empty : unit -> 'a bst
+  val singleton : Key.t * 'a -> 'a bst
+
+  val join : 'a bst * 'a bst -> 'a bst
+  val joinMid : 'a bst * (Key.t * 'a) * 'a bst -> 'a bst
+
+  val split : 'a bst * Key.t -> 'a bst * 'a option * 'a bst
+
+  val $ : Key.t * 'a -> 'a bst
+end
+\end{verbatim}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Types
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Types
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>type &#39;a t  
+type &#39;a bst = &#39;a t  </code></pre>
+<p>The abstract tree type <code>’a t</code> maps keys of type <code>Key.t</code> to values of type <code>’a</code>. The alias <code>’a bst</code> is for readability.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+type 'a t
+type 'a bst = 'a t
+\end{verbatim}
+The abstract tree type \sml{'a t} maps keys of type \sml{Key.t} to values of
+type \sml{'a}. The alias \sml{'a bst} is for readability.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>datatype &#39;a view = LEAF | NODE of {key : Key.t, value : &#39;a, left : &#39;a bst, right : &#39;a bst}  </code></pre>
+<p>A one-layer view of a tree, which is either a leaf (containing no data) or an interior node with a key, value, and two children.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+datatype 'a view = LEAF | NODE of {key : Key.t, value : 'a, left : 'a bst, right : 'a bst}
+\end{verbatim}
+A one-layer view of a tree, which is either a leaf (containing no data) or an
+interior node with a key, value, and two children.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Exceptions
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Exceptions
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>exception Order  </code></pre>
+<p><code>Order</code> is raised when the ordering invariant would be violated.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+exception Order
+\end{verbatim}
+\sml{Order} is raised when the ordering invariant would be violated.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Values
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Values
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+expose
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+expose
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val expose : &#39;a bst -&gt; &#39;a view  </code></pre>
+<p>View the root node of the tree.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val expose : 'a bst -> 'a view
+\end{verbatim}
+View the root node of the tree.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+size
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+size
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val size : &#39;a bst -&gt; int  </code></pre>
+<p>Return the number of nodes in the tree.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val size : 'a bst -> int
+\end{verbatim}
+Return the number of nodes in the tree.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+empty
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+empty
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val empty : unit -&gt; &#39;a bst  </code></pre>
+<p>Construct an empty tree.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val empty : unit -> 'a bst
+\end{verbatim}
+Construct an empty tree.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+singleton
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+singleton
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val singleton : Key.t * &#39;a -&gt; &#39;a bst  </code></pre>
+<p>Construct a tree containing a single node with the given key and value.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val singleton : Key.t * 'a -> 'a bst
+\end{verbatim}
+Construct a tree containing a single node with the given key and value.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+join
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+join
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val join : &#39;a bst * &#39;a bst -&gt; &#39;a bst  </code></pre>
+<p>When given <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> where the largest key in <span class="math inline">\(A\)</span> is strictly smaller than the smallest key in <span class="math inline">\(B\)</span>, <code>join(A,B)</code> is the union of all key-value pairs from both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. Raises <code>Order</code> otherwise.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val join : 'a bst * 'a bst -> 'a bst
+\end{verbatim}
+When given $A$ and $B$ where the largest key in $A$ is strictly smaller than
+the smallest key in $B$, \sml{join(A,B)} is the union of all key-value pairs
+from both $A$ and $B$. Raises \sml{Order} otherwise.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+joinMid
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+joinMid
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val joinMid : &#39;a bst * (Key.t * &#39;a) * &#39;a bst -&gt; &#39;a bst  </code></pre>
+<p><code>joinMid(A, (k,v), B)</code> is logically equivalent to <code>join(A, join(singleton(k,v), B))</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val joinMid : 'a bst * (Key.t * 'a) * 'a bst -> 'a bst
+\end{verbatim}
+\sml{joinMid(A, (k,v), B)} is logically equivalent to
+\sml{join(A, join(singleton(k,v), B))}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+split
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+split
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val split : &#39;a bst * Key.t -&gt; &#39;a bst * &#39;a option * &#39;a bst  </code></pre>
+<p><code>split(T,k)</code> evaluates to <span class="math inline">\((L,v,R)\)</span> where <span class="math inline">\(L\)</span> contains all keys from <span class="math inline">\(T\)</span> which are smaller than <span class="math inline">\(k\)</span>, <span class="math inline">\(R\)</span> contains all keys larger than <span class="math inline">\(k\)</span>, and <span class="math inline">\(v\)</span> is the value associated with <span class="math inline">\(k\)</span> (or <code>NONE</code> if <span class="math inline">\(k\)</span> is not in <span class="math inline">\(T\)</span>).</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val split : 'a bst * Key.t -> 'a bst * 'a option * 'a bst
+\end{verbatim}
+\sml{split(T,k)} evaluates to $(L,v,R)$ where $L$ contains all keys from $T$
+which are smaller than $k$, $R$ contains all keys larger than
+$k$, and $v$ is the value associated with $k$ (or \sml{NONE} if $k$ is not
+in $T$).
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+$
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+\$
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val $ : Key.t * &#39;a -&gt; &#39;a bst  </code></pre>
+<p>An alias for singleton.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val $ : Key.t * 'a -> 'a bst
+\end{verbatim}
+An alias for singleton.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+
+</block> <!-- chapter -->
