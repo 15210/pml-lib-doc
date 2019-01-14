@@ -1,0 +1,196 @@
+\chapter{ArraySequence}
+\label{ch:array-seq}
+\begin{preamble}
+The \sml{ArraySequence} structure implements the \sml{SEQUENCE} interface
+with \sml{type 'a t = 'a ArraySlice.slice}. This permits constant-time
+implementations of a number of crucial operations such as \sml{nth} and
+\sml{subseq}.
+\end{preamble}
+
+\begin{gram}[Implementation-Defined Behavior]
+When $|s| \geq 2$, \sml{splitMid s} is logically equivalent to
+\[
+  \sml{PAIR (take s (n div 2), drop s (n div 2))}
+\]
+\end{gram}
+
+\section{Cost Specification}
+
+\begin{costspec}[Constant-Work Operations]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{nth}~s~i$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{length}~s$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{empty}~()$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{singleton}~x$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{subseq}~s~(i,n)$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{take}~s~n$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{drop}~s~n$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{splitHead}~s$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{splitMid}~s$ & $\bigO 1$ & $\bigO 1$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Tabulate]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\sml{tabulate}~f~n$ &
+$\displaystyle \sum_{i = 0}^{n-1} \WW{f(i)}$ &
+$\displaystyle \max_{i = 0}^{n-1} \SS{f(i)}$ \\
+%
+\end{tabular}
+\end{costspec}
+
+% \begin{costspec}[Size-Preserving Operations]
+% \begin{tabular}{c|c|c}
+% & \textbf{Work} & \textbf{Span} \\
+
+% \end{tabular}
+% \end{costspec}
+
+\begin{costspec}[Map]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\{\sml{map},\sml{mapIdx}\}~f~s$ &
+$\displaystyle \sum_{x \in s} \WW{f(x)}$ &
+$\displaystyle \max_{x \in s} \SS{f(x)}$ \\
+%
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Filter]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\{\sml{filter},\sml{filterIdx}\}~p~s$ &
+$\displaystyle \sum_{x \in s} \WW{p(x)}$ &
+$\displaystyle \bigO{\log{|s|}} + \max_{x \in s} \SS{p(x)}$ \\
+%
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Concatenation]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\sml{append}~(s,t)$ &
+$\displaystyle \bigO{|s| + |t|}$ &
+$\displaystyle \bigO 1$ \\
+%
+$\sml{flatten}~s$ &
+$\displaystyle \bigO{|s| + \sum_{x \in s} |x|}$ &
+$\displaystyle \bigO{\log{|s|}}$
+%
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Zip]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\sml{zip}~(s,t)$ &
+$\displaystyle \bigO{\min(|s|,|t|)}$ &
+$\displaystyle \bigO 1$ \\
+%
+$\sml{zipWith}~f~(s,t)$ &
+$\displaystyle \sum_{i = 0}^{\min(|s|,|t|)-1} \WW{f(s[i],t[i])}$ &
+$\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \SS{f(s[i],t[i])}$
+%
+\end{tabular}
+\end{costspec}
+
+\begin{flex}
+\begin{costspec}[Iteration]
+In the following, $b_i$ is the result of the iteration after the first $i$
+elements.
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\sml{iterate}~f~b_0~s$ &
+$\displaystyle \sum_{i = 0}^{|s|-1} \WW{f(b_i, s[i])}$ &
+$\displaystyle \sum_{i = 0}^{|s|-1} \SS{f(b_i, s[i])}$
+\end{tabular}
+\end{costspec}
+\begin{note}
+$\sml{iteratePrefixes}$ and $\sml{iteratePrefixesIncl}$ have the same cost
+specification.
+\end{note}
+\end{flex}
+
+\begin{costspec}[Parallel Aggregation]
+The following assume $\WW{f(\cdot)}$ and $\SS{f(\cdot)}$ are $\bigO 1$. If not,
+refer directly to the implementation.
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\{\sml{reduce},\sml{scan},\sml{scanIncl}\}~f~b~s$ &
+$\displaystyle \bigO{|s|}$ &
+$\displaystyle \bigO{\log{|s|}}$
+%
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Updates]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\sml{update}~(s,(i,x))$ &
+$\bigO{|s|}$ &
+$\bigO 1$ \\
+%
+$\sml{inject}~(s,u)$ &
+$\bigO{|s| + |u|}$ &
+$\bigO 1$ \\
+%
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Comparisons and Sorting]
+The following assume that $\WW{c(\cdot)}$ and $\SS{c(\cdot)}$ are $\bigO 1$.
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\{\sml{sort},\sml{collect}\}~c~s$ &
+$\displaystyle \bigO{|s|\log{|s|}}$ &
+$\displaystyle \bigO{\log^2{|s|}}$ \\
+%
+$\sml{merge}~c~(s,t)$ &
+$\displaystyle \bigO{|s| + |t|}$ &
+$\displaystyle \bigO{\log\left(|s| + |t|\right)}$ \\
+%
+$\sml{collate}~c~(s,t)$ &
+$\displaystyle \bigO{|s| + |t|}$ &
+$\displaystyle \bigO{\log\left(\min\left(|s| + |t|\right)\right)}$ \\
+%
+$\sml{argmax}~c~s$ &
+$\displaystyle \bigO{|s|}$ &
+$\displaystyle \bigO{\log{|s|}}$ \\
+%
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Miscellaneous]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\sml{rev}~s$ &
+$\displaystyle \bigO{|s|}$ &
+$\displaystyle \bigO 1$ \\
+%
+$\sml{enum}~s$ &
+$\displaystyle \bigO{|s|}$ &
+$\displaystyle \bigO 1$ \\
+%
+$\sml{toList}~s$ &
+$\bigO{|s|}$ &
+$\bigO{|s|}$ \\
+%
+$\sml{fromList}~l$ &
+$\bigO{|l|}$ &
+$\bigO{|l|}$ \\
+%
+\end{tabular}
+\end{costspec}
+

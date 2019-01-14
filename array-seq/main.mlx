@@ -1,0 +1,759 @@
+<block name='chapter'>
+<field name='title'>
+<![CDATA[
+ArraySequence
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+ArraySequence
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+ch:array-seq
+</field> <!-- label -->
+<atom name='preamble'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>The <code>ArraySequence</code> structure implements the <code>SEQUENCE</code> interface with <code>type ’a t = ’a ArraySlice.slice</code>. This permits constant-time implementations of a number of crucial operations such as <code>nth</code> and <code>subseq</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+The \sml{ArraySequence} structure implements the \sml{SEQUENCE} interface
+with \sml{type 'a t = 'a ArraySlice.slice}. This permits constant-time
+implementations of a number of crucial operations such as \sml{nth} and
+\sml{subseq}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- preamble -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+Implementation-Defined Behavior
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Implementation-Defined Behavior
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>When <span class="math inline">\(|s| \geq 2\)</span>, <code>splitMid s</code> is logically equivalent to <span class="math display">\[\texttt{PAIR (take s (n div 2), drop s (n div 2))}\]</span></p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+When $|s| \geq 2$, \sml{splitMid s} is logically equivalent to
+\[
+  \sml{PAIR (take s (n div 2), drop s (n div 2))}
+\]
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Cost Specification
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Cost Specification
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='costspec'>
+<field name='title'>
+<![CDATA[
+Constant-Work Operations
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Constant-Work Operations
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{nth}~s~i\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\texttt{length}~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{empty}~()\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\texttt{singleton}~x\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{subseq}~s~(i,n)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\texttt{take}~s~n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{drop}~s~n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\texttt{splitHead}~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{splitMid}~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{nth}~s~i$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{length}~s$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{empty}~()$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{singleton}~x$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{subseq}~s~(i,n)$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{take}~s~n$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{drop}~s~n$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{splitHead}~s$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{splitMid}~s$ & $\bigO 1$ & $\bigO 1$
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- costspec -->
+<atom name='costspec'>
+<field name='title'>
+<![CDATA[
+Tabulate
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Tabulate
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{tabulate}~f~n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{i = 0}^{n-1} \mathop{\mathcal{W}}\left(f(i)\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \max_{i = 0}^{n-1} \mathop{\mathcal{S}}\left(f(i)\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\sml{tabulate}~f~n$ &
+$\displaystyle \sum_{i = 0}^{n-1} \WW{f(i)}$ &
+$\displaystyle \max_{i = 0}^{n-1} \SS{f(i)}$ \\
+%
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- costspec -->
+<atom name='costspec'>
+<field name='title'>
+<![CDATA[
+Map
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Map
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\{\texttt{map},\texttt{mapIdx}\}~f~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{x \in s} \mathop{\mathcal{W}}\left(f(x)\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \max_{x \in s} \mathop{\mathcal{S}}\left(f(x)\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\{\sml{map},\sml{mapIdx}\}~f~s$ &
+$\displaystyle \sum_{x \in s} \WW{f(x)}$ &
+$\displaystyle \max_{x \in s} \SS{f(x)}$ \\
+%
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- costspec -->
+<atom name='costspec'>
+<field name='title'>
+<![CDATA[
+Filter
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Filter
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\{\texttt{filter},\texttt{filterIdx}\}~p~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{x \in s} \mathop{\mathcal{W}}\left(p(x)\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log{|s|}\right) + \max_{x \in s} \mathop{\mathcal{S}}\left(p(x)\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\{\sml{filter},\sml{filterIdx}\}~p~s$ &
+$\displaystyle \sum_{x \in s} \WW{p(x)}$ &
+$\displaystyle \bigO{\log{|s|}} + \max_{x \in s} \SS{p(x)}$ \\
+%
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- costspec -->
+<atom name='costspec'>
+<field name='title'>
+<![CDATA[
+Concatenation
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Concatenation
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{append}~(s,t)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s| + |t|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\texttt{flatten}~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s| + \sum_{x \in s} |x|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log{|s|}\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\sml{append}~(s,t)$ &
+$\displaystyle \bigO{|s| + |t|}$ &
+$\displaystyle \bigO 1$ \\
+%
+$\sml{flatten}~s$ &
+$\displaystyle \bigO{|s| + \sum_{x \in s} |x|}$ &
+$\displaystyle \bigO{\log{|s|}}$
+%
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- costspec -->
+<atom name='costspec'>
+<field name='title'>
+<![CDATA[
+Zip
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Zip
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{zip}~(s,t)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\min(|s|,|t|)\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\texttt{zipWith}~f~(s,t)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{i = 0}^{\min(|s|,|t|)-1} \mathop{\mathcal{W}}\left(f(s[i],t[i])\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \mathop{\mathcal{S}}\left(f(s[i],t[i])\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\sml{zip}~(s,t)$ &
+$\displaystyle \bigO{\min(|s|,|t|)}$ &
+$\displaystyle \bigO 1$ \\
+%
+$\sml{zipWith}~f~(s,t)$ &
+$\displaystyle \sum_{i = 0}^{\min(|s|,|t|)-1} \WW{f(s[i],t[i])}$ &
+$\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \SS{f(s[i],t[i])}$
+%
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- costspec -->
+<block name='group'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='costspec'>
+<field name='title'>
+<![CDATA[
+Iteration
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Iteration
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>In the following, <span class="math inline">\(b_i\)</span> is the result of the iteration after the first <span class="math inline">\(i\)</span> elements.</p>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{iterate}~f~b_0~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{i = 0}^{|s|-1} \mathop{\mathcal{W}}\left(f(b_i, s[i])\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{i = 0}^{|s|-1} \mathop{\mathcal{S}}\left(f(b_i, s[i])\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+In the following, $b_i$ is the result of the iteration after the first $i$
+elements.
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\sml{iterate}~f~b_0~s$ &
+$\displaystyle \sum_{i = 0}^{|s|-1} \WW{f(b_i, s[i])}$ &
+$\displaystyle \sum_{i = 0}^{|s|-1} \SS{f(b_i, s[i])}$
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- costspec -->
+<atom name='note'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p><span class="math inline">\(\texttt{iteratePrefixes}\)</span> and <span class="math inline">\(\texttt{iteratePrefixesIncl}\)</span> have the same cost specification.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+$\sml{iteratePrefixes}$ and $\sml{iteratePrefixesIncl}$ have the same cost
+specification.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- note -->
+
+</block> <!-- group -->
+<atom name='costspec'>
+<field name='title'>
+<![CDATA[
+Parallel Aggregation
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Parallel Aggregation
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>The following assume <span class="math inline">\(\mathop{\mathcal{W}}\left(f(\cdot)\right)\)</span> and <span class="math inline">\(\mathop{\mathcal{S}}\left(f(\cdot)\right)\)</span> are <span class="math inline">\(\mathop{O}\left(1\right)\)</span>. If not, refer directly to the implementation.</p>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\{\texttt{reduce},\texttt{scan},\texttt{scanIncl}\}~f~b~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log{|s|}\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+The following assume $\WW{f(\cdot)}$ and $\SS{f(\cdot)}$ are $\bigO 1$. If not,
+refer directly to the implementation.
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\{\sml{reduce},\sml{scan},\sml{scanIncl}\}~f~b~s$ &
+$\displaystyle \bigO{|s|}$ &
+$\displaystyle \bigO{\log{|s|}}$
+%
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- costspec -->
+<atom name='costspec'>
+<field name='title'>
+<![CDATA[
+Updates
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Updates
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{update}~(s,(i,x))\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|s|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\texttt{inject}~(s,u)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|s| + |u|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\sml{update}~(s,(i,x))$ &
+$\bigO{|s|}$ &
+$\bigO 1$ \\
+%
+$\sml{inject}~(s,u)$ &
+$\bigO{|s| + |u|}$ &
+$\bigO 1$ \\
+%
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- costspec -->
+<atom name='costspec'>
+<field name='title'>
+<![CDATA[
+Comparisons and Sorting
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Comparisons and Sorting
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>The following assume that <span class="math inline">\(\mathop{\mathcal{W}}\left(c(\cdot)\right)\)</span> and <span class="math inline">\(\mathop{\mathcal{S}}\left(c(\cdot)\right)\)</span> are <span class="math inline">\(\mathop{O}\left(1\right)\)</span>.</p>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\{\texttt{sort},\texttt{collect}\}~c~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s|\log{|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log^2{|s|}\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\texttt{merge}~c~(s,t)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s| + |t|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log\left(|s| + |t|\right)\right)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{collate}~c~(s,t)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s| + |t|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log\left(\min\left(|s| + |t|\right)\right)\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\texttt{argmax}~c~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log{|s|}\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+The following assume that $\WW{c(\cdot)}$ and $\SS{c(\cdot)}$ are $\bigO 1$.
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\{\sml{sort},\sml{collect}\}~c~s$ &
+$\displaystyle \bigO{|s|\log{|s|}}$ &
+$\displaystyle \bigO{\log^2{|s|}}$ \\
+%
+$\sml{merge}~c~(s,t)$ &
+$\displaystyle \bigO{|s| + |t|}$ &
+$\displaystyle \bigO{\log\left(|s| + |t|\right)}$ \\
+%
+$\sml{collate}~c~(s,t)$ &
+$\displaystyle \bigO{|s| + |t|}$ &
+$\displaystyle \bigO{\log\left(\min\left(|s| + |t|\right)\right)}$ \\
+%
+$\sml{argmax}~c~s$ &
+$\displaystyle \bigO{|s|}$ &
+$\displaystyle \bigO{\log{|s|}}$ \\
+%
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- costspec -->
+<atom name='costspec'>
+<field name='title'>
+<![CDATA[
+Miscellaneous
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Miscellaneous
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{rev}~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\texttt{enum}~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(1\right)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\texttt{toList}~s\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|s|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|s|\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\texttt{fromList}~l\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|l|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|l|\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+%
+$\sml{rev}~s$ &
+$\displaystyle \bigO{|s|}$ &
+$\displaystyle \bigO 1$ \\
+%
+$\sml{enum}~s$ &
+$\displaystyle \bigO{|s|}$ &
+$\displaystyle \bigO 1$ \\
+%
+$\sml{toList}~s$ &
+$\bigO{|s|}$ &
+$\bigO{|s|}$ \\
+%
+$\sml{fromList}~l$ &
+$\bigO{|l|}$ &
+$\bigO{|l|}$ \\
+%
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- costspec -->
+
+
+</block> <!-- section -->
+
+</block> <!-- chapter -->

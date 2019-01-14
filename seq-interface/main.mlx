@@ -1,0 +1,1829 @@
+<block name='chapter'>
+<field name='title'>
+<![CDATA[
+Sequence Interface
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Sequence Interface
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+ch:seq-interface
+</field> <!-- label -->
+<atom name='preamble'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>The <code>SEQUENCE</code> signature is a comprehensive interface for a persistent sequence type.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+The \sml{SEQUENCE} signature is a comprehensive interface for a
+persistent sequence type.
+% We use a number of notational conventions which
+% can be seen <a href="../../../resources/notation/sequence.html">here</a>.
+% For example, we write $|s|$ and $s[i]$ for the length and $i^\text{th}$
+% element of $s$, respectively.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- preamble -->
+
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Summary
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Summary
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>signature SEQUENCE =  
+sig  
+  type &#39;a t  
+  type &#39;a seq = &#39;a t  
+  type &#39;a ord = &#39;a * &#39;a -&gt; order  
+  datatype &#39;a listview = NIL | CONS of &#39;a * &#39;a seq  
+  datatype &#39;a treeview = EMPTY | ONE of &#39;a | PAIR of &#39;a seq * &#39;a seq  
+  
+  exception Range  
+  exception Size  
+  
+  val nth : &#39;a seq -&gt; int -&gt; &#39;a  
+  val length : &#39;a seq -&gt; int  
+  val toList : &#39;a seq -&gt; &#39;a list  
+  val toString : (&#39;a -&gt; string) -&gt; &#39;a seq -&gt; string  
+  val equal : (&#39;a * &#39;a -&gt; bool) -&gt; &#39;a seq * &#39;a seq -&gt; bool  
+  
+  val empty : unit -&gt; &#39;a seq  
+  val singleton : &#39;a -&gt; &#39;a seq  
+  val tabulate : (int -&gt; &#39;a) -&gt; int -&gt; &#39;a seq  
+  val fromList : &#39;a list -&gt; &#39;a seq  
+  
+  val rev : &#39;a seq -&gt; &#39;a seq  
+  val append : &#39;a seq * &#39;a seq -&gt; &#39;a seq  
+  val flatten : &#39;a seq seq -&gt; &#39;a seq  
+  
+  val filter : (&#39;a -&gt; bool) -&gt; &#39;a seq -&gt; &#39;a seq  
+  val map : (&#39;a -&gt; &#39;b) -&gt; &#39;a seq -&gt; &#39;b seq  
+  val zip : &#39;a seq * &#39;b seq -&gt; (&#39;a * &#39;b) seq  
+  val zipWith : (&#39;a * &#39;b -&gt; &#39;c) -&gt; &#39;a seq * &#39;b seq -&gt; &#39;c seq  
+  
+  val enum : &#39;a seq -&gt; (int * &#39;a) seq  
+  val filterIdx : (int * &#39;a -&gt; bool) -&gt; &#39;a seq -&gt; &#39;a seq  
+  val mapIdx : (int * &#39;a -&gt; &#39;b) -&gt; &#39;a seq -&gt; &#39;b seq  
+  val update : &#39;a seq * (int * &#39;a) -&gt; &#39;a seq  
+  val inject : &#39;a seq * (int * &#39;a) seq -&gt; &#39;a seq  
+  
+  val subseq : &#39;a seq -&gt; int * int -&gt; &#39;a seq  
+  val take : &#39;a seq -&gt; int -&gt; &#39;a seq  
+  val drop : &#39;a seq -&gt; int -&gt; &#39;a seq  
+  val splitHead : &#39;a seq -&gt; &#39;a listview  
+  val splitMid : &#39;a seq -&gt; &#39;a treeview  
+  
+  val iterate : (&#39;b * &#39;a -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a seq -&gt; &#39;b  
+  val iteratePrefixes : (&#39;b * &#39;a -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a seq -&gt; &#39;b seq * &#39;b  
+  val iteratePrefixesIncl : (&#39;b * &#39;a -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a seq -&gt; &#39;b seq  
+  val reduce : (&#39;a * &#39;a -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;a seq -&gt; &#39;a  
+  val scan : (&#39;a * &#39;a -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;a seq -&gt; &#39;a seq * &#39;a  
+  val scanIncl : (&#39;a * &#39;a -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;a seq -&gt; &#39;a seq  
+  
+  val sort : &#39;a ord -&gt; &#39;a seq -&gt; &#39;a seq  
+  val merge : &#39;a ord -&gt; &#39;a seq * &#39;a seq -&gt; &#39;a seq  
+  val collect : &#39;a ord -&gt; (&#39;a * &#39;b) seq -&gt; (&#39;a * &#39;b seq) seq  
+  val collate : &#39;a ord -&gt; &#39;a seq ord  
+  val argmax : &#39;a ord -&gt; &#39;a seq -&gt; int  
+  
+  val $ : &#39;a -&gt; &#39;a seq  
+  val % : &#39;a list -&gt; &#39;a seq  
+end  </code></pre>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+signature SEQUENCE =
+sig
+  type 'a t
+  type 'a seq = 'a t
+  type 'a ord = 'a * 'a -> order
+  datatype 'a listview = NIL | CONS of 'a * 'a seq
+  datatype 'a treeview = EMPTY | ONE of 'a | PAIR of 'a seq * 'a seq
+
+  exception Range
+  exception Size
+
+  val nth : 'a seq -> int -> 'a
+  val length : 'a seq -> int
+  val toList : 'a seq -> 'a list
+  val toString : ('a -> string) -> 'a seq -> string
+  val equal : ('a * 'a -> bool) -> 'a seq * 'a seq -> bool
+
+  val empty : unit -> 'a seq
+  val singleton : 'a -> 'a seq
+  val tabulate : (int -> 'a) -> int -> 'a seq
+  val fromList : 'a list -> 'a seq
+
+  val rev : 'a seq -> 'a seq
+  val append : 'a seq * 'a seq -> 'a seq
+  val flatten : 'a seq seq -> 'a seq
+
+  val filter : ('a -> bool) -> 'a seq -> 'a seq
+  val map : ('a -> 'b) -> 'a seq -> 'b seq
+  val zip : 'a seq * 'b seq -> ('a * 'b) seq
+  val zipWith : ('a * 'b -> 'c) -> 'a seq * 'b seq -> 'c seq
+
+  val enum : 'a seq -> (int * 'a) seq
+  val filterIdx : (int * 'a -> bool) -> 'a seq -> 'a seq
+  val mapIdx : (int * 'a -> 'b) -> 'a seq -> 'b seq
+  val update : 'a seq * (int * 'a) -> 'a seq
+  val inject : 'a seq * (int * 'a) seq -> 'a seq
+
+  val subseq : 'a seq -> int * int -> 'a seq
+  val take : 'a seq -> int -> 'a seq
+  val drop : 'a seq -> int -> 'a seq
+  val splitHead : 'a seq -> 'a listview
+  val splitMid : 'a seq -> 'a treeview
+
+  val iterate : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b
+  val iteratePrefixes : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b seq * 'b
+  val iteratePrefixesIncl : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b seq
+  val reduce : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a
+  val scan : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a seq * 'a
+  val scanIncl : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a seq
+
+  val sort : 'a ord -> 'a seq -> 'a seq
+  val merge : 'a ord -> 'a seq * 'a seq -> 'a seq
+  val collect : 'a ord -> ('a * 'b) seq -> ('a * 'b seq) seq
+  val collate : 'a ord -> 'a seq ord
+  val argmax : 'a ord -> 'a seq -> int
+
+  val $ : 'a -> 'a seq
+  val % : 'a list -> 'a seq
+end
+\end{verbatim}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Types
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Types
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>type &#39;a t  
+type &#39;a seq = &#39;a t  </code></pre>
+<p>The abstract sequence type <code>’a t</code> has elements of type <code>’a</code>. The alias <code>’a seq</code> is for readability.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+type 'a t
+type 'a seq = 'a t
+\end{verbatim}
+The abstract sequence type \sml{'a t} has elements of type \sml{'a}. The alias
+\sml{'a seq} is for readability.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>type &#39;a ord = &#39;a * &#39;a -&gt; order  </code></pre>
+<p>An alias, for readability.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+type 'a ord = 'a * 'a -> order
+\end{verbatim}
+An alias, for readability.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>datatype &#39;a listview = NIL | CONS of &#39;a * &#39;a seq  </code></pre>
+<p>View a sequence as though it were a list. See <a href="#gr:splitHead" data-reference-type="ref" data-reference="gr:splitHead">[gr:splitHead]</a>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+datatype 'a listview = NIL | CONS of 'a * 'a seq
+\end{verbatim}
+View a sequence as though it were a list. See~\ref{gr:splitHead}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>datatype &#39;a treeview = EMPTY | ONE of &#39;a | PAIR of &#39;a seq * &#39;a seq  </code></pre>
+<p>View of a sequence as though it were a tree with data at the leaves. This is largely a syntactic convenience for 2-way divide-and-conquer algorithms on sequences. See <a href="#gr:splitMid" data-reference-type="ref" data-reference="gr:splitMid">[gr:splitMid]</a>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+datatype 'a treeview = EMPTY | ONE of 'a | PAIR of 'a seq * 'a seq
+\end{verbatim}
+View of a sequence as though it were a tree with data at the leaves.
+This is largely a syntactic convenience for 2-way divide-and-conquer algorithms
+on sequences. See~\ref{gr:splitMid}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Exceptions
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Exceptions
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>exception Range  </code></pre>
+<p>The <code>Range</code> exception is raised whenever an invalid index into a sequence is used.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+exception Range
+\end{verbatim}
+The \sml{Range} exception is raised whenever an invalid index into a sequence is used.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>exception Size  </code></pre>
+<p>The <code>Size</code> exception is raised whenever a function is given a negative size.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+exception Size
+\end{verbatim}
+The \sml{Size} exception is raised whenever a function is given a negative size.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Values
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Values
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+nth
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+nth
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:nth
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val nth : &#39;a seq -&gt; int -&gt; &#39;a  </code></pre>
+<p><code>nth s i</code> evaluates to <span class="math inline">\(s[i]\)</span>, the <span class="math inline">\(i^\text{th}\)</span> element of <span class="math inline">\(s\)</span>. Raises <code>Range</code> if <span class="math inline">\(i\)</span> is out-of-bounds.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val nth : 'a seq -> int -> 'a
+\end{verbatim}
+\sml{nth s i} evaluates to $s[i]$, the $i^\text{th}$ element of $s$.
+Raises \sml{Range} if $i$ is out-of-bounds.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+length
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+length
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:length
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val length : &#39;a seq -&gt; int  </code></pre>
+<p><code>length s</code> evaluates to <span class="math inline">\(|s|\)</span>, the number of elements in <span class="math inline">\(s\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val length : 'a seq -> int
+\end{verbatim}
+\sml{length s} evaluates to $|s|$, the number of elements in $s$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+toList
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+toList
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:toList
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val toList : &#39;a seq -&gt; &#39;a list  </code></pre>
+<p>Produces an index-preserving list representation of a sequence.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val toList : 'a seq -> 'a list
+\end{verbatim}
+Produces an index-preserving list representation of a sequence.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+toString
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+toString
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:toString
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val toString : (&#39;a -&gt; string) -&gt; &#39;a seq -&gt; string  </code></pre>
+<p><code>toString f s</code> produces a string representation of <span class="math inline">\(s\)</span>, where each element of <span class="math inline">\(s\)</span> is converted to a string via <span class="math inline">\(f\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val toString : ('a -> string) -> 'a seq -> string
+\end{verbatim}
+\sml{toString f s} produces a string representation of $s$, where each
+element of $s$ is converted to a string via $f$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='example'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p><code>toString Int.toString (fromList [1,2,3])</code> evaluates to <code>&quot;&lt;1,2,3&gt;&quot;</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\sml{toString Int.toString (fromList [1,2,3])} evaluates to \sml{"<1,2,3>"}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- example -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+equal
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+equal
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:equal
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val equal : (&#39;a * &#39;a -&gt; bool) -&gt; &#39;a seq * &#39;a seq -&gt; bool  </code></pre>
+<p><code>equal f (s, t)</code> returns whether or not <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> contain equal elements in the same order. Individual element pairs are compared for equality with <span class="math inline">\(f\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val equal : ('a * 'a -> bool) -> 'a seq * 'a seq -> bool
+\end{verbatim}
+\sml{equal f (s, t)} returns whether or not $s$ and $t$ contain equal elements
+in the same order. Individual element pairs are compared for equality with $f$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+empty
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+empty
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:empty
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val empty : unit -&gt; &#39;a seq  </code></pre>
+<p>Construct an empty sequence.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val empty : unit -> 'a seq
+\end{verbatim}
+Construct an empty sequence.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+singleton
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+singleton
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:singleton
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val singleton : &#39;a -&gt; &#39;a seq  </code></pre>
+<p><code>singleton x</code> evaluates to <span class="math inline">\(\left\langle {x} \right\rangle\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val singleton : 'a -> 'a seq
+\end{verbatim}
+\sml{singleton x} evaluates to $\seq{x}$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+tabulate
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+tabulate
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:tabulate
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val tabulate : (int -&gt; &#39;a) -&gt; int -&gt; &#39;a seq  </code></pre>
+<p><code>tabulate f n</code> evaluates to the length-<span class="math inline">\(n\)</span> sequence where the <span class="math inline">\(i^\text{th}\)</span> element is given by <span class="math inline">\(f(i)\)</span>. Raises <code>Size</code> if <span class="math inline">\(n &lt; 0\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val tabulate : (int -> 'a) -> int -> 'a seq
+\end{verbatim}
+\sml{tabulate f n} evaluates to the length-$n$ sequence where the $i^\text{th}$
+element is given by $f(i)$. Raises \sml{Size} if $n < 0$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+fromList
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+fromList
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:fromList
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val fromList : &#39;a list -&gt; &#39;a seq  </code></pre>
+<p>Produces an index-preserving sequence from a list.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val fromList : 'a list -> 'a seq
+\end{verbatim}
+Produces an index-preserving sequence from a list.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+rev
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+rev
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:rev
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val rev : &#39;a seq -&gt; &#39;a seq  </code></pre>
+<p><code>rev s</code> reverses the indexing of a sequence. That is, <code>nth (rev s) i</code> is equivalent to <code>nth s (length s - i - 1)</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val rev : 'a seq -> 'a seq
+\end{verbatim}
+\sml{rev s} reverses the indexing of a sequence. That is, \sml{nth (rev s) i}
+is equivalent to \sml{nth s (length s - i - 1)}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+append
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+append
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:append
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val append : &#39;a seq * &#39;a seq -&gt; &#39;a seq  </code></pre>
+<p>Concatenate two sequences.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val append : 'a seq * 'a seq -> 'a seq
+\end{verbatim}
+Concatenate two sequences.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+flatten
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+flatten
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:flatten
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val flatten : &#39;a seq seq -&gt; &#39;a seq  </code></pre>
+<p>Concatenate many sequences into one, in the order they are given.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val flatten : 'a seq seq -> 'a seq
+\end{verbatim}
+Concatenate many sequences into one, in the order they are given.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='example'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>Flattening <span class="math inline">\(\left\langle {\left\langle {1,2} \right\rangle,\left\langle {} \right\rangle,\left\langle {3} \right\rangle} \right\rangle\)</span> results in <span class="math inline">\(\left\langle {1,2,3} \right\rangle\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+Flattening $\seq{\seq{1,2},\seq{},\seq{3}}$ results in $\seq{1,2,3}$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- example -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+filter
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+filter
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:filter
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val filter : (&#39;a -&gt; bool) -&gt; &#39;a seq -&gt; &#39;a seq  </code></pre>
+<p><code>filter p s</code> evaluates to the subsequence of <span class="math inline">\(s\)</span> which contains every element satisfying the predicate <span class="math inline">\(p\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val filter : ('a -> bool) -> 'a seq -> 'a seq
+\end{verbatim}
+\sml{filter p s} evaluates to the subsequence of $s$ which contains every
+element satisfying the predicate $p$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+map
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+map
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:map
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val map : (&#39;a -&gt; &#39;b) -&gt; &#39;a seq -&gt; &#39;b seq  </code></pre>
+<p><code>map f s</code> applies <span class="math inline">\(f\)</span> to each element of <span class="math inline">\(s\)</span>. It is logically equivalent to <code>tabulate (f o nth s) (length s)</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val map : ('a -> 'b) -> 'a seq -> 'b seq
+\end{verbatim}
+\sml{map f s} applies $f$ to each element of $s$. It is logically equivalent
+to \sml{tabulate (f o nth s) (length s)}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+zip
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+zip
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:zip
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val zip : &#39;a seq * &#39;b seq -&gt; (&#39;a * &#39;b) seq  </code></pre>
+<p><code>zip (s, t)</code> evaluates to a sequence of length <span class="math inline">\(\min(|s|,|t|)\)</span> whose <span class="math inline">\(i^\text{th}\)</span> element is the pair <span class="math inline">\((s[i], t[i])\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val zip : 'a seq * 'b seq -> ('a * 'b) seq
+\end{verbatim}
+\sml{zip (s, t)} evaluates to a sequence of length $\min(|s|,|t|)$ whose $i^\text{th}$
+element is the pair $(s[i], t[i])$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+zipWith
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+zipWith
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:zipWith
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val zipWith : (&#39;a * &#39;b -&gt; &#39;c) -&gt; &#39;a seq * &#39;b seq -&gt; &#39;c seq  </code></pre>
+<p><code>zipWith f (s, t)</code> is logically equivalent to <code>map f (zip (s, t))</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val zipWith : ('a * 'b -> 'c) -> 'a seq * 'b seq -> 'c seq
+\end{verbatim}
+\sml{zipWith f (s, t)} is logically equivalent to \sml{map f (zip (s, t))}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+enum
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+enum
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:enum
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val enum : &#39;a seq -&gt; (int * &#39;a) seq  </code></pre>
+<p><code>enum s</code> evaluates to a sequence where each element is paired with its index. It is logically equivalent to <code>tabulate (fn i =&gt; (i, nth s i)) (length s)</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val enum : 'a seq -> (int * 'a) seq
+\end{verbatim}
+\sml{enum s} evaluates to a sequence where each element is paired with its
+index. It is logically equivalent to
+\sml{tabulate (fn i => (i, nth s i)) (length s)}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+filterIdx
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+filterIdx
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:filterIdx
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val filterIdx : (int * &#39;a -&gt; bool) -&gt; &#39;a seq -&gt; &#39;a seq  </code></pre>
+<p>Similar to <a href="#gr:filter" data-reference-type="ref" data-reference="gr:filter">[gr:filter]</a>, but also provides the index of each element to the predicate. <code>filterIdx f s</code> is logically equivalent to <code>map (fn (_, x) =&gt; x) (filter f (enum s))</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val filterIdx : (int * 'a -> bool) -> 'a seq -> 'a seq
+\end{verbatim}
+Similar to~\ref{gr:filter}, but also provides the
+index of each element to the predicate.
+\sml{filterIdx f s} is logically equivalent to
+\sml{map (fn (\_, x) => x) (filter f (enum s))}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+mapIdx
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+mapIdx
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:mapIdx
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val mapIdx : (int * &#39;a -&gt; &#39;b) -&gt; &#39;a seq -&gt; &#39;b seq  </code></pre>
+<p>Similar to <a href="#gr:map" data-reference-type="ref" data-reference="gr:map">[gr:map]</a>, but also provides the index of each element. <code>mapIdx f s</code> is logically equivalent to <code>map f (enum s)</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val mapIdx : (int * 'a -> 'b) -> 'a seq -> 'b seq
+\end{verbatim}
+Similar to~\ref{gr:map}, but also provides the index of each element.
+\sml{mapIdx f s} is logically equivalent to \sml{map f (enum s)}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+update
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+update
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:update
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val update : &#39;a seq * (int * &#39;a) -&gt; &#39;a seq  </code></pre>
+<p><code>update (s, (i, x))</code> evaluates to the sequence whose <span class="math inline">\(i^\text{th}\)</span> element is <span class="math inline">\(x\)</span>, and whose other elements are unchanged from <span class="math inline">\(s\)</span>. If <span class="math inline">\(i\)</span> is out-of-bounds, it raises <code>Range</code>, otherwise it is logically equivalent to <code>tabulate (fn j =&gt; if i = j then x else nth s j) (length s)</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val update : 'a seq * (int * 'a) -> 'a seq
+\end{verbatim}
+\sml{update (s, (i, x))} evaluates to the sequence whose $i^\text{th}$ element
+is $x$, and whose other elements are unchanged from $s$. If $i$ is out-of-bounds,
+it raises \sml{Range}, otherwise it is logically equivalent to
+\sml{tabulate (fn j => if i = j then x else nth s j) (length s)}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+inject
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+inject
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:inject
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val inject : &#39;a seq * (int * &#39;a) seq -&gt; &#39;a seq  </code></pre>
+<p><code>inject (s, u)</code> produces a new sequence where, for each <span class="math inline">\((i,x) \in u\)</span>, the <span class="math inline">\(i^\text{th}\)</span> element of <span class="math inline">\(s\)</span> has been replaced with <span class="math inline">\(x\)</span>. If there are multiple updates specified at the same index, then all but one of them are ignored non-deterministically. Raises <code>Range</code> if any <span class="math inline">\((i,\_) \in u\)</span> is out-of-bounds.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val inject : 'a seq * (int * 'a) seq -> 'a seq
+\end{verbatim}
+\sml{inject (s, u)} produces a new sequence where, for each $(i,x) \in u$,
+the $i^\text{th}$ element of $s$ has been replaced with $x$. If there are
+multiple updates specified
+at the same index, then all but one of them are ignored non-deterministically.
+Raises \sml{Range} if any $(i,\_) \in u$ is out-of-bounds.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='note'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>When all indices in <span class="math inline">\(u\)</span> are distinct, <code>inject (s, u)</code> is logically equivalent to <code>iterate update s u</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+When all indices in $u$ are distinct, \sml{inject (s, u)} is logically
+equivalent to \sml{iterate update s u}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- note -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+subseq
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+subseq
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:subseq
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val subseq : &#39;a seq -&gt; int * int -&gt; &#39;a seq  </code></pre>
+<p><code>subseq s (i, n)</code> evaluates to the contiguous subsequence of <span class="math inline">\(s\)</span> starting at index <span class="math inline">\(i\)</span> with length <span class="math inline">\(n\)</span>. Raises <code>Size</code> if <span class="math inline">\(n &lt; 0\)</span>. Raises <code>Range</code> if the subsequence is out-of-bounds.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val subseq : 'a seq -> int * int -> 'a seq
+\end{verbatim}
+\sml{subseq s (i, n)} evaluates to the contiguous subsequence of $s$ starting
+at index $i$ with length $n$. Raises \sml{Size} if $n < 0$. Raises \sml{Range}
+if the subsequence is out-of-bounds.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+take
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+take
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:take
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val take : &#39;a seq -&gt; int -&gt; &#39;a seq  </code></pre>
+<p><code>take s n</code> takes the prefix of <span class="math inline">\(s\)</span> of length <span class="math inline">\(n\)</span>. It is logically equivalent to <code>subseq s (0, n)</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val take : 'a seq -> int -> 'a seq
+\end{verbatim}
+\sml{take s n} takes the prefix of $s$ of length $n$. It is logically
+equivalent to \sml{subseq s (0, n)}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+drop
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+drop
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:drop
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val drop : &#39;a seq -&gt; int -&gt; &#39;a seq  </code></pre>
+<p><code>drop s n</code> drops the prefix of <span class="math inline">\(s\)</span> of length <span class="math inline">\(n\)</span>. It is logically equivalent to <code>subseq s (n, length s - n)</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val drop : 'a seq -> int -> 'a seq
+\end{verbatim}
+\sml{drop s n} drops the prefix of $s$ of length $n$. It is logically equivalent
+to \sml{subseq s (n, length s - n)}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+splitHead
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+splitHead
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:splitHead
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val splitHead : &#39;a seq -&gt; &#39;a listview  </code></pre>
+<p><code>splitHead s</code> evaluates to <code>NIL</code> if <span class="math inline">\(s\)</span> is empty, and otherwise is logically equivalent to <code>CONS (nth s 0, drop s 1)</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val splitHead : 'a seq -> 'a listview
+\end{verbatim}
+\sml{splitHead s} evaluates to \sml{NIL} if $s$ is empty, and otherwise is
+logically equivalent to \sml{CONS (nth s 0, drop s 1)}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+splitMid
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+splitMid
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:splitMid
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val splitMid : &#39;a seq -&gt; &#39;a treeview  </code></pre>
+<p><code>splitMid s</code> evaluates to <code>EMPTY</code> is <span class="math inline">\(s\)</span> is empty, <code>ONE x</code> if <span class="math inline">\(s = \left\langle {x} \right\rangle\)</span>, and <code>PAIR (l, r)</code> otherwise where <span class="math inline">\(l\)</span> and <span class="math inline">\(r\)</span> are non-empty and their concatenation is <span class="math inline">\(s\)</span>. The sizes of <span class="math inline">\(l\)</span> and <span class="math inline">\(r\)</span> are implementation-defined.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val splitMid : 'a seq -> 'a treeview
+\end{verbatim}
+\sml{splitMid s} evaluates to \sml{EMPTY} is $s$ is empty, \sml{ONE x} if
+$s = \seq{x}$, and \sml{PAIR (l, r)} otherwise where $l$ and $r$ are non-empty and their
+concatenation is $s$. The sizes of $l$ and $r$ are implementation-defined.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+iterate
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+iterate
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:iterate
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val iterate : (&#39;b * &#39;a -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a seq -&gt; &#39;b  </code></pre>
+<p><code>iterate f b s</code> computes the iteration of <span class="math inline">\(f\)</span> on <span class="math inline">\(s\)</span> with left-association, using <span class="math inline">\(b\)</span> as the base case. It is logically equivalent to <span class="math display">\[f(\ldots f(f(b, s[0]), s[1]) \ldots, s[|s|-1])\]</span></p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val iterate : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b
+\end{verbatim}
+\sml{iterate f b s} computes the iteration of $f$ on $s$ with left-association,
+using $b$ as the base case. It is logically equivalent to
+\[
+  f(\ldots f(f(b, s[0]), s[1]) \ldots, s[|s|-1])
+\]
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='note'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>When <span class="math inline">\(s\)</span> is empty, it returns <span class="math inline">\(b\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+When $s$ is empty, it returns $b$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- note -->
+<atom name='example'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p><code>iterate op+ 13 (fromList [1,2,3])</code> evaluates to <code>19</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\sml{iterate op+ 13 (fromList [1,2,3])} evaluates to \sml{19}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- example -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+iteratePrefixes
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+iteratePrefixes
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:iteratePrefixes
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val iteratePrefixes : (&#39;b * &#39;a -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a seq -&gt; &#39;b seq * &#39;b  </code></pre>
+<p><code>iteratePrefixes f b s</code> is logically equivalent to <span class="math display">\[\texttt{(tabulate (fn i =&gt; iterate f b (take s i)) (length s), iterate f b s)}.\]</span> That is, it produces the iteration of <span class="math inline">\(f\)</span> for each prefix of <span class="math inline">\(s\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val iteratePrefixes : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b seq * 'b
+\end{verbatim}
+\sml{iteratePrefixes f b s} is logically equivalent to
+\[
+  \sml{(tabulate (fn i => iterate f b (take s i)) (length s), iterate f b s)}.
+\]
+That is, it produces the iteration of $f$ for each prefix of $s$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+iteratePrefixesIncl
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+iteratePrefixesIncl
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:iteratePrefixesIncl
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val iteratePrefixesIncl : (&#39;b * &#39;a -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a seq -&gt; &#39;b seq  </code></pre>
+<p>Similar to <a href="#gr:iteratePrefixes" data-reference-type="ref" data-reference="gr:iteratePrefixes">[gr:iteratePrefixes]</a>, except that the <span class="math inline">\(i^\text{th}\)</span> prefix of <code>iteratePrefixesIncl f b s</code> is inclusive of <span class="math inline">\(s[i]\)</span>, rather than exclusive. It is logically equivalent to <span class="math display">\[\texttt{tabulate (fn i =&gt; iterate f b (take s (i+1)) (length s)}.\]</span></p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val iteratePrefixesIncl : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b seq
+\end{verbatim}
+Similar to~\ref{gr:iteratePrefixes}, except that the $i^\text{th}$ prefix of
+\sml{iteratePrefixesIncl f b s} is inclusive of $s[i]$, rather than exclusive.
+It is logically equivalent to
+\[
+  \sml{tabulate (fn i => iterate f b (take s (i+1)) (length s)}.
+\]
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='note'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>The return type of <a href="#gr:iteratePrefixesIncl" data-reference-type="ref" data-reference="gr:iteratePrefixesIncl">[gr:iteratePrefixesIncl]</a> is slightly different than <a href="#gr:iteratePrefixes" data-reference-type="ref" data-reference="gr:iteratePrefixes">[gr:iteratePrefixes]</a>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+The return type of~\ref{gr:iteratePrefixesIncl} is slightly different than
+\ref{gr:iteratePrefixes}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- note -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+reduce
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+reduce
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:reduce
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val reduce : (&#39;a * &#39;a -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;a seq -&gt; &#39;a  </code></pre>
+<p><code>reduce f b s</code> evaluates to <span class="math inline">\(b\)</span> when <span class="math inline">\(s = \left\langle {} \right\rangle\)</span>, <span class="math inline">\(x\)</span> when <span class="math inline">\(s = \left\langle {x} \right\rangle\)</span>, and otherwise is logically equivalent to <span class="math display">\[\texttt{f (reduce f b l, reduce f b r)}\]</span> where <span class="math inline">\(l = \texttt{take s (n div 2)}\)</span> and <span class="math inline">\(r = \texttt{drop s (n div 2)}\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val reduce : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a
+\end{verbatim}
+\sml{reduce f b s} evaluates to $b$ when $s = \seq{}$,
+$x$ when $s = \seq{x}$, and otherwise is logically equivalent to
+\[
+  \sml{f (reduce f b l, reduce f b r)}
+\]
+where $l = \sml{take s (n div 2)}$ and $r = \sml{drop s (n div 2)}$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='note'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p><code>reduce f b s</code> is logically equivalent to <code>iterate f b s</code> when <span class="math inline">\(f\)</span> is associative and <span class="math inline">\(b\)</span> is a corresponding identity.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\sml{reduce f b s} is logically equivalent to \sml{iterate f b s} when
+$f$ is associative and $b$ is a corresponding identity.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- note -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+scan
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+scan
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:scan
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val scan : (&#39;a * &#39;a -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;a seq -&gt; &#39;a seq * &#39;a  </code></pre>
+<p>For an associative function <span class="math inline">\(f\)</span> and corresponding identity <span class="math inline">\(b\)</span>, <code>scan f b s</code> is logically equivalent to <code>iteratePrefixes f b s</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val scan : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a seq * 'a
+\end{verbatim}
+For an associative function $f$ and corresponding identity $b$, \sml{scan f b s}
+is logically equivalent to \sml{iteratePrefixes f b s}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+scanIncl
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+scanIncl
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:scanIncl
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val scanIncl : (&#39;a * &#39;a -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;a seq -&gt; &#39;a seq  </code></pre>
+<p>For an associative function <span class="math inline">\(f\)</span> and corresponding identity <span class="math inline">\(b\)</span>, <code>scanIncl f b s</code> is logically equivalent to <code>iteratePrefixesIncl f b s</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val scanIncl : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a seq
+\end{verbatim}
+For an associative function $f$ and corresponding identity $b$, \sml{scanIncl f b s}
+is logically equivalent to \sml{iteratePrefixesIncl f b s}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+sort
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+sort
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:sort
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val sort : &#39;a ord -&gt; &#39;a seq -&gt; &#39;a seq  </code></pre>
+<p><code>sort c s</code> reorders the elements of <span class="math inline">\(s\)</span> with respect to the comparison function <span class="math inline">\(c\)</span>. The output is <em>stable</em>: any two elements considered equal by <span class="math inline">\(c\)</span> will appear in the same relative order in the output as they were in the input.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val sort : 'a ord -> 'a seq -> 'a seq
+\end{verbatim}
+\sml{sort c s} reorders the elements of $s$ with respect to the comparison
+function $c$. The output is \emph{stable}: any two elements considered equal
+by $c$ will appear in the same relative order in the output as they were
+in the input.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+merge
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+merge
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:merge
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val merge : &#39;a ord -&gt; &#39;a seq * &#39;a seq -&gt; &#39;a seq  </code></pre>
+<p>For sequences <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> already sorted with respect to <span class="math inline">\(c\)</span>, <code>merge c (s, t)</code> is logically equivalent to <code>sort c (append (s, t))</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val merge : 'a ord -> 'a seq * 'a seq -> 'a seq
+\end{verbatim}
+For sequences $s$ and $t$ already sorted with respect to $c$,
+\sml{merge c (s, t)} is logically equivalent to \sml{sort c (append (s, t))}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+collect
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+collect
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:collect
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val collect : &#39;a ord -&gt; (&#39;a * &#39;b) seq -&gt; (&#39;a * &#39;b seq) seq  </code></pre>
+<p><code>collect c s</code> takes a sequence <span class="math inline">\(s\)</span> of key-value pairs, deduplicates the keys, sorts them with respect to <span class="math inline">\(c\)</span>, and pairs each unique key with all values that were originally associated with it in <span class="math inline">\(s\)</span>. The resulting value-sequences retain their relative ordering from <span class="math inline">\(s\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val collect : 'a ord -> ('a * 'b) seq -> ('a * 'b seq) seq
+\end{verbatim}
+\sml{collect c s} takes a sequence $s$ of key-value pairs, deduplicates the
+keys, sorts them with respect to $c$, and pairs each unique key with all values
+that were originally associated with it in $s$. The resulting value-sequences
+retain their relative ordering from $s$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='example'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>Collecting <span class="math inline">\(\left\langle {(3,7),(2,6),(1,8),(3,5)} \right\rangle\)</span> produces <span class="math inline">\(\left\langle {(1,\left\langle {8} \right\rangle), (2, \left\langle {6} \right\rangle), (3,\left\langle {7,5} \right\rangle)} \right\rangle\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+Collecting $\seq{(3,7),(2,6),(1,8),(3,5)}$ produces
+$\seq{(1,\seq{8}), (2, \seq{6}), (3,\seq{7,5})}$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- example -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+collate
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+collate
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:collate
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val collate : &#39;a ord -&gt; &#39;a seq ord  </code></pre>
+<p><code>collate c</code> produces an ordering on sequences, derived lexicographically from <span class="math inline">\(c\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val collate : 'a ord -> 'a seq ord
+\end{verbatim}
+\sml{collate c} produces an ordering on sequences, derived lexicographically
+from $c$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+argmax
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+argmax
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:argmax
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val argmax : &#39;a ord -&gt; &#39;a seq -&gt; int  </code></pre>
+<p><code>argmax c s</code> produces the <em>index</em> of the maximal value in <span class="math inline">\(s\)</span> with respect to <span class="math inline">\(c\)</span>. Raises <code>Range</code> when <span class="math inline">\(s\)</span> is empty.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val argmax : 'a ord -> 'a seq -> int
+\end{verbatim}
+\sml{argmax c s} produces the \emph{index} of the maximal value in $s$
+with respect to $c$. Raises \sml{Range} when $s$ is empty.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+$
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+\$
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val $ : &#39;a -&gt; &#39;a seq  </code></pre>
+<p>An alias for <a href="#gr:singleton" data-reference-type="ref" data-reference="gr:singleton">[gr:singleton]</a>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val $ : 'a -> 'a seq
+\end{verbatim}
+An alias for~\ref{gr:singleton}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+%
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+\%
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val % : &#39;a list -&gt; &#39;a seq  </code></pre>
+<p>An alias for <a href="#gr:fromList" data-reference-type="ref" data-reference="gr:fromList">[gr:fromList]</a>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val % : 'a list -> 'a seq
+\end{verbatim}
+An alias for~\ref{gr:fromList}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+
+</block> <!-- chapter -->
