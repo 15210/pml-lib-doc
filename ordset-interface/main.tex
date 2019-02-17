@@ -1,4 +1,4 @@
-\begin{chapter}[OrdSet Interface]
+\chapter{OrdSet Interface}
 \label{ch:ordset-interface}
 \begin{preamble}
 The \sml{ORDSET} interface specifies an ordered collection of items. These sets
@@ -16,7 +16,7 @@ The \sml{ORDSET} signature is identical to \sml{SET} except for the following.
 \end{itemize}
 \end{note}
 
-\begin{section}[Summary]
+\section{Summary}
 \begin{gram}
 \begin{verbatim}
 signature ORDSET =
@@ -70,9 +70,8 @@ sig
 end
 \end{verbatim}
 \end{gram}
-\end{section}
 
-\begin{section}[Substructures]
+\section{Substructures}
 
 \begin{gram}
 \begin{verbatim}
@@ -90,9 +89,8 @@ The \sml{Seq} substructure defines a sequence type for use with
 \ref{gr:ordset-interface:toSeq} and \ref{gr:ordset-interface:fromSeq}.
 \end{gram}
 
-\end{section}
 
-\begin{section}[Types]
+\section{Types}
 
 \begin{gram}
 \begin{verbatim}
@@ -103,9 +101,8 @@ The abstract set type. The alias \sml{set} is for readability in the
 signature.
 \end{gram}
 
-\end{section}
 
-\begin{section}[Exceptions]
+\section{Exceptions}
 
 \begin{gram}
 \begin{verbatim}
@@ -114,9 +111,8 @@ exception Order
 \sml{Order} is raised when the ordering invariant would be violated.
 \end{gram}
 
-\end{section}
 
-\begin{section}[Values]
+\section{Values}
 
 \begin{gram}[size]
 \begin{verbatim}
@@ -316,6 +312,3 @@ elements of $s$. Raises \sml{Fail} if either $i < 0$ or $i \geq |s|$.
 \end{gram}
 
 
-\end{section}
-
-\end{chapter}
