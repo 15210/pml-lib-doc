@@ -1,12 +1,13 @@
-\begin{chapter}[Set Interface]
+\chapter{Set Interface}
 \label{ch:set-interface}
+
 \begin{preamble}
 The \sml{SET} interface specifies an unordered collection of items. Sets do not
 contain duplicates, and are not polymorphic: the type of their elements is
 given by the \sml{Key} substructure.
 \end{preamble}
 
-\begin{section}[Summary]
+\section{Summary}
 \begin{gram}
 \begin{verbatim}
 signature SET =
@@ -42,9 +43,9 @@ sig
 end
 \end{verbatim}
 \end{gram}
-\end{section}
 
-\begin{section}[Substructures]
+
+\section{Substructures}
 
 \begin{gram}
 \begin{verbatim}
@@ -62,9 +63,8 @@ The \sml{Seq} substructure defines the underlying sequence type, so that we
 may convert sets to and from sequences.
 \end{gram}
 
-\end{section}
 
-\begin{section}[Types]
+\section{Types}
 
 \begin{gram}
 \begin{verbatim}
@@ -75,9 +75,8 @@ The abstract set type. The alias \sml{set} is for readability in the
 signature.
 \end{gram}
 
-\end{section}
 
-\begin{section}[Values]
+\section{Values}
 
 \begin{gram}[size]
 \begin{verbatim}
@@ -194,6 +193,4 @@ val $ : Key.t -> set
 An alias for \ref{gr:set-interface:singleton}.
 \end{gram}
 
-\end{section}
 
-\end{chapter}
