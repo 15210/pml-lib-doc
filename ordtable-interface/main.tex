@@ -1,4 +1,4 @@
-\begin{chapter}[OrdTable Interface]
+\chapter{OrdTable Interface}
 \label{ch:ordtable-interface}
 \begin{preamble}
 The \sml{ORDTABLE} interface specifies a mapping from keys to values, written
@@ -18,7 +18,7 @@ The \sml{ORDTABLE} signature is identical to \sml{TABLE} except for the followin
 \end{itemize}
 \end{note}
 
-\begin{section}[Summary]
+\section{Summary}
 \begin{gram}
 \begin{verbatim}
 signature ORDTABLE =
@@ -86,9 +86,8 @@ sig
 end
 \end{verbatim}
 \end{gram}
-\end{section}
 
-\begin{section}[Substructures]
+\section{Substructures}
 
 \begin{gram}
 \begin{verbatim}
@@ -114,9 +113,8 @@ The \sml{Set} substructure contains operations on ordered sets with elements of
 type \sml{Key.t}.
 \end{gram}
 
-\end{section}
 
-\begin{section}[Types]
+\section{Types}
 
 \begin{gram}
 \begin{verbatim}
@@ -127,9 +125,8 @@ The abstract table type with values of type \sml{'a}. The alias \sml{table} is
 for readability in the signature.
 \end{gram}
 
-\end{section}
 
-\begin{section}[Exceptions]
+\section{Exceptions}
 
 \begin{gram}
 \begin{verbatim}
@@ -138,9 +135,8 @@ exception Order
 \sml{Order} is raised when the ordering invariant would be violated.
 \end{gram}
 
-\end{section}
 
-\begin{section}[Values]
+\section{Values}
 
 \begin{gram}[size]
 \begin{verbatim}
@@ -441,6 +437,3 @@ keys of $t$, and $r$ is the set of the $|t|-i$ largest
 keys of $t$. Raises \sml{Fail} if either $i < 0$ or $i \geq |t|$.
 \end{gram}
 
-\end{section}
-
-\end{chapter}
