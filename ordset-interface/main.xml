@@ -1,0 +1,1176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block name='chapter'>
+<field name='title'>
+<![CDATA[
+OrdSet Interface
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+OrdSet Interface
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+ch:ordset-interface
+</field> <!-- label -->
+<atom name='preamble'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>The <code>ORDSET</code> interface specifies an ordered collection of items. These sets do not contain duplicates, and are not polymorphic: the type of their elements is given by the <code>Key</code> substructure.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+The \sml{ORDSET} interface specifies an ordered collection of items. These sets
+do not contain duplicates, and are not polymorphic: the type of their
+elements is given by the \sml{Key} substructure.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- preamble -->
+<atom name='note'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<p>The <code>ORDSET</code> signature is identical to <code>SET</code> except for the following.</p>
+<ul>
+<li><p>The <code>Key</code> substructure now ascribes to <code>ORDKEY</code>.</p></li>
+<li><p>There is additional functionality relying upon the ordering of keys, such as <code>split</code>, <code>join</code>, and <code>getRange</code>.</p></li>
+<li><p>The <code>toSeq</code> function now specifies that it returns keys in sorted order.</p></li>
+</ul>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+The \sml{ORDSET} signature is identical to \sml{SET} except for the following.
+\begin{itemize}
+  \item The \sml{Key} substructure now ascribes to \sml{ORDKEY}.
+  \item There is additional functionality relying upon the ordering of keys,
+  such as \sml{split}, \sml{join}, and \sml{getRange}.
+  \item The \sml{toSeq} function now specifies that it returns keys in sorted order.
+\end{itemize}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- note -->
+
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Summary
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Summary
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>signature ORDSET =  
+sig  
+  structure Key : ORDKEY  
+  structure Seq : SEQUENCE  
+  
+  type t  
+  type set = t  
+  
+  exception Order  
+  
+  val size : set -&gt; int  
+  val toString : set -&gt; string  
+  val toSeq : set -&gt; Key.t Seq.t  
+  
+  val empty : unit -&gt; set  
+  val singleton : Key.t -&gt; set  
+  val fromSeq : Key.t Seq.t -&gt; set  
+  
+  val find : set -&gt; Key.t -&gt; bool  
+  val insert : set * Key.t -&gt; set  
+  val delete : set * Key.t -&gt; set  
+  
+  val filterKey : (Key.t -&gt; bool) -&gt; set -&gt; set  
+  
+  val reduceKey : (Key.t * Key.t -&gt; Key.t) -&gt; Key.t -&gt; set -&gt; Key.t  
+  val iterateKey : (&#39;a * Key.t -&gt; &#39;a) -&gt; &#39;a -&gt; set -&gt; &#39;a  
+  
+  val union : set * set -&gt; set  
+  val intersection : set * set -&gt; set  
+  val difference : set * set -&gt; set  
+  
+  val $ : Key.t -&gt; set  
+  
+  (* ordered sets begins here *)  
+  val first : set -&gt; Key.t option  
+  val last : set -&gt; Key.t option  
+  
+  val prev : set * Key.t -&gt; Key.t option  
+  val next : set * Key.t -&gt; Key.t option  
+  
+  val split : set * Key.t -&gt; set * bool * set  
+  val join : set * set -&gt; set  
+  
+  val getRange : set -&gt; Key.t * Key.t -&gt; set  
+  
+  val rank : set * Key.t -&gt; int  
+  val select : set * int -&gt; Key.t option  
+  val splitRank : set * int -&gt; set * set  
+end  </code></pre>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+signature ORDSET =
+sig
+  structure Key : ORDKEY
+  structure Seq : SEQUENCE
+
+  type t
+  type set = t
+
+  exception Order
+
+  val size : set -> int
+  val toString : set -> string
+  val toSeq : set -> Key.t Seq.t
+
+  val empty : unit -> set
+  val singleton : Key.t -> set
+  val fromSeq : Key.t Seq.t -> set
+
+  val find : set -> Key.t -> bool
+  val insert : set * Key.t -> set
+  val delete : set * Key.t -> set
+
+  val filterKey : (Key.t -> bool) -> set -> set
+
+  val reduceKey : (Key.t * Key.t -> Key.t) -> Key.t -> set -> Key.t
+  val iterateKey : ('a * Key.t -> 'a) -> 'a -> set -> 'a
+
+  val union : set * set -> set
+  val intersection : set * set -> set
+  val difference : set * set -> set
+
+  val $ : Key.t -> set
+
+  (* ordered sets begins here *)
+  val first : set -> Key.t option
+  val last : set -> Key.t option
+
+  val prev : set * Key.t -> Key.t option
+  val next : set * Key.t -> Key.t option
+
+  val split : set * Key.t -> set * bool * set
+  val join : set * set -> set
+
+  val getRange : set -> Key.t * Key.t -> set
+
+  val rank : set * Key.t -> int
+  val select : set * int -> Key.t option
+  val splitRank : set * int -> set * set
+end
+\end{verbatim}
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Substructures
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Substructures
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>structure Key : ORDKEY  </code></pre>
+<p>The <code>Key</code> substructure defines the type of elements in a set, which are totally ordered according to the provided comparison function.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+structure Key : ORDKEY
+\end{verbatim}
+The \sml{Key} substructure defines the type of elements in a set, which are
+totally ordered according to the provided comparison function.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>structure Seq : SEQUENCE  </code></pre>
+<p>The <code>Seq</code> substructure defines a sequence type for use with <a href="#gr:ordset-interface:toSeq" data-reference-type="ref" data-reference="gr:ordset-interface:toSeq">[gr:ordset-interface:toSeq]</a> and <a href="#gr:ordset-interface:fromSeq" data-reference-type="ref" data-reference="gr:ordset-interface:fromSeq">[gr:ordset-interface:fromSeq]</a>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+structure Seq : SEQUENCE
+\end{verbatim}
+The \sml{Seq} substructure defines a sequence type for use with
+\ref{gr:ordset-interface:toSeq} and \ref{gr:ordset-interface:fromSeq}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Types
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Types
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>type t  
+type set = t  </code></pre>
+<p>The abstract set type. The alias <code>set</code> is for readability in the signature.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+type t
+type set = t
+\end{verbatim}
+The abstract set type. The alias \sml{set} is for readability in the
+signature.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Exceptions
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Exceptions
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>exception Order  </code></pre>
+<p><code>Order</code> is raised when the ordering invariant would be violated.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+exception Order
+\end{verbatim}
+\sml{Order} is raised when the ordering invariant would be violated.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+<block name='section'>
+<field name='title'>
+<![CDATA[
+Values
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Values
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+size
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+size
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val size : set -&gt; int  </code></pre>
+<p>The number of elements in a set.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val size : set -> int
+\end{verbatim}
+The number of elements in a set.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+toString
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+toString
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val toString : set -&gt; string  </code></pre>
+<p>Evaluates to a string representation of the set. Each element is converted to a string via <code>Key.toString</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val toString : set -> string
+\end{verbatim}
+Evaluates to a string representation of the set. Each element is converted to
+a string via \sml{Key.toString}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+toSeq
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+toSeq
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:ordset-interface:toSeq
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val toSeq : set -&gt; Key.t Seq.t  </code></pre>
+<p>Return a sequence of all keys in a set, in sorted order.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val toSeq : set -> Key.t Seq.t
+\end{verbatim}
+Return a sequence of all keys in a set, in sorted order.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+empty
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+empty
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val empty : unit -&gt; set  </code></pre>
+<p>Construct the empty set.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val empty : unit -> set
+\end{verbatim}
+Construct the empty set.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+singleton
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+singleton
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:ordset-interface:singleton
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val singleton : Key.t -&gt; set  </code></pre>
+<p>Construct the singleton set containing only the provided key.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val singleton : Key.t -> set
+\end{verbatim}
+Construct the singleton set containing only the provided key.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+fromSeq
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+fromSeq
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+gr:ordset-interface:fromSeq
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val fromSeq : Key.t Seq.t -&gt; set  </code></pre>
+<p>Return the set of all elements of a sequence.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val fromSeq : Key.t Seq.t -> set
+\end{verbatim}
+Return the set of all elements of a sequence.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+find
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+find
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val find : set -&gt; Key.t -&gt; bool  </code></pre>
+<p><code>find s k</code> returns whether or not <span class="math inline">\(k\)</span> is a member of the set <span class="math inline">\(s\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val find : set -> Key.t -> bool
+\end{verbatim}
+\sml{find s k} returns whether or not $k$ is a member of the set $s$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+insert
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+insert
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val insert : set * Key.t -&gt; set  </code></pre>
+<p><code>insert (s, k)</code> evaluates to the set <span class="math inline">\(s \cup \{k\}\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val insert : set * Key.t -> set
+\end{verbatim}
+\sml{insert (s, k)} evaluates to the set $s \cup \{k\}$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+delete
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+delete
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val delete : set * Key.t -&gt; set  </code></pre>
+<p><code>delete (s, k)</code> evaluates to the set <span class="math inline">\(s \setminus \{k\}\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val delete : set * Key.t -> set
+\end{verbatim}
+\sml{delete (s, k)} evaluates to the set $s \setminus \{k\}$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+filterKey
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+filterKey
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val filterKey : (Key.t -&gt; bool) -&gt; set -&gt; set  </code></pre>
+<p><code>filterKey p s</code> evaluates to the set <span class="math inline">\(\{x \in s \mathbin| p(x) \}\)</span></p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val filterKey : (Key.t -> bool) -> set -> set
+\end{verbatim}
+\sml{filterKey p s} evaluates to the set $\{x \in s \mathbin| p(x) \}$
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+reduceKey
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+reduceKey
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val reduceKey : (Key.t * Key.t -&gt; Key.t) -&gt; Key.t -&gt; set -&gt; Key.t  </code></pre>
+<p><code>reduceKey f b s</code> is logically equivalent to <code>Seq.reduce f b (toSeq s)</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val reduceKey : (Key.t * Key.t -> Key.t) -> Key.t -> set -> Key.t
+\end{verbatim}
+\sml{reduceKey f b s} is logically equivalent to \sml{Seq.reduce f b (toSeq s)}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+iterateKey
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+iterateKey
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val iterateKey : (&#39;a * Key.t -&gt; &#39;a) -&gt; &#39;a -&gt; set -&gt; &#39;a  </code></pre>
+<p><code>iterateKey f b s</code> is logically equivalent to <code>Seq.iterate f b (toSeq s)</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val iterateKey : ('a * Key.t -> 'a) -> 'a -> set -> 'a
+\end{verbatim}
+\sml{iterateKey f b s} is logically equivalent to \sml{Seq.iterate f b (toSeq s)}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+union
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+union
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val union : set * set -&gt; set  </code></pre>
+<p><code>union a b</code> evaluates to the set <span class="math inline">\(a \cup b\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val union : set * set -> set
+\end{verbatim}
+\sml{union a b} evaluates to the set $a \cup b$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+intersection
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+intersection
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val intersection : set * set -&gt; set  </code></pre>
+<p><code>intersection a b</code> evaluates to the set <span class="math inline">\(a \cap b\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val intersection : set * set -> set
+\end{verbatim}
+\sml{intersection a b} evaluates to the set $a \cap b$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+difference
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+difference
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val difference : set * set -&gt; set  </code></pre>
+<p><code>difference a b</code> evaluates to the set <span class="math inline">\(a \setminus b\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val difference : set * set -> set
+\end{verbatim}
+\sml{difference a b} evaluates to the set $a \setminus b$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+$
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+\$
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val $ : Key.t -&gt; set  </code></pre>
+<p>An alias for <a href="#gr:ordset-interface:singleton" data-reference-type="ref" data-reference="gr:ordset-interface:singleton">[gr:ordset-interface:singleton]</a>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val $ : Key.t -> set
+\end{verbatim}
+An alias for \ref{gr:ordset-interface:singleton}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+first
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+first
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val first : set -&gt; Key.t option  </code></pre>
+<p>Return the least element of the set, or <code>NONE</code> if the set is empty.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val first : set -> Key.t option
+\end{verbatim}
+Return the least element of the set, or \sml{NONE} if the set is empty.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+last
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+last
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val last : set -&gt; Key.t option  </code></pre>
+<p>Return the greatest element of the set, or <code>NONE</code> if the set is empty.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val last : set -> Key.t option
+\end{verbatim}
+Return the greatest element of the set, or \sml{NONE} if the set is empty.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+prev
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+prev
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val prev : set * Key.t -&gt; Key.t option  </code></pre>
+<p><code>prev (s, k)</code> evaluates to <span class="math inline">\(\max \{ k&#39; \in s \mathbin| k&#39; &lt; k \}\)</span>, or <code>NONE</code> if there is no such element.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val prev : set * Key.t -> Key.t option
+\end{verbatim}
+\sml{prev (s, k)} evaluates to $\max \{ k' \in s \mathbin| k' < k \}$, or
+\sml{NONE} if there is no such element.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+next
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+next
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val next : set * Key.t -&gt; Key.t option  </code></pre>
+<p><code>next (s, k)</code> evaluates to <span class="math inline">\(\min \{ k&#39; \in s \mathbin| k&#39; &gt; k \}\)</span>, or <code>NONE</code> if there is no such element.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val next : set * Key.t -> Key.t option
+\end{verbatim}
+\sml{next (s, k)} evaluates to $\min \{ k' \in s \mathbin| k' > k \}$, or
+\sml{NONE} if there is no such element.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+split
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+split
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val split : set * Key.t -&gt; set * bool * set  </code></pre>
+<p><code>split (s, k)</code> evaluates to <span class="math inline">\((\ell, m, r)\)</span> where <span class="math inline">\(\ell\)</span> is the set of elements in <span class="math inline">\(s\)</span> which are smaller than <span class="math inline">\(k\)</span>, <span class="math inline">\(r\)</span> is the set of elements in <span class="math inline">\(s\)</span> which are greater than <span class="math inline">\(k\)</span>, and <span class="math inline">\(m\)</span> indicates whether or not <span class="math inline">\(k\)</span> is a member of <span class="math inline">\(s\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val split : set * Key.t -> set * bool * set
+\end{verbatim}
+\sml{split (s, k)} evaluates to $(\ell, m, r)$ where $\ell$ is the set of elements
+in $s$ which are smaller than $k$, $r$ is the set of elements in $s$ which
+are greater than $k$, and $m$ indicates whether or not $k$ is a member of $s$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+join
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+join
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val join : set * set -&gt; set  </code></pre>
+<p>For sets <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> where the largest element of <span class="math inline">\(a\)</span> is strictly smaller than the smallest element of <span class="math inline">\(b\)</span>, <code>join (a, b)</code> evaluates to <span class="math inline">\(a \cup b\)</span>. Otherwise it raises <code>Order</code>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val join : set * set -> set
+\end{verbatim}
+For sets $a$ and $b$ where the largest element of $a$ is strictly smaller than
+the smallest element of $b$, \sml{join (a, b)} evaluates to $a \cup b$.
+Otherwise it raises \sml{Order}.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+getRange
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+getRange
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val getRange : set -&gt; Key.t * Key.t -&gt; set  </code></pre>
+<p><code>getRange s (x, y)</code> evaluates to the set <span class="math inline">\(\{ k \in s \mathbin| x \leq k \leq y \}\)</span></p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val getRange : set -> Key.t * Key.t -> set
+\end{verbatim}
+\sml{getRange s (x, y)} evaluates to the set
+$\{ k \in s \mathbin| x \leq k \leq y \}$
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+rank
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+rank
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val rank : set * Key.t -&gt; int  </code></pre>
+<p><code>rank (s, k)</code> evaluates to <span class="math inline">\(\left| \{ k&#39; \in s \mathbin| k&#39; &lt; k \}\right|\)</span>, the number of elements in <span class="math inline">\(s\)</span> which are strictly smaller than <span class="math inline">\(k\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val rank : set * Key.t -> int
+\end{verbatim}
+\sml{rank (s, k)} evaluates to $\left| \{ k' \in s \mathbin| k' < k \}\right|$,
+the number of elements in $s$ which are strictly smaller than $k$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+select
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+select
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val select : set * int -&gt; Key.t option  </code></pre>
+<p><code>select (s, i)</code> returns the <span class="math inline">\(i^\text{th}\)</span> smallest element of <span class="math inline">\(s\)</span>, or <code>NONE</code> if either <span class="math inline">\(i &lt; 0\)</span> or <span class="math inline">\(i \geq |s|\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val select : set * int -> Key.t option
+\end{verbatim}
+\sml{select (s, i)} returns the $i^\text{th}$ smallest element of $s$, or
+\sml{NONE} if either $i < 0$ or $i \geq |s|$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+splitRank
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+splitRank
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+...NOT.PROVIDED.LABEL...
+</field> <!-- label -->
+<field name='body'>
+<![CDATA[
+<pre><code>val splitRank : set * int -&gt; set * set  </code></pre>
+<p><code>splitRank (s, i)</code> evalutes to <span class="math inline">\((\ell,r)\)</span> where <span class="math inline">\(\ell\)</span> is the set of the <span class="math inline">\(i\)</span> smallest elements of <span class="math inline">\(s\)</span>, and <span class="math inline">\(r\)</span> is the set of the <span class="math inline">\(|s|-i\)</span> largest elements of <span class="math inline">\(s\)</span>. Raises <code>Fail</code> if either <span class="math inline">\(i &lt; 0\)</span> or <span class="math inline">\(i \geq |s|\)</span>.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\begin{verbatim}
+val splitRank : set * int -> set * set
+\end{verbatim}
+\sml{splitRank (s, i)} evalutes to $(\ell,r)$ where $\ell$ is the set of the
+$i$ smallest elements of $s$, and $r$ is the set of the $|s|-i$ largest
+elements of $s$. Raises \sml{Fail} if either $i < 0$ or $i \geq |s|$.
+]]>
+</field> <!-- body_src -->
+</atom> <!-- gram -->
+
+
+</block> <!-- section -->
+
+</block> <!-- chapter -->
