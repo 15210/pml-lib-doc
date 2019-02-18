@@ -1,0 +1,53 @@
+\chapter{MkSTSequence}
+\label{ch:st-seq}
+\begin{preamble}
+Implements single-threaded sequences with an underlying mutable array and a
+history.
+Every single-threaded sequence is either \emph{current} or \emph{old},
+depending upon whether or not it has ever been updated.
+When a single-threaded sequence is current, updates can proceed efficiently
+on the mutable array, returning a new single-threaded sequence which is
+current, and modifying the original sequence to be \emph{old}.
+When a single-threaded sequence is old, all operations are expensive, and
+are not considered by the cost semantics given below. In particular, they
+must build a new array from the history, which costs at least as much as the
+size of the history.
+
+As long as operations are always performed on a current
+single-threaded sequence, they are efficient.
+\begin{verbatim}
+functor MkSTSequence (structure Seq : SEQUENCE) :> ST_SEQUENCE where Seq = Seq
+\end{verbatim}
+\end{preamble}
+
+\section{Cost Specification}
+
+\begin{gram}
+The following costs assume that all single-threaded sequences are a current
+version.
+\end{gram}
+
+\begin{costspec}[Indexing]
+\begin{tabular}{ccc}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{nth}~s~i$ & $\bigO 1$ & $\bigO 1$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Updates]
+\begin{tabular}{ccc}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{update}~(s,(i,x))$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{inject}~(s,u)$ & $\bigO{|u|}$ & $\bigO 1$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Conversion]
+The following costs assume $\sml{Seq} = \sml{ArraySequence}$.
+\begin{tabular}{ccc}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{fromSeq}~s$ & $\bigO{|s|}$ & $\bigO 1$ \\
+$\sml{toSeq}~s$ & $\bigO{|s|}$ & $\bigO 1$
+\end{tabular}
+\end{costspec}
+

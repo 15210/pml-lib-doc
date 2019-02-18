@@ -1,4 +1,4 @@
-\begin{chapter}[MkTreapAugTable]
+\chapter{MkTreapAugTable}
 \label{ch:treap-aug-table}
 \begin{preamble}
 Implements augmented, ordered tables (and ordered sets) as treaps.
@@ -14,7 +14,7 @@ functor MkTreapAugTable
 Functions \sml{range} and \sml{toSeq} produce elements in key-sorted order.
 \end{gram}
 
-\begin{section}[Cost Specification]
+\section{Cost Specification}
 
 \begin{gram}
 The following costs assume that the work and span of \sml{Key.compare},
@@ -170,6 +170,3 @@ $\sml{range}~T$ & $\bigO{|T|}$ & $\bigO{\log|T|}$
 \end{tabular}
 \end{costspec}
 
-\end{section}
-
-\end{chapter}
