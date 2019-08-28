@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<block name='chapter'>
+<segment name='chapter'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ArraySequence
@@ -13,7 +16,14 @@ ArraySequence
 <field name='label'>
 ch:array-seq
 </field> <!-- label -->
-<atom name='preamble'>
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -25,8 +35,38 @@ ch:array-seq
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:array-seq::arraysequence
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
+<field name='label'>
+grm:array-seq::arraysequence
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <p>The <code>ArraySequence</code> structure implements the <code>SEQUENCE</code> interface with <code>type ’a t = ’a ArraySlice.slice</code>. This permits constant-time implementations of a number of crucial operations such as <code>nth</code> and <code>subseq</code>.</p>
@@ -34,13 +74,51 @@ ch:array-seq
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{ch:array-seq}
+\begin{preamble}
 The \sml{ArraySequence} structure implements the \sml{SEQUENCE} interface
 with \sml{type 'a t = 'a ArraySlice.slice}. This permits constant-time
 implementations of a number of crucial operations such as \sml{nth} and
 \sml{subseq}.
+\end{preamble}
 ]]>
 </field> <!-- body_src -->
-</atom> <!-- preamble -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
+</atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:array-seq::implementation-defined-behavior
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -52,9 +130,21 @@ Implementation-Defined Behavior
 Implementation-Defined Behavior
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grm:array-seq::implementation-defined-behavior
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <p>When <span class="math inline">\(|s| \geq 2\)</span>, <code>splitMid s</code> is logically equivalent to <span class="math display">\[\texttt{PAIR (take s (n div 2), drop s (n div 2))}\]</span></p>
@@ -68,9 +158,26 @@ When $|s| \geq 2$, \sml{splitMid s} is logically equivalent to
 \]
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
 
-<block name='section'>
+</segment> <!-- cluster -->
+
+
+<segment name='section'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 Cost Specification
@@ -82,8 +189,33 @@ Cost Specification
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+sec:array-seq::cost-specification
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:array-seq::constant-work-operations
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='costspec'>
 <field name='title'>
 <![CDATA[
@@ -95,9 +227,21 @@ Constant-Work Operations
 Constant-Work Operations
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:array-seq::constant-work-operations
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <table>
@@ -109,48 +253,48 @@ Constant-Work Operations
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{nth}~s~i\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{length}~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{empty}~()\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{singleton}~x\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{subseq}~s~(i,n)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{take}~s~n\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{drop}~s~n\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{splitHead}~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{splitMid}~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -160,19 +304,54 @@ Constant-Work Operations
 <![CDATA[
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{nth}~s~i$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{length}~s$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{empty}~()$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{singleton}~x$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{subseq}~s~(i,n)$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{take}~s~n$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{drop}~s~n$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{splitHead}~s$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{splitMid}~s$ & $\bigO 1$ & $\bigO 1$
+$\sml{nth}~s~i$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{length}~s$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{empty}~()$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{singleton}~x$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{subseq}~s~(i,n)$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{take}~s~n$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{drop}~s~n$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{splitHead}~s$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{splitMid}~s$ & $\bigoh 1$ & $\bigoh 1$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:array-seq::tabulate
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='costspec'>
 <field name='title'>
 <![CDATA[
@@ -184,9 +363,21 @@ Tabulate
 Tabulate
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:array-seq::tabulate
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <table>
@@ -198,8 +389,8 @@ Tabulate
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{tabulate}~f~n\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{i = 0}^{n-1} \mathop{\mathcal{W}}\left(f(i)\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \max_{i = 0}^{n-1} \mathop{\mathcal{S}}\left(f(i)\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{i = 0}^{n-1} W\left({f(i)}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \max_{i = 0}^{n-1} S\left({f(i)}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -209,15 +400,48 @@ Tabulate
 <![CDATA[
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\sml{tabulate}~f~n$ &
-$\displaystyle \sum_{i = 0}^{n-1} \WW{f(i)}$ &
-$\displaystyle \max_{i = 0}^{n-1} \SS{f(i)}$ \\
-%
+$\displaystyle \sum_{i = 0}^{n-1} \cwork{f(i)}$ &
+$\displaystyle \max_{i = 0}^{n-1} \cspan{f(i)}$ \\
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:array-seq::map
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='costspec'>
 <field name='title'>
 <![CDATA[
@@ -229,9 +453,21 @@ Map
 Map
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:array-seq::map
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <table>
@@ -243,8 +479,8 @@ Map
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\{\texttt{map},\texttt{mapIdx}\}~f~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{x \in s} \mathop{\mathcal{W}}\left(f(x)\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \max_{x \in s} \mathop{\mathcal{S}}\left(f(x)\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{x \in s} W\left({f(x)}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \max_{x \in s} S\left({f(x)}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -254,15 +490,48 @@ Map
 <![CDATA[
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\{\sml{map},\sml{mapIdx}\}~f~s$ &
-$\displaystyle \sum_{x \in s} \WW{f(x)}$ &
-$\displaystyle \max_{x \in s} \SS{f(x)}$ \\
-%
+$\displaystyle \sum_{x \in s} \cwork{f(x)}$ &
+$\displaystyle \max_{x \in s} \cspan{f(x)}$ \\
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:array-seq::filter
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='costspec'>
 <field name='title'>
 <![CDATA[
@@ -274,9 +543,21 @@ Filter
 Filter
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:array-seq::filter
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <table>
@@ -288,8 +569,8 @@ Filter
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\{\texttt{filter},\texttt{filterIdx}\}~p~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{x \in s} \mathop{\mathcal{W}}\left(p(x)\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log{|s|}\right) + \max_{x \in s} \mathop{\mathcal{S}}\left(p(x)\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{x \in s} W\left({p(x)}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({\log{|s|}}\right) + \max_{x \in s} S\left({p(x)}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -299,15 +580,48 @@ Filter
 <![CDATA[
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\{\sml{filter},\sml{filterIdx}\}~p~s$ &
-$\displaystyle \sum_{x \in s} \WW{p(x)}$ &
-$\displaystyle \bigO{\log{|s|}} + \max_{x \in s} \SS{p(x)}$ \\
-%
+$\displaystyle \sum_{x \in s} \cwork{p(x)}$ &
+$\displaystyle \bigoh{\log{|s|}} + \max_{x \in s} \cspan{p(x)}$ \\
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:array-seq::concatenation
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='costspec'>
 <field name='title'>
 <![CDATA[
@@ -319,9 +633,21 @@ Concatenation
 Concatenation
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:array-seq::concatenation
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <table>
@@ -333,13 +659,13 @@ Concatenation
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{append}~(s,t)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s| + |t|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({|s| + |t|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({1}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{flatten}~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s| + \sum_{x \in s} |x|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log{|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({|s| + \sum_{x \in s} |x|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({\log{|s|}}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -349,19 +675,51 @@ Concatenation
 <![CDATA[
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\sml{append}~(s,t)$ &
-$\displaystyle \bigO{|s| + |t|}$ &
-$\displaystyle \bigO 1$ \\
-%
+$\displaystyle \bigoh{|s| + |t|}$ &
+$\displaystyle \bigoh 1$ \\
 $\sml{flatten}~s$ &
-$\displaystyle \bigO{|s| + \sum_{x \in s} |x|}$ &
-$\displaystyle \bigO{\log{|s|}}$
-%
+$\displaystyle \bigoh{|s| + \sum_{x \in s} |x|}$ &
+$\displaystyle \bigoh{\log{|s|}}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:array-seq::zip
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='costspec'>
 <field name='title'>
 <![CDATA[
@@ -373,9 +731,21 @@ Zip
 Zip
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:array-seq::zip
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <table>
@@ -387,13 +757,13 @@ Zip
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{zip}~(s,t)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\min(|s|,|t|)\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({\min(|s|,|t|)}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({1}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{zipWith}~f~(s,t)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{i = 0}^{\min(|s|,|t|)-1} \mathop{\mathcal{W}}\left(f(s[i],t[i])\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \mathop{\mathcal{S}}\left(f(s[i],t[i])\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{i = 0}^{\min(|s|,|t|)-1} W\left({f(s[i],t[i])}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} S\left({f(s[i],t[i])}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -403,20 +773,34 @@ Zip
 <![CDATA[
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\sml{zip}~(s,t)$ &
-$\displaystyle \bigO{\min(|s|,|t|)}$ &
-$\displaystyle \bigO 1$ \\
-%
+$\displaystyle \bigoh{\min(|s|,|t|)}$ &
+$\displaystyle \bigoh 1$ \\
 $\sml{zipWith}~f~(s,t)$ &
-$\displaystyle \sum_{i = 0}^{\min(|s|,|t|)-1} \WW{f(s[i],t[i])}$ &
-$\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \SS{f(s[i],t[i])}$
-%
+$\displaystyle \sum_{i = 0}^{\min(|s|,|t|)-1} \cwork{f(s[i],t[i])}$ &
+$\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \cspan{f(s[i],t[i])}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
-<block name='group'>
+
+</segment> <!-- cluster -->
+
+<segment name='flex'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -428,22 +812,38 @@ $\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \SS{f(s[i],t[i])}$
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:array-seq::iteration
 </field> <!-- label -->
-<atom name='costspec'>
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<atom name='gram'>
 <field name='title'>
 <![CDATA[
-Iteration
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title -->
 <field name='title_src'>
 <![CDATA[
-Iteration
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grm:array-seq::iteration
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <p>In the following, <span class="math inline">\(b_i\)</span> is the result of the iteration after the first <span class="math inline">\(i\)</span> elements.</p>
@@ -456,28 +856,51 @@ Iteration
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{iterate}~f~b_0~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{i = 0}^{|s|-1} \mathop{\mathcal{W}}\left(f(b_i, s[i])\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{i = 0}^{|s|-1} \mathop{\mathcal{S}}\left(f(b_i, s[i])\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{i = 0}^{|s|-1} W\left({f(b_i, s[i])}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle \sum_{i = 0}^{|s|-1} S\left({f(b_i, s[i])}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
+<p><span class="math inline">\(\texttt{iteratePrefixes}\)</span> and <span class="math inline">\(\texttt{iteratePrefixesIncl}\)</span> have the same cost specification.</p>
 ]]>
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\begin{costspec}[Iteration]
 In the following, $b_i$ is the result of the iteration after the first $i$
 elements.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\sml{iterate}~f~b_0~s$ &
-$\displaystyle \sum_{i = 0}^{|s|-1} \WW{f(b_i, s[i])}$ &
-$\displaystyle \sum_{i = 0}^{|s|-1} \SS{f(b_i, s[i])}$
+$\displaystyle \sum_{i = 0}^{|s|-1} \cwork{f(b_i, s[i])}$ &
+$\displaystyle \sum_{i = 0}^{|s|-1} \cspan{f(b_i, s[i])}$
 \end{tabular}
+\end{costspec}
+\begin{note}
+$\sml{iteratePrefixes}$ and $\sml{iteratePrefixesIncl}$ have the same cost
+specification.
+\end{note}
 ]]>
 </field> <!-- body_src -->
-</atom> <!-- costspec -->
-<atom name='note'>
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
+</atom> <!-- gram -->
+
+</segment> <!-- flex -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -489,22 +912,12 @@ $\displaystyle \sum_{i = 0}^{|s|-1} \SS{f(b_i, s[i])}$
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:array-seq::parallel-aggregation
 </field> <!-- label -->
-<field name='body'>
-<![CDATA[
-<p><span class="math inline">\(\texttt{iteratePrefixes}\)</span> and <span class="math inline">\(\texttt{iteratePrefixesIncl}\)</span> have the same cost specification.</p>
-]]>
-</field> <!-- body -->
-<field name='body_src'>
-<![CDATA[
-$\sml{iteratePrefixes}$ and $\sml{iteratePrefixesIncl}$ have the same cost
-specification.
-]]>
-</field> <!-- body_src -->
-</atom> <!-- note -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
 
-</block> <!-- group -->
 <atom name='costspec'>
 <field name='title'>
 <![CDATA[
@@ -516,12 +929,24 @@ Parallel Aggregation
 Parallel Aggregation
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:array-seq::parallel-aggregation
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
-<p>The following assume <span class="math inline">\(\mathop{\mathcal{W}}\left(f(\cdot)\right)\)</span> and <span class="math inline">\(\mathop{\mathcal{S}}\left(f(\cdot)\right)\)</span> are <span class="math inline">\(\mathop{O}\left(1\right)\)</span>. If not, refer directly to the implementation.</p>
+<p>The following assume <span class="math inline">\(W\left({f(\cdot)}\right)\)</span> and <span class="math inline">\(S\left({f(\cdot)}\right)\)</span> are <span class="math inline">\(O\left({1}\right)\)</span>. If not, refer directly to the implementation.</p>
 <table>
 <tbody>
 <tr class="odd">
@@ -531,8 +956,8 @@ Parallel Aggregation
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\{\texttt{reduce},\texttt{scan},\texttt{scanIncl}\}~f~b~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log{|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({\log{|s|}}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -540,19 +965,52 @@ Parallel Aggregation
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
-The following assume $\WW{f(\cdot)}$ and $\SS{f(\cdot)}$ are $\bigO 1$. If not,
+The following assume $\cwork{f(\cdot)}$ and $\cspan{f(\cdot)}$ are $\bigoh 1$. If not,
 refer directly to the implementation.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\{\sml{reduce},\sml{scan},\sml{scanIncl}\}~f~b~s$ &
-$\displaystyle \bigO{|s|}$ &
-$\displaystyle \bigO{\log{|s|}}$
-%
+$\displaystyle \bigoh{|s|}$ &
+$\displaystyle \bigoh{\log{|s|}}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:array-seq::updates
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='costspec'>
 <field name='title'>
 <![CDATA[
@@ -564,9 +1022,21 @@ Updates
 Updates
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:array-seq::updates
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <table>
@@ -578,13 +1048,13 @@ Updates
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{update}~(s,(i,x))\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|s|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{inject}~(s,u)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|s| + |u|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|s| + |u|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -594,19 +1064,51 @@ Updates
 <![CDATA[
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\sml{update}~(s,(i,x))$ &
-$\bigO{|s|}$ &
-$\bigO 1$ \\
-%
+$\bigoh{|s|}$ &
+$\bigoh 1$ \\
 $\sml{inject}~(s,u)$ &
-$\bigO{|s| + |u|}$ &
-$\bigO 1$ \\
-%
+$\bigoh{|s| + |u|}$ &
+$\bigoh 1$ \\
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:array-seq::comparisons-and-sorting
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='costspec'>
 <field name='title'>
 <![CDATA[
@@ -618,12 +1120,24 @@ Comparisons and Sorting
 Comparisons and Sorting
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:array-seq::comparisons-and-sorting
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
-<p>The following assume that <span class="math inline">\(\mathop{\mathcal{W}}\left(c(\cdot)\right)\)</span> and <span class="math inline">\(\mathop{\mathcal{S}}\left(c(\cdot)\right)\)</span> are <span class="math inline">\(\mathop{O}\left(1\right)\)</span>.</p>
+<p>The following assume that <span class="math inline">\(W\left({c(\cdot)}\right)\)</span> and <span class="math inline">\(S\left({c(\cdot)}\right)\)</span> are <span class="math inline">\(O\left({1}\right)\)</span>.</p>
 <table>
 <tbody>
 <tr class="odd">
@@ -633,23 +1147,23 @@ Comparisons and Sorting
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\{\texttt{sort},\texttt{collect}\}~c~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s|\log{|s|}\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log^2{|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({|s|\log{|s|}}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({\log^2{|s|}}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{merge}~c~(s,t)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s| + |t|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log\left(|s| + |t|\right)\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({|s| + |t|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({\log\left(|s| + |t|\right)}\right)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{collate}~c~(s,t)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s| + |t|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log\left(\min\left(|s| + |t|\right)\right)\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({|s| + |t|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({\log\left(\min\left(|s| + |t|\right)\right)}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{argmax}~c~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(\log{|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({\log{|s|}}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -657,30 +1171,60 @@ Comparisons and Sorting
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
-The following assume that $\WW{c(\cdot)}$ and $\SS{c(\cdot)}$ are $\bigO 1$.
+The following assume that $\cwork{c(\cdot)}$ and $\cspan{c(\cdot)}$ are $\bigoh 1$.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\{\sml{sort},\sml{collect}\}~c~s$ &
-$\displaystyle \bigO{|s|\log{|s|}}$ &
-$\displaystyle \bigO{\log^2{|s|}}$ \\
-%
+$\displaystyle \bigoh{|s|\log{|s|}}$ &
+$\displaystyle \bigoh{\log^2{|s|}}$ \\
 $\sml{merge}~c~(s,t)$ &
-$\displaystyle \bigO{|s| + |t|}$ &
-$\displaystyle \bigO{\log\left(|s| + |t|\right)}$ \\
-%
+$\displaystyle \bigoh{|s| + |t|}$ &
+$\displaystyle \bigoh{\log\left(|s| + |t|\right)}$ \\
 $\sml{collate}~c~(s,t)$ &
-$\displaystyle \bigO{|s| + |t|}$ &
-$\displaystyle \bigO{\log\left(\min\left(|s| + |t|\right)\right)}$ \\
-%
+$\displaystyle \bigoh{|s| + |t|}$ &
+$\displaystyle \bigoh{\log\left(\min\left(|s| + |t|\right)\right)}$ \\
 $\sml{argmax}~c~s$ &
-$\displaystyle \bigO{|s|}$ &
-$\displaystyle \bigO{\log{|s|}}$ \\
-%
+$\displaystyle \bigoh{|s|}$ &
+$\displaystyle \bigoh{\log{|s|}}$ \\
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:array-seq::miscellaneous
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='costspec'>
 <field name='title'>
 <![CDATA[
@@ -692,9 +1236,21 @@ Miscellaneous
 Miscellaneous
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:array-seq::miscellaneous
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <table>
@@ -706,23 +1262,23 @@ Miscellaneous
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{rev}~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({1}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{enum}~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(|s|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle \mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle O\left({1}\right)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{toList}~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|s|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|s|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|s|}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{fromList}~l\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|l|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|l|\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|l|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|l|}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -732,29 +1288,37 @@ Miscellaneous
 <![CDATA[
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\sml{rev}~s$ &
-$\displaystyle \bigO{|s|}$ &
-$\displaystyle \bigO 1$ \\
-%
+$\displaystyle \bigoh{|s|}$ &
+$\displaystyle \bigoh 1$ \\
 $\sml{enum}~s$ &
-$\displaystyle \bigO{|s|}$ &
-$\displaystyle \bigO 1$ \\
-%
+$\displaystyle \bigoh{|s|}$ &
+$\displaystyle \bigoh 1$ \\
 $\sml{toList}~s$ &
-$\bigO{|s|}$ &
-$\bigO{|s|}$ \\
-%
+$\bigoh{|s|}$ &
+$\bigoh{|s|}$ \\
 $\sml{fromList}~l$ &
-$\bigO{|l|}$ &
-$\bigO{|l|}$ \\
-%
+$\bigoh{|l|}$ &
+$\bigoh{|l|}$ \\
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
 
+</segment> <!-- cluster -->
 
-</block> <!-- section -->
 
-</block> <!-- chapter -->
+</segment> <!-- section -->
+
+</segment> <!-- chapter -->

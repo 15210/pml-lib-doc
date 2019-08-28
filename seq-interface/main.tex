@@ -187,7 +187,7 @@ Construct an empty sequence.
 \begin{verbatim}
 val singleton : 'a -> 'a seq
 \end{verbatim}
-\sml{singleton x} evaluates to $\seq{x}$.
+\sml{singleton x} evaluates to $\cseq{x}$.
 \end{gram}
 
 \begin{gram}[tabulate]
@@ -233,7 +233,7 @@ val flatten : 'a seq seq -> 'a seq
 Concatenate many sequences into one, in the order they are given.
 \end{gram}
 \begin{example}
-Flattening $\seq{\seq{1,2},\seq{},\seq{3}}$ results in $\seq{1,2,3}$.
+Flattening $\cseq{\cseq{1,2},\cseq{},\cseq{3}}$ results in $\cseq{1,2,3}$.
 \end{example}
 \end{flex}
 
@@ -374,7 +374,7 @@ logically equivalent to \sml{CONS (nth s 0, drop s 1)}.
 val splitMid : 'a seq -> 'a treeview
 \end{verbatim}
 \sml{splitMid s} evaluates to \sml{EMPTY} is $s$ is empty, \sml{ONE x} if
-$s = \seq{x}$, and \sml{PAIR (l, r)} otherwise where $l$ and $r$ are non-empty and their
+$s = \cseq{x}$, and \sml{PAIR (l, r)} otherwise where $l$ and $r$ are non-empty and their
 concatenation is $s$. The sizes of $l$ and $r$ are implementation-defined.
 \end{gram}
 
@@ -424,7 +424,7 @@ It is logically equivalent to
 \]
 \end{gram}
 \begin{note}
-The return type of~\ref{gr:iteratePrefixesIncl} is slightly different than
+The return type of~\sml{iteratePrefixesIncl} is slightly different than
 \ref{gr:iteratePrefixes}.
 \end{note}
 \end{flex}
@@ -435,8 +435,8 @@ The return type of~\ref{gr:iteratePrefixesIncl} is slightly different than
 \begin{verbatim}
 val reduce : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a
 \end{verbatim}
-\sml{reduce f b s} evaluates to $b$ when $s = \seq{}$,
-$x$ when $s = \seq{x}$, and otherwise is logically equivalent to
+\sml{reduce f b s} evaluates to $b$ when $s = \cseq{}$,
+$x$ when $s = \cseq{x}$, and otherwise is logically equivalent to
 \[
   \sml{f (reduce f b l, reduce f b r)}
 \]
@@ -498,8 +498,8 @@ that were originally associated with it in $s$. The resulting value-sequences
 retain their relative ordering from $s$.
 \end{gram}
 \begin{example}
-Collecting $\seq{(3,7),(2,6),(1,8),(3,5)}$ produces
-$\seq{(1,\seq{8}), (2, \seq{6}), (3,\seq{7,5})}$.
+Collecting $\cseq{(3,7),(2,6),(1,8),(3,5)}$ produces
+$\cseq{(1,\cseq{8}), (2, \cseq{6}), (3,\cseq{7,5})}$.
 \end{example}
 \end{flex}
 

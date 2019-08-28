@@ -65,15 +65,15 @@ When $|s| \geq 2$, \sml{splitMid s} is logically equivalent to
 \begin{costspec}[Constant-Work Operations]
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{nth}~s~i$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{length}~s$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{empty}~()$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{singleton}~x$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{subseq}~s~(i,n)$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{take}~s~n$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{drop}~s~n$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{splitHead}~s$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{splitMid}~s$ & $\bigO 1$ & $\bigO 1$
+$\sml{nth}~s~i$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{length}~s$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{empty}~()$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{singleton}~x$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{subseq}~s~(i,n)$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{take}~s~n$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{drop}~s~n$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{splitHead}~s$ & $\bigoh 1$ & $\bigoh 1$ \\
+$\sml{splitMid}~s$ & $\bigoh 1$ & $\bigoh 1$
 \end{tabular}
 \end{costspec}
 
@@ -82,8 +82,8 @@ $\sml{splitMid}~s$ & $\bigO 1$ & $\bigO 1$
 & \textbf{Work} & \textbf{Span} \\
 %
 $\sml{tabulate}~f~n$ &
-$\displaystyle \sum_{i = 0}^{n-1} \WW{f(i)}$ &
-$\displaystyle \max_{i = 0}^{n-1} \SS{f(i)}$ \\
+$\displaystyle \sum_{i = 0}^{n-1} \cwork{f(i)}$ &
+$\displaystyle \max_{i = 0}^{n-1} \cspan{f(i)}$ \\
 %
 \end{tabular}
 \end{costspec}
@@ -100,8 +100,8 @@ $\displaystyle \max_{i = 0}^{n-1} \SS{f(i)}$ \\
 & \textbf{Work} & \textbf{Span} \\
 %
 $\{\sml{map},\sml{mapIdx}\}~f~s$ &
-$\displaystyle \sum_{x \in s} \WW{f(x)}$ &
-$\displaystyle \max_{x \in s} \SS{f(x)}$ \\
+$\displaystyle \sum_{x \in s} \cwork{f(x)}$ &
+$\displaystyle \max_{x \in s} \cspan{f(x)}$ \\
 %
 \end{tabular}
 \end{costspec}
@@ -111,8 +111,8 @@ $\displaystyle \max_{x \in s} \SS{f(x)}$ \\
 & \textbf{Work} & \textbf{Span} \\
 %
 $\{\sml{filter},\sml{filterIdx}\}~p~s$ &
-$\displaystyle \sum_{x \in s} \WW{p(x)}$ &
-$\displaystyle \bigO{\log{|s|}} + \max_{x \in s} \SS{p(x)}$ \\
+$\displaystyle \sum_{x \in s} \cwork{p(x)}$ &
+$\displaystyle \bigoh{\log{|s|}} + \max_{x \in s} \cspan{p(x)}$ \\
 %
 \end{tabular}
 \end{costspec}
@@ -122,12 +122,12 @@ $\displaystyle \bigO{\log{|s|}} + \max_{x \in s} \SS{p(x)}$ \\
 & \textbf{Work} & \textbf{Span} \\
 %
 $\sml{append}~(s,t)$ &
-$\displaystyle \bigO{|s| + |t|}$ &
-$\displaystyle \bigO 1$ \\
+$\displaystyle \bigoh{|s| + |t|}$ &
+$\displaystyle \bigoh 1$ \\
 %
 $\sml{flatten}~s$ &
-$\displaystyle \bigO{|s| + \sum_{x \in s} |x|}$ &
-$\displaystyle \bigO{\log{|s|}}$
+$\displaystyle \bigoh{|s| + \sum_{x \in s} |x|}$ &
+$\displaystyle \bigoh{\log{|s|}}$
 %
 \end{tabular}
 \end{costspec}
@@ -137,12 +137,12 @@ $\displaystyle \bigO{\log{|s|}}$
 & \textbf{Work} & \textbf{Span} \\
 %
 $\sml{zip}~(s,t)$ &
-$\displaystyle \bigO{\min(|s|,|t|)}$ &
-$\displaystyle \bigO 1$ \\
+$\displaystyle \bigoh{\min(|s|,|t|)}$ &
+$\displaystyle \bigoh 1$ \\
 %
 $\sml{zipWith}~f~(s,t)$ &
-$\displaystyle \sum_{i = 0}^{\min(|s|,|t|)-1} \WW{f(s[i],t[i])}$ &
-$\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \SS{f(s[i],t[i])}$
+$\displaystyle \sum_{i = 0}^{\min(|s|,|t|)-1} \cwork{f(s[i],t[i])}$ &
+$\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \cspan{f(s[i],t[i])}$
 %
 \end{tabular}
 \end{costspec}
@@ -155,8 +155,8 @@ elements.
 & \textbf{Work} & \textbf{Span} \\
 %
 $\sml{iterate}~f~b_0~s$ &
-$\displaystyle \sum_{i = 0}^{|s|-1} \WW{f(b_i, s[i])}$ &
-$\displaystyle \sum_{i = 0}^{|s|-1} \SS{f(b_i, s[i])}$
+$\displaystyle \sum_{i = 0}^{|s|-1} \cwork{f(b_i, s[i])}$ &
+$\displaystyle \sum_{i = 0}^{|s|-1} \cspan{f(b_i, s[i])}$
 \end{tabular}
 \end{costspec}
 \begin{note}
@@ -166,14 +166,14 @@ specification.
 \end{flex}
 
 \begin{costspec}[Parallel Aggregation]
-The following assume $\WW{f(\cdot)}$ and $\SS{f(\cdot)}$ are $\bigO 1$. If not,
+The following assume $\cwork{f(\cdot)}$ and $\cspan{f(\cdot)}$ are $\bigoh 1$. If not,
 refer directly to the implementation.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 %
 $\{\sml{reduce},\sml{scan},\sml{scanIncl}\}~f~b~s$ &
-$\displaystyle \bigO{|s|}$ &
-$\displaystyle \bigO{\log{|s|}}$
+$\displaystyle \bigoh{|s|}$ &
+$\displaystyle \bigoh{\log{|s|}}$
 %
 \end{tabular}
 \end{costspec}
@@ -183,36 +183,36 @@ $\displaystyle \bigO{\log{|s|}}$
 & \textbf{Work} & \textbf{Span} \\
 %
 $\sml{update}~(s,(i,x))$ &
-$\bigO{|s|}$ &
-$\bigO 1$ \\
+$\bigoh{|s|}$ &
+$\bigoh 1$ \\
 %
 $\sml{inject}~(s,u)$ &
-$\bigO{|s| + |u|}$ &
-$\bigO 1$ \\
+$\bigoh{|s| + |u|}$ &
+$\bigoh 1$ \\
 %
 \end{tabular}
 \end{costspec}
 
 \begin{costspec}[Comparisons and Sorting]
-The following assume that $\WW{c(\cdot)}$ and $\SS{c(\cdot)}$ are $\bigO 1$.
+The following assume that $\cwork{c(\cdot)}$ and $\cspan{c(\cdot)}$ are $\bigoh 1$.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 %
 $\{\sml{sort},\sml{collect}\}~c~s$ &
-$\displaystyle \bigO{|s|\log{|s|}}$ &
-$\displaystyle \bigO{\log^2{|s|}}$ \\
+$\displaystyle \bigoh{|s|\log{|s|}}$ &
+$\displaystyle \bigoh{\log^2{|s|}}$ \\
 %
 $\sml{merge}~c~(s,t)$ &
-$\displaystyle \bigO{|s| + |t|}$ &
-$\displaystyle \bigO{\log\left(|s| + |t|\right)}$ \\
+$\displaystyle \bigoh{|s| + |t|}$ &
+$\displaystyle \bigoh{\log\left(|s| + |t|\right)}$ \\
 %
 $\sml{collate}~c~(s,t)$ &
-$\displaystyle \bigO{|s| + |t|}$ &
-$\displaystyle \bigO{\log\left(\min\left(|s| + |t|\right)\right)}$ \\
+$\displaystyle \bigoh{|s| + |t|}$ &
+$\displaystyle \bigoh{\log\left(\min\left(|s| + |t|\right)\right)}$ \\
 %
 $\sml{argmax}~c~s$ &
-$\displaystyle \bigO{|s|}$ &
-$\displaystyle \bigO{\log{|s|}}$ \\
+$\displaystyle \bigoh{|s|}$ &
+$\displaystyle \bigoh{\log{|s|}}$ \\
 %
 \end{tabular}
 \end{costspec}
@@ -222,20 +222,20 @@ $\displaystyle \bigO{\log{|s|}}$ \\
 & \textbf{Work} & \textbf{Span} \\
 %
 $\sml{rev}~s$ &
-$\displaystyle \bigO{|s|}$ &
-$\displaystyle \bigO 1$ \\
+$\displaystyle \bigoh{|s|}$ &
+$\displaystyle \bigoh 1$ \\
 %
 $\sml{enum}~s$ &
-$\displaystyle \bigO{|s|}$ &
-$\displaystyle \bigO 1$ \\
+$\displaystyle \bigoh{|s|}$ &
+$\displaystyle \bigoh 1$ \\
 %
 $\sml{toList}~s$ &
-$\bigO{|s|}$ &
-$\bigO{|s|}$ \\
+$\bigoh{|s|}$ &
+$\bigoh{|s|}$ \\
 %
 $\sml{fromList}~l$ &
-$\bigO{|l|}$ &
-$\bigO{|l|}$ \\
+$\bigoh{|l|}$ &
+$\bigoh{|l|}$ \\
 %
 \end{tabular}
 \end{costspec}

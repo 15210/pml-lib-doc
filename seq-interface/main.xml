@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<block name='chapter'>
+<segment name='chapter'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 Sequence Interface
@@ -13,51 +16,31 @@ Sequence Interface
 <field name='label'>
 ch:seq-interface
 </field> <!-- label -->
-<atom name='preamble'>
-<field name='title'>
-<![CDATA[
-...NOT.PROVIDED.TITLE...
-]]>
-</field> <!-- title -->
-<field name='title_src'>
-<![CDATA[
-...NOT.PROVIDED.TITLE...
-]]>
-</field> <!-- title_src -->
-<field name='label'>
-...NOT.PROVIDED.LABEL...
-</field> <!-- label -->
-<field name='body'>
-<![CDATA[
-<p>The <code>SEQUENCE</code> signature is a comprehensive interface for a persistent sequence type.</p>
-]]>
-</field> <!-- body -->
-<field name='body_src'>
-<![CDATA[
-The \sml{SEQUENCE} signature is a comprehensive interface for a
-persistent sequence type.
-% We use a number of notational conventions which
-% can be seen <a href="../../../resources/notation/sequence.html">here</a>.
-% For example, we write $|s|$ and $s[i]$ for the length and $i^\text{th}$
-% element of $s$, respectively.
-]]>
-</field> <!-- body_src -->
-</atom> <!-- preamble -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
 
-<block name='section'>
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
-Summary
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title -->
 <field name='title_src'>
 <![CDATA[
-Summary
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::sequence
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -69,9 +52,119 @@ Summary
 ...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grm:seq-interface::sequence
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='body'>
+<![CDATA[
+<p>The <code>SEQUENCE</code> signature is a comprehensive interface for a persistent sequence type.</p>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\label{ch:seq-interface}
+\begin{preamble}
+The \sml{SEQUENCE} signature is a comprehensive interface for a
+persistent sequence type.
+\end{preamble}
+]]>
+</field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
+</atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+
+<segment name='section'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+Summary
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Summary
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+sec:seq-interface::summary
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::signature
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
+<field name='label'>
+grm:seq-interface::signature
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>signature SEQUENCE =  
@@ -200,11 +293,28 @@ end
 \end{verbatim}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
 
+</segment> <!-- cluster -->
 
-</block> <!-- section -->
-<block name='section'>
+
+</segment> <!-- section -->
+
+<segment name='section'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 Types
@@ -216,8 +326,33 @@ Types
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+sec:seq-interface::types
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::type
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -229,9 +364,21 @@ Types
 ...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grm:seq-interface::type
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>type &#39;a t  
@@ -249,8 +396,25 @@ The abstract sequence type \sml{'a t} has elements of type \sml{'a}. The alias
 \sml{'a seq} is for readability.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<atom name='gram'>
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -262,8 +426,38 @@ The abstract sequence type \sml{'a t} has elements of type \sml{'a}. The alias
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::order
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
+<field name='label'>
+grm:seq-interface::order
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>type &#39;a ord = &#39;a * &#39;a -&gt; order  </code></pre>
@@ -278,8 +472,25 @@ type 'a ord = 'a * 'a -> order
 An alias, for readability.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<atom name='gram'>
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -291,8 +502,38 @@ An alias, for readability.
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::listview
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
+<field name='label'>
+grm:seq-interface::listview
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>datatype &#39;a listview = NIL | CONS of &#39;a * &#39;a seq  </code></pre>
@@ -307,8 +548,25 @@ datatype 'a listview = NIL | CONS of 'a * 'a seq
 View a sequence as though it were a list. See~\ref{gr:splitHead}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<atom name='gram'>
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -320,8 +578,38 @@ View a sequence as though it were a list. See~\ref{gr:splitHead}.
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::treeview
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
+<field name='label'>
+grm:seq-interface::treeview
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>datatype &#39;a treeview = EMPTY | ONE of &#39;a | PAIR of &#39;a seq * &#39;a seq  </code></pre>
@@ -338,11 +626,28 @@ This is largely a syntactic convenience for 2-way divide-and-conquer algorithms
 on sequences. See~\ref{gr:splitMid}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
 
+</segment> <!-- cluster -->
 
-</block> <!-- section -->
-<block name='section'>
+
+</segment> <!-- section -->
+
+<segment name='section'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 Exceptions
@@ -354,8 +659,33 @@ Exceptions
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+sec:seq-interface::exceptions
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::exception
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -367,9 +697,21 @@ Exceptions
 ...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grm:seq-interface::exception
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>exception Range  </code></pre>
@@ -384,8 +726,25 @@ exception Range
 The \sml{Range} exception is raised whenever an invalid index into a sequence is used.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<atom name='gram'>
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -397,8 +756,38 @@ The \sml{Range} exception is raised whenever an invalid index into a sequence is
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::size
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<atom name='gram'>
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
+<field name='label'>
+grm:seq-interface::size
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>exception Size  </code></pre>
@@ -413,11 +802,28 @@ exception Size
 The \sml{Size} exception is raised whenever a function is given a negative size.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
 
+</segment> <!-- cluster -->
 
-</block> <!-- section -->
-<block name='section'>
+
+</segment> <!-- section -->
+
+<segment name='section'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 Values
@@ -429,8 +835,33 @@ Values
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+sec:seq-interface::values
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::nth
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -442,9 +873,21 @@ nth
 nth
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:nth
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val nth : &#39;a seq -&gt; int -&gt; &#39;a  </code></pre>
@@ -453,6 +896,7 @@ gr:nth
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:nth}
 \begin{verbatim}
 val nth : 'a seq -> int -> 'a
 \end{verbatim}
@@ -460,7 +904,42 @@ val nth : 'a seq -> int -> 'a
 Raises \sml{Range} if $i$ is out-of-bounds.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::length
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -472,9 +951,21 @@ length
 length
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:length
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val length : &#39;a seq -&gt; int  </code></pre>
@@ -483,13 +974,49 @@ gr:length
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:length}
 \begin{verbatim}
 val length : 'a seq -> int
 \end{verbatim}
 \sml{length s} evaluates to $|s|$, the number of elements in $s$.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::tolist
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -501,9 +1028,21 @@ toList
 toList
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:toList
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val toList : &#39;a seq -&gt; &#39;a list  </code></pre>
@@ -512,14 +1051,32 @@ gr:toList
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:toList}
 \begin{verbatim}
 val toList : 'a seq -> 'a list
 \end{verbatim}
 Produces an index-preserving list representation of a sequence.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<block name='group'>
+
+</segment> <!-- cluster -->
+
+<segment name='flex'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -531,39 +1088,79 @@ Produces an index-preserving list representation of a sequence.
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::tostring
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
-toString
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title -->
 <field name='title_src'>
 <![CDATA[
-toString
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-gr:toString
+grm:seq-interface::tostring
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val toString : (&#39;a -&gt; string) -&gt; &#39;a seq -&gt; string  </code></pre>
 <p><code>toString f s</code> produces a string representation of <span class="math inline">\(s\)</span>, where each element of <span class="math inline">\(s\)</span> is converted to a string via <span class="math inline">\(f\)</span>.</p>
+<p><code>toString Int.toString (fromList [1,2,3])</code> evaluates to <code>"&lt;1,2,3&gt;"</code>.</p>
 ]]>
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\begin{gram}[toString]
+\label{gr:toString}
 \begin{verbatim}
 val toString : ('a -> string) -> 'a seq -> string
 \end{verbatim}
 \sml{toString f s} produces a string representation of $s$, where each
 element of $s$ is converted to a string via $f$.
+\end{gram}
+\begin{example}
+\sml{toString Int.toString (fromList [1,2,3])} evaluates to \sml{"<1,2,3>"}.
+\end{example}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<atom name='example'>
+
+</segment> <!-- flex -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -575,21 +1172,12 @@ element of $s$ is converted to a string via $f$.
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::equal
 </field> <!-- label -->
-<field name='body'>
-<![CDATA[
-<p><code>toString Int.toString (fromList [1,2,3])</code> evaluates to <code>&quot;&lt;1,2,3&gt;&quot;</code>.</p>
-]]>
-</field> <!-- body -->
-<field name='body_src'>
-<![CDATA[
-\sml{toString Int.toString (fromList [1,2,3])} evaluates to \sml{"<1,2,3>"}.
-]]>
-</field> <!-- body_src -->
-</atom> <!-- example -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
 
-</block> <!-- group -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -601,9 +1189,21 @@ equal
 equal
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:equal
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val equal : (&#39;a * &#39;a -&gt; bool) -&gt; &#39;a seq * &#39;a seq -&gt; bool  </code></pre>
@@ -612,6 +1212,7 @@ gr:equal
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:equal}
 \begin{verbatim}
 val equal : ('a * 'a -> bool) -> 'a seq * 'a seq -> bool
 \end{verbatim}
@@ -619,7 +1220,42 @@ val equal : ('a * 'a -> bool) -> 'a seq * 'a seq -> bool
 in the same order. Individual element pairs are compared for equality with $f$.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::empty
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -631,9 +1267,21 @@ empty
 empty
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:empty
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val empty : unit -&gt; &#39;a seq  </code></pre>
@@ -642,13 +1290,49 @@ gr:empty
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:empty}
 \begin{verbatim}
 val empty : unit -> 'a seq
 \end{verbatim}
 Construct an empty sequence.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::singleton
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -660,24 +1344,72 @@ singleton
 singleton
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:singleton
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val singleton : &#39;a -&gt; &#39;a seq  </code></pre>
-<p><code>singleton x</code> evaluates to <span class="math inline">\(\left\langle {x} \right\rangle\)</span>.</p>
+<p><code>singleton x</code> evaluates to <span class="math inline">\(\left\langle\, x \,\right\rangle\)</span>.</p>
 ]]>
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:singleton}
 \begin{verbatim}
 val singleton : 'a -> 'a seq
 \end{verbatim}
-\sml{singleton x} evaluates to $\seq{x}$.
+\sml{singleton x} evaluates to $\cseq{x}$.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::tabulate
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -689,9 +1421,21 @@ tabulate
 tabulate
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:tabulate
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val tabulate : (int -&gt; &#39;a) -&gt; int -&gt; &#39;a seq  </code></pre>
@@ -700,6 +1444,7 @@ gr:tabulate
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:tabulate}
 \begin{verbatim}
 val tabulate : (int -> 'a) -> int -> 'a seq
 \end{verbatim}
@@ -707,7 +1452,42 @@ val tabulate : (int -> 'a) -> int -> 'a seq
 element is given by $f(i)$. Raises \sml{Size} if $n < 0$.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::fromlist
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -719,9 +1499,21 @@ fromList
 fromList
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:fromList
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val fromList : &#39;a list -&gt; &#39;a seq  </code></pre>
@@ -730,13 +1522,49 @@ gr:fromList
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:fromList}
 \begin{verbatim}
 val fromList : 'a list -> 'a seq
 \end{verbatim}
 Produces an index-preserving sequence from a list.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::rev
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -748,9 +1576,21 @@ rev
 rev
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:rev
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val rev : &#39;a seq -&gt; &#39;a seq  </code></pre>
@@ -759,6 +1599,7 @@ gr:rev
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:rev}
 \begin{verbatim}
 val rev : 'a seq -> 'a seq
 \end{verbatim}
@@ -766,7 +1607,42 @@ val rev : 'a seq -> 'a seq
 is equivalent to \sml{nth s (length s - i - 1)}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::append
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -778,9 +1654,21 @@ append
 append
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:append
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val append : &#39;a seq * &#39;a seq -&gt; &#39;a seq  </code></pre>
@@ -789,14 +1677,32 @@ gr:append
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:append}
 \begin{verbatim}
 val append : 'a seq * 'a seq -> 'a seq
 \end{verbatim}
 Concatenate two sequences.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<block name='group'>
+
+</segment> <!-- cluster -->
+
+<segment name='flex'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -808,38 +1714,78 @@ Concatenate two sequences.
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::flatten
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
-flatten
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title -->
 <field name='title_src'>
 <![CDATA[
-flatten
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-gr:flatten
+grm:seq-interface::flatten
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val flatten : &#39;a seq seq -&gt; &#39;a seq  </code></pre>
 <p>Concatenate many sequences into one, in the order they are given.</p>
+<p>Flattening <span class="math inline">\(\left\langle\, \left\langle\, 1,2 \,\right\rangle,\left\langle\,  \,\right\rangle,\left\langle\, 3 \,\right\rangle \,\right\rangle\)</span> results in <span class="math inline">\(\left\langle\, 1,2,3 \,\right\rangle\)</span>.</p>
 ]]>
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\begin{gram}[flatten]
+\label{gr:flatten}
 \begin{verbatim}
 val flatten : 'a seq seq -> 'a seq
 \end{verbatim}
 Concatenate many sequences into one, in the order they are given.
+\end{gram}
+\begin{example}
+Flattening $\cseq{\cseq{1,2},\cseq{},\cseq{3}}$ results in $\cseq{1,2,3}$.
+\end{example}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<atom name='example'>
+
+</segment> <!-- flex -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -851,21 +1797,12 @@ Concatenate many sequences into one, in the order they are given.
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::filter
 </field> <!-- label -->
-<field name='body'>
-<![CDATA[
-<p>Flattening <span class="math inline">\(\left\langle {\left\langle {1,2} \right\rangle,\left\langle {} \right\rangle,\left\langle {3} \right\rangle} \right\rangle\)</span> results in <span class="math inline">\(\left\langle {1,2,3} \right\rangle\)</span>.</p>
-]]>
-</field> <!-- body -->
-<field name='body_src'>
-<![CDATA[
-Flattening $\seq{\seq{1,2},\seq{},\seq{3}}$ results in $\seq{1,2,3}$.
-]]>
-</field> <!-- body_src -->
-</atom> <!-- example -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
 
-</block> <!-- group -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -877,9 +1814,21 @@ filter
 filter
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:filter
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val filter : (&#39;a -&gt; bool) -&gt; &#39;a seq -&gt; &#39;a seq  </code></pre>
@@ -888,6 +1837,7 @@ gr:filter
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:filter}
 \begin{verbatim}
 val filter : ('a -> bool) -> 'a seq -> 'a seq
 \end{verbatim}
@@ -895,7 +1845,42 @@ val filter : ('a -> bool) -> 'a seq -> 'a seq
 element satisfying the predicate $p$.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::map
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -907,9 +1892,21 @@ map
 map
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:map
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val map : (&#39;a -&gt; &#39;b) -&gt; &#39;a seq -&gt; &#39;b seq  </code></pre>
@@ -918,6 +1915,7 @@ gr:map
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:map}
 \begin{verbatim}
 val map : ('a -> 'b) -> 'a seq -> 'b seq
 \end{verbatim}
@@ -925,7 +1923,42 @@ val map : ('a -> 'b) -> 'a seq -> 'b seq
 to \sml{tabulate (f o nth s) (length s)}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::zip
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -937,9 +1970,21 @@ zip
 zip
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:zip
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val zip : &#39;a seq * &#39;b seq -&gt; (&#39;a * &#39;b) seq  </code></pre>
@@ -948,6 +1993,7 @@ gr:zip
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:zip}
 \begin{verbatim}
 val zip : 'a seq * 'b seq -> ('a * 'b) seq
 \end{verbatim}
@@ -955,7 +2001,42 @@ val zip : 'a seq * 'b seq -> ('a * 'b) seq
 element is the pair $(s[i], t[i])$.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::zipwith
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -967,9 +2048,21 @@ zipWith
 zipWith
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:zipWith
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val zipWith : (&#39;a * &#39;b -&gt; &#39;c) -&gt; &#39;a seq * &#39;b seq -&gt; &#39;c seq  </code></pre>
@@ -978,13 +2071,49 @@ gr:zipWith
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:zipWith}
 \begin{verbatim}
 val zipWith : ('a * 'b -> 'c) -> 'a seq * 'b seq -> 'c seq
 \end{verbatim}
 \sml{zipWith f (s, t)} is logically equivalent to \sml{map f (zip (s, t))}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::enum
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -996,9 +2125,21 @@ enum
 enum
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:enum
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val enum : &#39;a seq -&gt; (int * &#39;a) seq  </code></pre>
@@ -1007,6 +2148,7 @@ gr:enum
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:enum}
 \begin{verbatim}
 val enum : 'a seq -> (int * 'a) seq
 \end{verbatim}
@@ -1015,7 +2157,42 @@ index. It is logically equivalent to
 \sml{tabulate (fn i => (i, nth s i)) (length s)}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::filteridx
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1027,9 +2204,21 @@ filterIdx
 filterIdx
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:filterIdx
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val filterIdx : (int * &#39;a -&gt; bool) -&gt; &#39;a seq -&gt; &#39;a seq  </code></pre>
@@ -1038,6 +2227,7 @@ gr:filterIdx
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:filterIdx}
 \begin{verbatim}
 val filterIdx : (int * 'a -> bool) -> 'a seq -> 'a seq
 \end{verbatim}
@@ -1047,7 +2237,42 @@ index of each element to the predicate.
 \sml{map (fn (\_, x) => x) (filter f (enum s))}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::mapidx
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1059,9 +2284,21 @@ mapIdx
 mapIdx
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:mapIdx
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val mapIdx : (int * &#39;a -&gt; &#39;b) -&gt; &#39;a seq -&gt; &#39;b seq  </code></pre>
@@ -1070,6 +2307,7 @@ gr:mapIdx
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:mapIdx}
 \begin{verbatim}
 val mapIdx : (int * 'a -> 'b) -> 'a seq -> 'b seq
 \end{verbatim}
@@ -1077,7 +2315,42 @@ Similar to~\ref{gr:map}, but also provides the index of each element.
 \sml{mapIdx f s} is logically equivalent to \sml{map f (enum s)}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::update
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1089,9 +2362,21 @@ update
 update
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:update
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val update : &#39;a seq * (int * &#39;a) -&gt; &#39;a seq  </code></pre>
@@ -1100,6 +2385,7 @@ gr:update
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:update}
 \begin{verbatim}
 val update : 'a seq * (int * 'a) -> 'a seq
 \end{verbatim}
@@ -1109,8 +2395,25 @@ it raises \sml{Range}, otherwise it is logically equivalent to
 \sml{tabulate (fn j => if i = j then x else nth s j) (length s)}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<block name='group'>
+
+</segment> <!-- cluster -->
+
+<segment name='flex'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -1122,30 +2425,49 @@ it raises \sml{Range}, otherwise it is logically equivalent to
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::inject
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
-inject
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title -->
 <field name='title_src'>
 <![CDATA[
-inject
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-gr:inject
+grm:seq-interface::inject
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val inject : &#39;a seq * (int * &#39;a) seq -&gt; &#39;a seq  </code></pre>
 <p><code>inject (s, u)</code> produces a new sequence where, for each <span class="math inline">\((i,x) \in u\)</span>, the <span class="math inline">\(i^\text{th}\)</span> element of <span class="math inline">\(s\)</span> has been replaced with <span class="math inline">\(x\)</span>. If there are multiple updates specified at the same index, then all but one of them are ignored non-deterministically. Raises <code>Range</code> if any <span class="math inline">\((i,\_) \in u\)</span> is out-of-bounds.</p>
+<p>When all indices in <span class="math inline">\(u\)</span> are distinct, <code>inject (s, u)</code> is logically equivalent to <code>iterate update s u</code>.</p>
 ]]>
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\begin{gram}[inject]
+\label{gr:inject}
 \begin{verbatim}
 val inject : 'a seq * (int * 'a) seq -> 'a seq
 \end{verbatim}
@@ -1154,10 +2476,32 @@ the $i^\text{th}$ element of $s$ has been replaced with $x$. If there are
 multiple updates specified
 at the same index, then all but one of them are ignored non-deterministically.
 Raises \sml{Range} if any $(i,\_) \in u$ is out-of-bounds.
+\end{gram}
+\begin{note}
+When all indices in $u$ are distinct, \sml{inject (s, u)} is logically
+equivalent to \sml{iterate update s u}.
+\end{note}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<atom name='note'>
+
+</segment> <!-- flex -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -1169,22 +2513,12 @@ Raises \sml{Range} if any $(i,\_) \in u$ is out-of-bounds.
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::subseq
 </field> <!-- label -->
-<field name='body'>
-<![CDATA[
-<p>When all indices in <span class="math inline">\(u\)</span> are distinct, <code>inject (s, u)</code> is logically equivalent to <code>iterate update s u</code>.</p>
-]]>
-</field> <!-- body -->
-<field name='body_src'>
-<![CDATA[
-When all indices in $u$ are distinct, \sml{inject (s, u)} is logically
-equivalent to \sml{iterate update s u}.
-]]>
-</field> <!-- body_src -->
-</atom> <!-- note -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
 
-</block> <!-- group -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1196,9 +2530,21 @@ subseq
 subseq
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:subseq
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val subseq : &#39;a seq -&gt; int * int -&gt; &#39;a seq  </code></pre>
@@ -1207,6 +2553,7 @@ gr:subseq
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:subseq}
 \begin{verbatim}
 val subseq : 'a seq -> int * int -> 'a seq
 \end{verbatim}
@@ -1215,7 +2562,42 @@ at index $i$ with length $n$. Raises \sml{Size} if $n < 0$. Raises \sml{Range}
 if the subsequence is out-of-bounds.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::take
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1227,9 +2609,21 @@ take
 take
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:take
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val take : &#39;a seq -&gt; int -&gt; &#39;a seq  </code></pre>
@@ -1238,6 +2632,7 @@ gr:take
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:take}
 \begin{verbatim}
 val take : 'a seq -> int -> 'a seq
 \end{verbatim}
@@ -1245,7 +2640,42 @@ val take : 'a seq -> int -> 'a seq
 equivalent to \sml{subseq s (0, n)}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::drop
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1257,9 +2687,21 @@ drop
 drop
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:drop
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val drop : &#39;a seq -&gt; int -&gt; &#39;a seq  </code></pre>
@@ -1268,6 +2710,7 @@ gr:drop
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:drop}
 \begin{verbatim}
 val drop : 'a seq -> int -> 'a seq
 \end{verbatim}
@@ -1275,7 +2718,42 @@ val drop : 'a seq -> int -> 'a seq
 to \sml{subseq s (n, length s - n)}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::splithead
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1287,9 +2765,21 @@ splitHead
 splitHead
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:splitHead
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val splitHead : &#39;a seq -&gt; &#39;a listview  </code></pre>
@@ -1298,6 +2788,7 @@ gr:splitHead
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:splitHead}
 \begin{verbatim}
 val splitHead : 'a seq -> 'a listview
 \end{verbatim}
@@ -1305,7 +2796,42 @@ val splitHead : 'a seq -> 'a listview
 logically equivalent to \sml{CONS (nth s 0, drop s 1)}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::splitmid
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1317,27 +2843,57 @@ splitMid
 splitMid
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:splitMid
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val splitMid : &#39;a seq -&gt; &#39;a treeview  </code></pre>
-<p><code>splitMid s</code> evaluates to <code>EMPTY</code> is <span class="math inline">\(s\)</span> is empty, <code>ONE x</code> if <span class="math inline">\(s = \left\langle {x} \right\rangle\)</span>, and <code>PAIR (l, r)</code> otherwise where <span class="math inline">\(l\)</span> and <span class="math inline">\(r\)</span> are non-empty and their concatenation is <span class="math inline">\(s\)</span>. The sizes of <span class="math inline">\(l\)</span> and <span class="math inline">\(r\)</span> are implementation-defined.</p>
+<p><code>splitMid s</code> evaluates to <code>EMPTY</code> is <span class="math inline">\(s\)</span> is empty, <code>ONE x</code> if <span class="math inline">\(s = \left\langle\, x \,\right\rangle\)</span>, and <code>PAIR (l, r)</code> otherwise where <span class="math inline">\(l\)</span> and <span class="math inline">\(r\)</span> are non-empty and their concatenation is <span class="math inline">\(s\)</span>. The sizes of <span class="math inline">\(l\)</span> and <span class="math inline">\(r\)</span> are implementation-defined.</p>
 ]]>
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:splitMid}
 \begin{verbatim}
 val splitMid : 'a seq -> 'a treeview
 \end{verbatim}
 \sml{splitMid s} evaluates to \sml{EMPTY} is $s$ is empty, \sml{ONE x} if
-$s = \seq{x}$, and \sml{PAIR (l, r)} otherwise where $l$ and $r$ are non-empty and their
+$s = \cseq{x}$, and \sml{PAIR (l, r)} otherwise where $l$ and $r$ are non-empty and their
 concatenation is $s$. The sizes of $l$ and $r$ are implementation-defined.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<block name='group'>
+
+</segment> <!-- cluster -->
+
+<segment name='flex'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -1349,30 +2905,50 @@ concatenation is $s$. The sizes of $l$ and $r$ are implementation-defined.
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::iterate
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
-iterate
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title -->
 <field name='title_src'>
 <![CDATA[
-iterate
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-gr:iterate
+grm:seq-interface::iterate
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val iterate : (&#39;b * &#39;a -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a seq -&gt; &#39;b  </code></pre>
 <p><code>iterate f b s</code> computes the iteration of <span class="math inline">\(f\)</span> on <span class="math inline">\(s\)</span> with left-association, using <span class="math inline">\(b\)</span> as the base case. It is logically equivalent to <span class="math display">\[f(\ldots f(f(b, s[0]), s[1]) \ldots, s[|s|-1])\]</span></p>
+<p>When <span class="math inline">\(s\)</span> is empty, it returns <span class="math inline">\(b\)</span>.</p>
+<p><code>iterate op+ 13 (fromList [1,2,3])</code> evaluates to <code>19</code>.</p>
 ]]>
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\begin{gram}[iterate]
+\label{gr:iterate}
 \begin{verbatim}
 val iterate : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b
 \end{verbatim}
@@ -1381,35 +2957,34 @@ using $b$ as the base case. It is logically equivalent to
 \[
   f(\ldots f(f(b, s[0]), s[1]) \ldots, s[|s|-1])
 \]
-]]>
-</field> <!-- body_src -->
-</atom> <!-- gram -->
-<atom name='note'>
-<field name='title'>
-<![CDATA[
-...NOT.PROVIDED.TITLE...
-]]>
-</field> <!-- title -->
-<field name='title_src'>
-<![CDATA[
-...NOT.PROVIDED.TITLE...
-]]>
-</field> <!-- title_src -->
-<field name='label'>
-...NOT.PROVIDED.LABEL...
-</field> <!-- label -->
-<field name='body'>
-<![CDATA[
-<p>When <span class="math inline">\(s\)</span> is empty, it returns <span class="math inline">\(b\)</span>.</p>
-]]>
-</field> <!-- body -->
-<field name='body_src'>
-<![CDATA[
+\end{gram}
+\begin{note}
 When $s$ is empty, it returns $b$.
+\end{note}
+\begin{example}
+\sml{iterate op+ 13 (fromList [1,2,3])} evaluates to \sml{19}.
+\end{example}
 ]]>
 </field> <!-- body_src -->
-</atom> <!-- note -->
-<atom name='example'>
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
+</atom> <!-- gram -->
+
+</segment> <!-- flex -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -1421,21 +2996,12 @@ When $s$ is empty, it returns $b$.
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::iterateprefixes
 </field> <!-- label -->
-<field name='body'>
-<![CDATA[
-<p><code>iterate op+ 13 (fromList [1,2,3])</code> evaluates to <code>19</code>.</p>
-]]>
-</field> <!-- body -->
-<field name='body_src'>
-<![CDATA[
-\sml{iterate op+ 13 (fromList [1,2,3])} evaluates to \sml{19}.
-]]>
-</field> <!-- body_src -->
-</atom> <!-- example -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
 
-</block> <!-- group -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1447,9 +3013,21 @@ iteratePrefixes
 iteratePrefixes
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:iteratePrefixes
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val iteratePrefixes : (&#39;b * &#39;a -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a seq -&gt; &#39;b seq * &#39;b  </code></pre>
@@ -1458,6 +3036,7 @@ gr:iteratePrefixes
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:iteratePrefixes}
 \begin{verbatim}
 val iteratePrefixes : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b seq * 'b
 \end{verbatim}
@@ -1468,8 +3047,25 @@ val iteratePrefixes : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b seq * 'b
 That is, it produces the iteration of $f$ for each prefix of $s$.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<block name='group'>
+
+</segment> <!-- cluster -->
+
+<segment name='flex'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -1481,30 +3077,49 @@ That is, it produces the iteration of $f$ for each prefix of $s$.
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::iterateprefixesincl
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
-iteratePrefixesIncl
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title -->
 <field name='title_src'>
 <![CDATA[
-iteratePrefixesIncl
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-gr:iteratePrefixesIncl
+grm:seq-interface::iterateprefixesincl
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val iteratePrefixesIncl : (&#39;b * &#39;a -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a seq -&gt; &#39;b seq  </code></pre>
 <p>Similar to <a href="#gr:iteratePrefixes" data-reference-type="ref" data-reference="gr:iteratePrefixes">[gr:iteratePrefixes]</a>, except that the <span class="math inline">\(i^\text{th}\)</span> prefix of <code>iteratePrefixesIncl f b s</code> is inclusive of <span class="math inline">\(s[i]\)</span>, rather than exclusive. It is logically equivalent to <span class="math display">\[\texttt{tabulate (fn i =&gt; iterate f b (take s (i+1)) (length s)}.\]</span></p>
+<p>The return type of <code>iteratePrefixesIncl</code> is slightly different than <a href="#gr:iteratePrefixes" data-reference-type="ref" data-reference="gr:iteratePrefixes">[gr:iteratePrefixes]</a>.</p>
 ]]>
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\begin{gram}[iteratePrefixesIncl]
+\label{gr:iteratePrefixesIncl}
 \begin{verbatim}
 val iteratePrefixesIncl : ('b * 'a -> 'b) -> 'b -> 'a seq -> 'b seq
 \end{verbatim}
@@ -1514,38 +3129,32 @@ It is logically equivalent to
 \[
   \sml{tabulate (fn i => iterate f b (take s (i+1)) (length s)}.
 \]
-]]>
-</field> <!-- body_src -->
-</atom> <!-- gram -->
-<atom name='note'>
-<field name='title'>
-<![CDATA[
-...NOT.PROVIDED.TITLE...
-]]>
-</field> <!-- title -->
-<field name='title_src'>
-<![CDATA[
-...NOT.PROVIDED.TITLE...
-]]>
-</field> <!-- title_src -->
-<field name='label'>
-...NOT.PROVIDED.LABEL...
-</field> <!-- label -->
-<field name='body'>
-<![CDATA[
-<p>The return type of <a href="#gr:iteratePrefixesIncl" data-reference-type="ref" data-reference="gr:iteratePrefixesIncl">[gr:iteratePrefixesIncl]</a> is slightly different than <a href="#gr:iteratePrefixes" data-reference-type="ref" data-reference="gr:iteratePrefixes">[gr:iteratePrefixes]</a>.</p>
-]]>
-</field> <!-- body -->
-<field name='body_src'>
-<![CDATA[
-The return type of~\ref{gr:iteratePrefixesIncl} is slightly different than
+\end{gram}
+\begin{note}
+The return type of~\sml{iteratePrefixesIncl} is slightly different than
 \ref{gr:iteratePrefixes}.
+\end{note}
 ]]>
 </field> <!-- body_src -->
-</atom> <!-- note -->
 
-</block> <!-- group -->
-<block name='group'>
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
+</atom> <!-- gram -->
+
+</segment> <!-- flex -->
+
+<segment name='flex'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -1557,70 +3166,101 @@ The return type of~\ref{gr:iteratePrefixesIncl} is slightly different than
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::reduce
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
-reduce
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title -->
 <field name='title_src'>
 <![CDATA[
-reduce
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-gr:reduce
+grm:seq-interface::reduce
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val reduce : (&#39;a * &#39;a -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;a seq -&gt; &#39;a  </code></pre>
-<p><code>reduce f b s</code> evaluates to <span class="math inline">\(b\)</span> when <span class="math inline">\(s = \left\langle {} \right\rangle\)</span>, <span class="math inline">\(x\)</span> when <span class="math inline">\(s = \left\langle {x} \right\rangle\)</span>, and otherwise is logically equivalent to <span class="math display">\[\texttt{f (reduce f b l, reduce f b r)}\]</span> where <span class="math inline">\(l = \texttt{take s (n div 2)}\)</span> and <span class="math inline">\(r = \texttt{drop s (n div 2)}\)</span>.</p>
-]]>
-</field> <!-- body -->
-<field name='body_src'>
-<![CDATA[
-\begin{verbatim}
-val reduce : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a
-\end{verbatim}
-\sml{reduce f b s} evaluates to $b$ when $s = \seq{}$,
-$x$ when $s = \seq{x}$, and otherwise is logically equivalent to
-\[
-  \sml{f (reduce f b l, reduce f b r)}
-\]
-where $l = \sml{take s (n div 2)}$ and $r = \sml{drop s (n div 2)}$.
-]]>
-</field> <!-- body_src -->
-</atom> <!-- gram -->
-<atom name='note'>
-<field name='title'>
-<![CDATA[
-...NOT.PROVIDED.TITLE...
-]]>
-</field> <!-- title -->
-<field name='title_src'>
-<![CDATA[
-...NOT.PROVIDED.TITLE...
-]]>
-</field> <!-- title_src -->
-<field name='label'>
-...NOT.PROVIDED.LABEL...
-</field> <!-- label -->
-<field name='body'>
-<![CDATA[
+<p><code>reduce f b s</code> evaluates to <span class="math inline">\(b\)</span> when <span class="math inline">\(s = \left\langle\,  \,\right\rangle\)</span>, <span class="math inline">\(x\)</span> when <span class="math inline">\(s = \left\langle\, x \,\right\rangle\)</span>, and otherwise is logically equivalent to <span class="math display">\[\texttt{f (reduce f b l, reduce f b r)}\]</span> where <span class="math inline">\(l = \texttt{take s (n div 2)}\)</span> and <span class="math inline">\(r = \texttt{drop s (n div 2)}\)</span>.</p>
 <p><code>reduce f b s</code> is logically equivalent to <code>iterate f b s</code> when <span class="math inline">\(f\)</span> is associative and <span class="math inline">\(b\)</span> is a corresponding identity.</p>
 ]]>
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\begin{gram}[reduce]
+\label{gr:reduce}
+\begin{verbatim}
+val reduce : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a
+\end{verbatim}
+\sml{reduce f b s} evaluates to $b$ when $s = \cseq{}$,
+$x$ when $s = \cseq{x}$, and otherwise is logically equivalent to
+\[
+  \sml{f (reduce f b l, reduce f b r)}
+\]
+where $l = \sml{take s (n div 2)}$ and $r = \sml{drop s (n div 2)}$.
+\end{gram}
+\begin{note}
 \sml{reduce f b s} is logically equivalent to \sml{iterate f b s} when
 $f$ is associative and $b$ is a corresponding identity.
+\end{note}
 ]]>
 </field> <!-- body_src -->
-</atom> <!-- note -->
 
-</block> <!-- group -->
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
+</atom> <!-- gram -->
+
+</segment> <!-- flex -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::scan
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1632,9 +3272,21 @@ scan
 scan
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:scan
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val scan : (&#39;a * &#39;a -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;a seq -&gt; &#39;a seq * &#39;a  </code></pre>
@@ -1643,6 +3295,7 @@ gr:scan
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:scan}
 \begin{verbatim}
 val scan : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a seq * 'a
 \end{verbatim}
@@ -1650,7 +3303,42 @@ For an associative function $f$ and corresponding identity $b$, \sml{scan f b s}
 is logically equivalent to \sml{iteratePrefixes f b s}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::scanincl
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1662,9 +3350,21 @@ scanIncl
 scanIncl
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:scanIncl
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val scanIncl : (&#39;a * &#39;a -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;a seq -&gt; &#39;a seq  </code></pre>
@@ -1673,6 +3373,7 @@ gr:scanIncl
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:scanIncl}
 \begin{verbatim}
 val scanIncl : ('a * 'a -> 'a) -> 'a -> 'a seq -> 'a seq
 \end{verbatim}
@@ -1680,7 +3381,42 @@ For an associative function $f$ and corresponding identity $b$, \sml{scanIncl f 
 is logically equivalent to \sml{iteratePrefixesIncl f b s}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::sort
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1692,9 +3428,21 @@ sort
 sort
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:sort
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val sort : &#39;a ord -&gt; &#39;a seq -&gt; &#39;a seq  </code></pre>
@@ -1703,6 +3451,7 @@ gr:sort
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:sort}
 \begin{verbatim}
 val sort : 'a ord -> 'a seq -> 'a seq
 \end{verbatim}
@@ -1712,7 +3461,42 @@ by $c$ will appear in the same relative order in the output as they were
 in the input.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::merge
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1724,9 +3508,21 @@ merge
 merge
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:merge
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val merge : &#39;a ord -&gt; &#39;a seq * &#39;a seq -&gt; &#39;a seq  </code></pre>
@@ -1735,6 +3531,7 @@ gr:merge
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:merge}
 \begin{verbatim}
 val merge : 'a ord -> 'a seq * 'a seq -> 'a seq
 \end{verbatim}
@@ -1742,8 +3539,25 @@ For sequences $s$ and $t$ already sorted with respect to $c$,
 \sml{merge c (s, t)} is logically equivalent to \sml{sort c (append (s, t))}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<block name='group'>
+
+</segment> <!-- cluster -->
+
+<segment name='flex'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -1755,30 +3569,49 @@ For sequences $s$ and $t$ already sorted with respect to $c$,
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::collect
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
-collect
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title -->
 <field name='title_src'>
 <![CDATA[
-collect
+...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-gr:collect
+grm:seq-interface::collect
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val collect : &#39;a ord -&gt; (&#39;a * &#39;b) seq -&gt; (&#39;a * &#39;b seq) seq  </code></pre>
 <p><code>collect c s</code> takes a sequence <span class="math inline">\(s\)</span> of key-value pairs, deduplicates the keys, sorts them with respect to <span class="math inline">\(c\)</span>, and pairs each unique key with all values that were originally associated with it in <span class="math inline">\(s\)</span>. The resulting value-sequences retain their relative ordering from <span class="math inline">\(s\)</span>.</p>
+<p>Collecting <span class="math inline">\(\left\langle\, (3,7),(2,6),(1,8),(3,5) \,\right\rangle\)</span> produces <span class="math inline">\(\left\langle\, (1,\left\langle\, 8 \,\right\rangle), (2, \left\langle\, 6 \,\right\rangle), (3,\left\langle\, 7,5 \,\right\rangle) \,\right\rangle\)</span>.</p>
 ]]>
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\begin{gram}[collect]
+\label{gr:collect}
 \begin{verbatim}
 val collect : 'a ord -> ('a * 'b) seq -> ('a * 'b seq) seq
 \end{verbatim}
@@ -1786,10 +3619,32 @@ val collect : 'a ord -> ('a * 'b) seq -> ('a * 'b seq) seq
 keys, sorts them with respect to $c$, and pairs each unique key with all values
 that were originally associated with it in $s$. The resulting value-sequences
 retain their relative ordering from $s$.
+\end{gram}
+\begin{example}
+Collecting $\cseq{(3,7),(2,6),(1,8),(3,5)}$ produces
+$\cseq{(1,\cseq{8}), (2, \cseq{6}), (3,\cseq{7,5})}$.
+\end{example}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
-<atom name='example'>
+
+</segment> <!-- flex -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -1801,22 +3656,12 @@ retain their relative ordering from $s$.
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:seq-interface::collate
 </field> <!-- label -->
-<field name='body'>
-<![CDATA[
-<p>Collecting <span class="math inline">\(\left\langle {(3,7),(2,6),(1,8),(3,5)} \right\rangle\)</span> produces <span class="math inline">\(\left\langle {(1,\left\langle {8} \right\rangle), (2, \left\langle {6} \right\rangle), (3,\left\langle {7,5} \right\rangle)} \right\rangle\)</span>.</p>
-]]>
-</field> <!-- body -->
-<field name='body_src'>
-<![CDATA[
-Collecting $\seq{(3,7),(2,6),(1,8),(3,5)}$ produces
-$\seq{(1,\seq{8}), (2, \seq{6}), (3,\seq{7,5})}$.
-]]>
-</field> <!-- body_src -->
-</atom> <!-- example -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
 
-</block> <!-- group -->
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1828,9 +3673,21 @@ collate
 collate
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:collate
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val collate : &#39;a ord -&gt; &#39;a seq ord  </code></pre>
@@ -1839,6 +3696,7 @@ gr:collate
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:collate}
 \begin{verbatim}
 val collate : 'a ord -> 'a seq ord
 \end{verbatim}
@@ -1846,7 +3704,42 @@ val collate : 'a ord -> 'a seq ord
 from $c$.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::argmax
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1858,9 +3751,21 @@ argmax
 argmax
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
 gr:argmax
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val argmax : &#39;a ord -&gt; &#39;a seq -&gt; int  </code></pre>
@@ -1869,6 +3774,7 @@ gr:argmax
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{gr:argmax}
 \begin{verbatim}
 val argmax : 'a ord -> 'a seq -> int
 \end{verbatim}
@@ -1876,7 +3782,42 @@ val argmax : 'a ord -> 'a seq -> int
 with respect to $c$. Raises \sml{Range} when $s$ is empty.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::alias
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1888,9 +3829,21 @@ $
 \$
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grm:seq-interface::alias
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val $ : &#39;a -&gt; &#39;a seq  </code></pre>
@@ -1905,7 +3858,42 @@ val $ : 'a -> 'a seq
 An alias for~\ref{gr:singleton}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:seq-interface::list
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
 <field name='title'>
 <![CDATA[
@@ -1917,9 +3905,21 @@ An alias for~\ref{gr:singleton}.
 \%
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grm:seq-interface::list
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <pre><code>val % : &#39;a list -&gt; &#39;a seq  </code></pre>
@@ -1934,9 +3934,22 @@ val % : 'a list -> 'a seq
 An alias for~\ref{gr:fromList}.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
 
+</segment> <!-- cluster -->
 
-</block> <!-- section -->
 
-</block> <!-- chapter -->
+</segment> <!-- section -->
+
+</segment> <!-- chapter -->
