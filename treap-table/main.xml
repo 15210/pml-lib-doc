@@ -641,8 +641,8 @@ cst:treap-table::tabulate
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{tabulate}~f~S\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{k \in S} \WW {f(k)}\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(O\left({\log|S|}\right) + \displaystyle\max_{k \in S} \SS{f(k)}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{k \in S} W\left({f(k)}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({\log|S|}\right) + \displaystyle\max_{k \in S} S\left({f(k)}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -653,8 +653,8 @@ cst:treap-table::tabulate
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{tabulate}~f~S$ &
-$\displaystyle\sum_{k \in S} \WW {f(k)}$ &
-$\bigoh{\log|S|} + \displaystyle\max_{k \in S} \SS{f(k)}$
+$\displaystyle\sum_{k \in S} \cwork {f(k)}$ &
+$\bigoh{\log|S|} + \displaystyle\max_{k \in S} \cspan{f(k)}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
@@ -737,13 +737,13 @@ cst:treap-table::map
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{map}~f~T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{(k \mapsto v) \in T} \WW {f(v)}\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(O\left({\log|T|}\right) + \displaystyle\max_{(k \mapsto v) \in T} \SS{f(v)}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{(k \mapsto v) \in T} W\left({f(v)}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({\log|T|}\right) + \displaystyle\max_{(k \mapsto v) \in T} S\left({f(v)}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{mapKey}~f~T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{(k \mapsto v) \in T} \WW {f(k,v)}\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(O\left({\log|T|}\right) + \displaystyle\max_{(k \mapsto v) \in T} \SS{f(k,v)}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{(k \mapsto v) \in T} W\left({f(k,v)}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({\log|T|}\right) + \displaystyle\max_{(k \mapsto v) \in T} S\left({f(k,v)}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -754,12 +754,12 @@ cst:treap-table::map
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{map}~f~T$ &
-$\displaystyle\sum_{(k \mapsto v) \in T} \WW {f(v)}$ &
-$\bigoh{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{f(v)}$
+$\displaystyle\sum_{(k \mapsto v) \in T} \cwork {f(v)}$ &
+$\bigoh{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \cspan{f(v)}$
 \\
 $\sml{mapKey}~f~T$ &
-$\displaystyle\sum_{(k \mapsto v) \in T} \WW {f(k,v)}$ &
-$\bigoh{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{f(k,v)}$
+$\displaystyle\sum_{(k \mapsto v) \in T} \cwork {f(k,v)}$ &
+$\bigoh{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \cspan{f(k,v)}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
@@ -842,13 +842,13 @@ cst:treap-table::filter
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{filter}~p~T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{(k \mapsto v) \in T} \WW {p(v)}\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(O\left({\log|T|}\right) + \displaystyle\max_{(k \mapsto v) \in T} \SS{p(v)}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{(k \mapsto v) \in T} W\left({p(v)}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({\log|T|}\right) + \displaystyle\max_{(k \mapsto v) \in T} S\left({p(v)}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{filterKey}~p~T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{(k \mapsto v) \in T} \WW {p(k,v)}\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(O\left({\log|T|}\right) + \displaystyle\max_{(k \mapsto v) \in T} \SS{p(k,v)}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{(k \mapsto v) \in T} W\left({p(k,v)}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({\log|T|}\right) + \displaystyle\max_{(k \mapsto v) \in T} S\left({p(k,v)}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -859,12 +859,12 @@ cst:treap-table::filter
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{filter}~p~T$ &
-$\displaystyle\sum_{(k \mapsto v) \in T} \WW {p(v)}$ &
-$\bigoh{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{p(v)}$
+$\displaystyle\sum_{(k \mapsto v) \in T} \cwork {p(v)}$ &
+$\bigoh{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \cspan{p(v)}$
 \\
 $\sml{filterKey}~p~T$ &
-$\displaystyle\sum_{(k \mapsto v) \in T} \WW {p(k,v)}$ &
-$\bigoh{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{p(k,v)}$
+$\displaystyle\sum_{(k \mapsto v) \in T} \cwork {p(k,v)}$ &
+$\bigoh{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \cspan{p(k,v)}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
@@ -1198,8 +1198,8 @@ cst:treap-table::reduce
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{reduce}~f~b~T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\WW{\texttt{Seq.reduce}~f~b~(\texttt{range}~T)}\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\SS{\texttt{Seq.reduce}~f~b~(\texttt{range}~T)}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W\left({\texttt{Seq.reduce}~f~b~(\texttt{range}~T)}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(S\left({\texttt{Seq.reduce}~f~b~(\texttt{range}~T)}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -1210,8 +1210,8 @@ cst:treap-table::reduce
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{reduce}~f~b~T$ &
-$\WW{\sml{Seq.reduce}~f~b~(\sml{range}~T)}$ &
-$\SS{\sml{Seq.reduce}~f~b~(\sml{range}~T)}$
+$\cwork{\sml{Seq.reduce}~f~b~(\sml{range}~T)}$ &
+$\cspan{\sml{Seq.reduce}~f~b~(\sml{range}~T)}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
@@ -1295,8 +1295,8 @@ cst:treap-table::iteration
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{iterate}~f~b~T\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{i=0}^{|T|-1} \WW{f(b_i, (k_i, v_i))}\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{i=0}^{|T|-1} \SS{f(b_i, (k_i, v_i))}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{i=0}^{|T|-1} W\left({f(b_i, (k_i, v_i))}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\displaystyle\sum_{i=0}^{|T|-1} S\left({f(b_i, (k_i, v_i))}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -1310,8 +1310,8 @@ where $b_0 = b$. Note that \sml{iteratePrefixes} has the same cost specification
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{iterate}~f~b~T$ &
-$\displaystyle\sum_{i=0}^{|T|-1} \WW{f(b_i, (k_i, v_i))}$ &
-$\displaystyle\sum_{i=0}^{|T|-1} \SS{f(b_i, (k_i, v_i))}$
+$\displaystyle\sum_{i=0}^{|T|-1} \cwork{f(b_i, (k_i, v_i))}$ &
+$\displaystyle\sum_{i=0}^{|T|-1} \cspan{f(b_i, (k_i, v_i))}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
