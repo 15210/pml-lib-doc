@@ -29,15 +29,15 @@ sets as tables without associated values.
 \begin{costspec}[Reduced Values]
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{reduceVal}~T$ & $\bigO 1$ & $\bigO 1$
+$\sml{reduceVal}~T$ & $\bigoh{1}$ & $\bigoh{1}$
 \end{tabular}
 \end{costspec}
 
 \begin{costspec}[Constant-Work Operations]
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{size}~T$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{singleton}~T$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{size}~T$ & $\bigoh{1}$ & $\bigoh{1}$ \\
+$\sml{singleton}~T$ & $\bigoh{1}$ & $\bigoh{1}$ \\
 \end{tabular}
 \end{costspec}
 
@@ -45,10 +45,10 @@ $\sml{singleton}~T$ & $\bigO 1$ & $\bigO 1$ \\
 In the case of \sml{insertWith}, we assume the cost of $f$ is constant.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{find}~T~k$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{insert}~(T, k)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{insertWith}~f~(T, k)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{delete}~(T, k)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$
+$\sml{find}~T~k$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{insert}~(T, k)$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{insertWith}~f~(T, k)$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{delete}~(T, k)$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$
 \end{tabular}
 \end{costspec}
 
@@ -56,8 +56,8 @@ $\sml{delete}~(T, k)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{tabulate}~f~S$ &
-$\displaystyle\sum_{k \in S} \WW {f(k)}$ &
-$\bigO{\log|S|} + \displaystyle\max_{k \in S} \SS{f(k)}$
+$\displaystyle\sum_{k \in S} \cwork {f(k)}$ &
+$\bigoh{\log|S|} + \displaystyle\max_{k \in S} \cspan{f(k)}$
 \end{tabular}
 \end{costspec}
 
@@ -65,12 +65,12 @@ $\bigO{\log|S|} + \displaystyle\max_{k \in S} \SS{f(k)}$
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{map}~f~T$ &
-$\displaystyle\sum_{(k \mapsto v) \in T} \WW {f(v)}$ &
-$\bigO{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{f(v)}$
+$\displaystyle\sum_{(k \mapsto v) \in T} \cwork {f(v)}$ &
+$\bigoh{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \cspan{f(v)}$
 \\
 $\sml{mapKey}~f~T$ &
-$\displaystyle\sum_{(k \mapsto v) \in T} \WW {f(k,v)}$ &
-$\bigO{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{f(k,v)}$
+$\displaystyle\sum_{(k \mapsto v) \in T} \cwork {f(k,v)}$ &
+$\bigoh{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \cspan{f(k,v)}$
 \end{tabular}
 \end{costspec}
 
@@ -78,38 +78,38 @@ $\bigO{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{f(k,v)}$
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{filter}~p~T$ &
-$\displaystyle\sum_{(k \mapsto v) \in T} \WW {p(v)}$ &
-$\bigO{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{p(v)}$
+$\displaystyle\sum_{(k \mapsto v) \in T} \cwork {p(v)}$ &
+$\bigoh{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \cspan{p(v)}$
 \\
 $\sml{filterKey}~p~T$ &
-$\displaystyle\sum_{(k \mapsto v) \in T} \WW {p(k,v)}$ &
-$\bigO{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{p(k,v)}$
+$\displaystyle\sum_{(k \mapsto v) \in T} \cwork {p(k,v)}$ &
+$\bigoh{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \cspan{p(k,v)}$
 \end{tabular}
 \end{costspec}
 
 \begin{costspec}[Tables From Sequences]
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{fromSeq}~S$ & $\bigO{|S|\log|S|}$ & $\bigO{\log^2|S|}$
+$\sml{fromSeq}~S$ & $\bigoh{|S|\log|S|}$ & $\bigoh{\log^2|S|}$
 \end{tabular}
 \end{costspec}
 
 \begin{costspec}[Ordered Table Operations]
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{first}~T$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{last}~T$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{prev}~T$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{next}~T$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{rank}~(T, k)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{split}~(T, k)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{select}~(T, i)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{splitRank}~(T, i)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{getRange}~T~(k_1, k_2)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$
+$\sml{first}~T$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{last}~T$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{prev}~T$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{next}~T$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{rank}~(T, k)$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{split}~(T, k)$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{select}~(T, i)$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{splitRank}~(T, i)$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{getRange}~T~(k_1, k_2)$ & $\bigoh{\log|T|}$ & $\bigoh{\log|T|}$
 \\
 $\sml{join}~(T_1, T_2)$ &
-$\bigO{\log\left(|T_1| + |T_2|\right)}$ &
-$\bigO{\log\left(|T_1| + |T_2|\right)}$
+$\bigoh{\log\left(|T_1| + |T_2|\right)}$ &
+$\bigoh{\log\left(|T_1| + |T_2|\right)}$
 \end{tabular}
 \end{costspec}
 
@@ -117,8 +117,8 @@ $\bigO{\log\left(|T_1| + |T_2|\right)}$
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{reduce}~f~b~T$ &
-$\WW{\sml{Seq.reduce}~f~b~(\sml{range}~T)}$ &
-$\SS{\sml{Seq.reduce}~f~b~(\sml{range}~T)}$
+$\cwork{\sml{Seq.reduce}~f~b~(\sml{range}~T)}$ &
+$\cspan{\sml{Seq.reduce}~f~b~(\sml{range}~T)}$
 \end{tabular}
 \end{costspec}
 
@@ -129,8 +129,8 @@ where $b_0 = b$.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{iterate}~f~b~T$ &
-$\displaystyle\sum_{i=0}^{|T|-1} \WW{f(b_i, (k_i, v_i))}$ &
-$\displaystyle\sum_{i=0}^{|T|-1} \SS{f(b_i, (k_i, v_i))}$
+$\displaystyle\sum_{i=0}^{|T|-1} \cwork{f(b_i, (k_i, v_i))}$ &
+$\displaystyle\sum_{i=0}^{|T|-1} \cspan{f(b_i, (k_i, v_i))}$
 \end{tabular}
 \end{costspec}
 
@@ -140,33 +140,33 @@ $n$ and $m$ are the sizes of the arguments with $m \leq n$.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{union}~f~(T_1, T_2)$ &
-$\bigO{m \log\left(\frac n m + 1\right)}$ &
-$\bigO{\log(n + m)}$
+$\bigoh{m \log\left(\frac n m + 1\right)}$ &
+$\bigoh{\log(n + m)}$
 \\
 $\sml{intersection}~f~(T_1, T_2)$ &
-$\bigO{m \log\left(\frac n m + 1\right)}$ &
-$\bigO{\log(n + m)}$
+$\bigoh{m \log\left(\frac n m + 1\right)}$ &
+$\bigoh{\log(n + m)}$
 \\
 $\sml{difference}~(T_1, T_2)$ &
-$\bigO{m \log\left(\frac n m + 1\right)}$ &
-$\bigO{\log(n + m)}$
+$\bigoh{m \log\left(\frac n m + 1\right)}$ &
+$\bigoh{\log(n + m)}$
 \\
 $\sml{restrict}~(T, S)$ &
-$\bigO{m \log\left(\frac n m + 1\right)}$ &
-$\bigO{\log(n + m)}$
+$\bigoh{m \log\left(\frac n m + 1\right)}$ &
+$\bigoh{\log(n + m)}$
 \\
 $\sml{subtract}~(T, S)$ &
-$\bigO{m \log\left(\frac n m + 1\right)}$ &
-$\bigO{\log(n + m)}$
+$\bigoh{m \log\left(\frac n m + 1\right)}$ &
+$\bigoh{\log(n + m)}$
 \end{tabular}
 \end{costspec}
 
 \begin{costspec}[Miscellaous]
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{toSeq}~T$ & $\bigO{|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{domain}~T$ & $\bigO{|T|}$ & $\bigO{\log|T|}$ \\
-$\sml{range}~T$ & $\bigO{|T|}$ & $\bigO{\log|T|}$
+$\sml{toSeq}~T$ & $\bigoh{|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{domain}~T$ & $\bigoh{|T|}$ & $\bigoh{\log|T|}$ \\
+$\sml{range}~T$ & $\bigoh{|T|}$ & $\bigoh{\log|T|}$
 \end{tabular}
 \end{costspec}
 

@@ -18,10 +18,10 @@ and \sml{Key.hash} are constant.
 \begin{costspec}[Constant-Work Operations]
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{expose}~T$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{size}~T$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{empty}~()$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{singleton}~(k,v)$ & $\bigO 1$ & $\bigO 1$
+$\sml{expose}~T$ & $\bigoh{1}$ & $\bigoh{1}$ \\
+$\sml{size}~T$ & $\bigoh{1}$ & $\bigoh{1}$ \\
+$\sml{empty}~()$ & $\bigoh{1}$ & $\bigoh{1}$ \\
+$\sml{singleton}~(k,v)$ & $\bigoh{1}$ & $\bigoh{1}$
 \end{tabular}
 \end{costspec}
 
@@ -29,8 +29,8 @@ $\sml{singleton}~(k,v)$ & $\bigO 1$ & $\bigO 1$
 \label{cost:treap:join}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{join}~(A,B)$ & $\bigO {\log\left(|A| + |B|\right)}$ & $\bigO {\log\left(|A| + |B|\right)}$ \\
-$\sml{joinMid}~(A,(k,v),B)$ & $\bigO {\log\left(|A| + |B|\right)}$ & $\bigO {\log\left(|A| + |B|\right)}$
+$\sml{join}~(A,B)$ & $\bigoh {\log\left(|A| + |B|\right)}$ & $\bigoh {\log\left(|A| + |B|\right)}$ \\
+$\sml{joinMid}~(A,(k,v),B)$ & $\bigoh {\log\left(|A| + |B|\right)}$ & $\bigoh {\log\left(|A| + |B|\right)}$
 \end{tabular}
 \end{costspec}
 
@@ -38,7 +38,7 @@ $\sml{joinMid}~(A,(k,v),B)$ & $\bigO {\log\left(|A| + |B|\right)}$ & $\bigO {\lo
 \label{cost:treap:split}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{split}~(T,k)$ & $\bigO {\log|T|}$ & $\bigO {\log|T|}$
+$\sml{split}~(T,k)$ & $\bigoh {\log|T|}$ & $\bigoh {\log|T|}$
 \end{tabular}
 \end{costspec}
 

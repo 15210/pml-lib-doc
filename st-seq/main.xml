@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<block name='chapter'>
+<segment name='chapter'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 MkSTSequence
@@ -13,7 +16,14 @@ MkSTSequence
 <field name='label'>
 ch:st-seq
 </field> <!-- label -->
-<atom name='preamble'>
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -25,8 +35,44 @@ ch:st-seq
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grp:grm:st-seq::implements
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<atom name='gram'>
+<field name='pl'>
+...NOT.PROVIDED.PL...
+</field> <!-- pl -->
+<field name='pl_version'>
+...NOT.PROVIDED.PL_VERSION...
+</field> <!-- pl_version -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
+<field name='label'>
+grm:st-seq::implements
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <p>Implements single-threaded sequences with an underlying mutable array and a history. Every single-threaded sequence is either <em>current</em> or <em>old</em>, depending upon whether or not it has ever been updated. When a single-threaded sequence is current, updates can proceed efficiently on the mutable array, returning a new single-threaded sequence which is current, and modifying the original sequence to be <em>old</em>. When a single-threaded sequence is old, all operations are expensive, and are not considered by the cost semantics given below. In particular, they must build a new array from the history, which costs at least as much as the size of the history.</p>
@@ -36,6 +82,8 @@ ch:st-seq
 </field> <!-- body -->
 <field name='body_src'>
 <![CDATA[
+\label{ch:st-seq}
+\begin{preamble}
 Implements single-threaded sequences with an underlying mutable array and a
 history.
 Every single-threaded sequence is either \emph{current} or \emph{old},
@@ -53,11 +101,29 @@ single-threaded sequence, they are efficient.
 \begin{verbatim}
 functor MkSTSequence (structure Seq : SEQUENCE) :> ST_SEQUENCE where Seq = Seq
 \end{verbatim}
+\end{preamble}
 ]]>
 </field> <!-- body_src -->
-</atom> <!-- preamble -->
 
-<block name='section'>
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
+</atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+
+<segment name='section'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='title'>
 <![CDATA[
 Cost Specification
@@ -69,9 +135,40 @@ Cost Specification
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+sec:st-seq::cost-specification
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:grm:st-seq::costs
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='gram'>
+<field name='pl'>
+...NOT.PROVIDED.PL...
+</field> <!-- pl -->
+<field name='pl_version'>
+...NOT.PROVIDED.PL_VERSION...
+</field> <!-- pl_version -->
 <field name='title'>
 <![CDATA[
 ...NOT.PROVIDED.TITLE...
@@ -82,9 +179,21 @@ Cost Specification
 ...NOT.PROVIDED.TITLE...
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+grm:st-seq::costs
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <p>The following costs assume that all single-threaded sequences are a current version.</p>
@@ -96,8 +205,49 @@ The following costs assume that all single-threaded sequences are a current
 version.
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- gram -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:cst:st-seq::indexing
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='costspec'>
+<field name='pl'>
+...NOT.PROVIDED.PL...
+</field> <!-- pl -->
+<field name='pl_version'>
+...NOT.PROVIDED.PL_VERSION...
+</field> <!-- pl_version -->
 <field name='title'>
 <![CDATA[
 Indexing
@@ -108,9 +258,21 @@ Indexing
 Indexing
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:st-seq::indexing
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <table>
@@ -122,8 +284,8 @@ Indexing
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{nth}~s~i\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -133,12 +295,53 @@ Indexing
 <![CDATA[
 \begin{tabular}{ccc}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{nth}~s~i$ & $\bigO 1$ & $\bigO 1$
+$\sml{nth}~s~i$ & $\bigoh{1}$ & $\bigoh{1}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:cst:st-seq::updates
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='costspec'>
+<field name='pl'>
+...NOT.PROVIDED.PL...
+</field> <!-- pl -->
+<field name='pl_version'>
+...NOT.PROVIDED.PL_VERSION...
+</field> <!-- pl_version -->
 <field name='title'>
 <![CDATA[
 Updates
@@ -149,9 +352,21 @@ Updates
 Updates
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:st-seq::updates
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <table>
@@ -163,13 +378,13 @@ Updates
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{update}~(s,(i,x))\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{inject}~(s,u)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|u|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|u|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\bigO{1}\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -179,13 +394,54 @@ Updates
 <![CDATA[
 \begin{tabular}{ccc}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{update}~(s,(i,x))$ & $\bigO 1$ & $\bigO 1$ \\
-$\sml{inject}~(s,u)$ & $\bigO{|u|}$ & $\bigO 1$
+$\sml{update}~(s,(i,x))$ & $\bigoh{1}$ & $\bigoh{1}$ \\
+$\sml{inject}~(s,u)$ & $\bigoh{|u|}$ & $\bigO{1}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:cst:st-seq::conversion
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
 <atom name='costspec'>
+<field name='pl'>
+...NOT.PROVIDED.PL...
+</field> <!-- pl -->
+<field name='pl_version'>
+...NOT.PROVIDED.PL_VERSION...
+</field> <!-- pl_version -->
 <field name='title'>
 <![CDATA[
 Conversion
@@ -196,9 +452,21 @@ Conversion
 Conversion
 ]]>
 </field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
 <field name='label'>
-...NOT.PROVIDED.LABEL...
+cst:st-seq::conversion
 </field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
 <field name='body'>
 <![CDATA[
 <p>The following costs assume <span class="math inline">\(\texttt{Seq} = \texttt{ArraySequence}\)</span>.</p>
@@ -211,13 +479,13 @@ Conversion
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{fromSeq}~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|s|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\bigO{1}\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{toSeq}~s\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(|s|\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathop{O}\left(1\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|s|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\bigO{1}\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -228,14 +496,27 @@ Conversion
 The following costs assume $\sml{Seq} = \sml{ArraySequence}$.
 \begin{tabular}{ccc}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{fromSeq}~s$ & $\bigO{|s|}$ & $\bigO 1$ \\
-$\sml{toSeq}~s$ & $\bigO{|s|}$ & $\bigO 1$
+$\sml{fromSeq}~s$ & $\bigoh{|s|}$ & $\bigO{1}$ \\
+$\sml{toSeq}~s$ & $\bigoh{|s|}$ & $\bigO{1}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
 </atom> <!-- costspec -->
 
+</segment> <!-- cluster -->
 
-</block> <!-- section -->
 
-</block> <!-- chapter -->
+</segment> <!-- section -->
+
+</segment> <!-- chapter -->
