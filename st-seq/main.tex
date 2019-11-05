@@ -38,7 +38,7 @@ $\sml{nth}~s~i$ & $\bigoh{1}$ & $\bigoh{1}$
 \begin{tabular}{ccc}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{update}~(s,(i,x))$ & $\bigoh{1}$ & $\bigoh{1}$ \\
-$\sml{inject}~(s,u)$ & $\bigoh{|u|}$ & $\bigO{1}$
+$\sml{inject}~(s,u)$ & $\bigoh{|u|}$ & $\bigoh{1}$
 \end{tabular}
 \end{costspec}
 
@@ -46,8 +46,8 @@ $\sml{inject}~(s,u)$ & $\bigoh{|u|}$ & $\bigO{1}$
 The following costs assume $\sml{Seq} = \sml{ArraySequence}$.
 \begin{tabular}{ccc}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{fromSeq}~s$ & $\bigoh{|s|}$ & $\bigO{1}$ \\
-$\sml{toSeq}~s$ & $\bigoh{|s|}$ & $\bigO{1}$
+$\sml{fromSeq}~s$ & $\bigoh{|s|}$ & $\bigoh{1}$ \\
+$\sml{toSeq}~s$ & $\bigoh{|s|}$ & $\bigoh{1}$
 \end{tabular}
 \end{costspec}
 

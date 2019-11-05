@@ -384,7 +384,7 @@ cst:st-seq::updates
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{inject}~(s,u)\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(O\left({|u|}\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\bigO{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -395,7 +395,7 @@ cst:st-seq::updates
 \begin{tabular}{ccc}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{update}~(s,(i,x))$ & $\bigoh{1}$ & $\bigoh{1}$ \\
-$\sml{inject}~(s,u)$ & $\bigoh{|u|}$ & $\bigO{1}$
+$\sml{inject}~(s,u)$ & $\bigoh{|u|}$ & $\bigoh{1}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
@@ -480,12 +480,12 @@ cst:st-seq::conversion
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\texttt{fromSeq}~s\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(O\left({|s|}\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\bigO{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\texttt{toSeq}~s\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(O\left({|s|}\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\bigO{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({1}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -496,8 +496,8 @@ cst:st-seq::conversion
 The following costs assume $\sml{Seq} = \sml{ArraySequence}$.
 \begin{tabular}{ccc}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{fromSeq}~s$ & $\bigoh{|s|}$ & $\bigO{1}$ \\
-$\sml{toSeq}~s$ & $\bigoh{|s|}$ & $\bigO{1}$
+$\sml{fromSeq}~s$ & $\bigoh{|s|}$ & $\bigoh{1}$ \\
+$\sml{toSeq}~s$ & $\bigoh{|s|}$ & $\bigoh{1}$
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
