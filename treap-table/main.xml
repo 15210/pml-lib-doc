@@ -1480,7 +1480,7 @@ $\bigoh{\log(n + m)}$
 ]]>
 </field> <!-- title_src -->
 <field name='label'>
-grp:cst:treap-table::miscellaous
+grp:cst:treap-table::miscellaneous
 </field> <!-- label -->
 <field name='depend'>
 ...NOT.PROVIDED.DEPEND...
@@ -1495,12 +1495,12 @@ grp:cst:treap-table::miscellaous
 </field> <!-- pl_version -->
 <field name='title'>
 <![CDATA[
-Miscellaous
+Miscellaneous
 ]]>
 </field> <!-- title -->
 <field name='title_src'>
 <![CDATA[
-Miscellaous
+Miscellaneous
 ]]>
 </field> <!-- title_src -->
 <field name='cover'>
@@ -1510,7 +1510,7 @@ Miscellaous
 ...NOT.PROVIDED.SOUND...
 </field> <!-- sound -->
 <field name='label'>
-cst:treap-table::miscellaous
+cst:treap-table::miscellaneous
 </field> <!-- label -->
 <field name='depend'>
 ...NOT.PROVIDED.DEPEND...
