@@ -1,0 +1,172 @@
+\chapter{MkTreapAugTable}
+\label{ch:treap-aug-table}
+\begin{preamble}
+Implements augmented, ordered tables (and ordered sets) as treaps.
+\begin{verbatim}
+functor MkTreapAugTable
+  (structure Key : HASHKEY
+   structure Val : MONOID)
+  :> AUG_ORDTABLE where Key = Key and Val = Val and Seq = ArraySequence
+\end{verbatim}
+\end{preamble}
+
+\begin{gram}[Implementation-Defined Behavior]
+Functions \sml{range} and \sml{toSeq} produce elements in key-sorted order.
+\end{gram}
+
+\section{Cost Specification}
+
+\begin{gram}
+The following costs assume that the work and span of \sml{Key.compare},
+\sml{Key.hash}, and \sml{Val.f} are constant.
+\end{gram}
+
+\begin{gram}
+The following costs also apply to the substructure \sml{Set}, which implements
+sets as tables without associated values.
+\end{gram}
+
+\begin{costspec}[Reduced Values]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{reduceVal}~T$ & $\bigO 1$ & $\bigO 1$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Constant-Work Operations]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{size}~T$ & $\bigO 1$ & $\bigO 1$ \\
+$\sml{singleton}~T$ & $\bigO 1$ & $\bigO 1$ \\
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Single-Element Operations]
+In the case of \sml{insertWith}, we assume the cost of $f$ is constant.
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{find}~T~k$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{insert}~(T, k)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{insertWith}~f~(T, k)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{delete}~(T, k)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Tabulate]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{tabulate}~f~S$ &
+$\displaystyle\sum_{k \in S} \WW {f(k)}$ &
+$\bigO{\log|S|} + \displaystyle\max_{k \in S} \SS{f(k)}$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Map]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{map}~f~T$ &
+$\displaystyle\sum_{(k \mapsto v) \in T} \WW {f(v)}$ &
+$\bigO{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{f(v)}$
+\\
+$\sml{mapKey}~f~T$ &
+$\displaystyle\sum_{(k \mapsto v) \in T} \WW {f(k,v)}$ &
+$\bigO{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{f(k,v)}$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Filter]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{filter}~p~T$ &
+$\displaystyle\sum_{(k \mapsto v) \in T} \WW {p(v)}$ &
+$\bigO{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{p(v)}$
+\\
+$\sml{filterKey}~p~T$ &
+$\displaystyle\sum_{(k \mapsto v) \in T} \WW {p(k,v)}$ &
+$\bigO{\log|T|} + \displaystyle\max_{(k \mapsto v) \in T} \SS{p(k,v)}$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Tables From Sequences]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{fromSeq}~S$ & $\bigO{|S|\log|S|}$ & $\bigO{\log^2|S|}$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Ordered Table Operations]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{first}~T$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{last}~T$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{prev}~T$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{next}~T$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{rank}~(T, k)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{split}~(T, k)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{select}~(T, i)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{splitRank}~(T, i)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{getRange}~T~(k_1, k_2)$ & $\bigO{\log|T|}$ & $\bigO{\log|T|}$
+\\
+$\sml{join}~(T_1, T_2)$ &
+$\bigO{\log\left(|T_1| + |T_2|\right)}$ &
+$\bigO{\log\left(|T_1| + |T_2|\right)}$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Reduce]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{reduce}~f~b~T$ &
+$\WW{\sml{Seq.reduce}~f~b~(\sml{range}~T)}$ &
+$\SS{\sml{Seq.reduce}~f~b~(\sml{range}~T)}$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Iteration]
+In the following, $(k_i \mapsto v_i)$ is the $i^\text{th}$ smallest key-value
+pair, and $b_i$ is the result of the iteration after the first $i$ elements,
+where $b_0 = b$.
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{iterate}~f~b~T$ &
+$\displaystyle\sum_{i=0}^{|T|-1} \WW{f(b_i, (k_i, v_i))}$ &
+$\displaystyle\sum_{i=0}^{|T|-1} \SS{f(b_i, (k_i, v_i))}$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Combination]
+In the following, assume that the work and span of $f$ is constant, and that
+$n$ and $m$ are the sizes of the arguments with $m \leq n$.
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{union}~f~(T_1, T_2)$ &
+$\bigO{m \log\left(\frac n m + 1\right)}$ &
+$\bigO{\log(n + m)}$
+\\
+$\sml{intersection}~f~(T_1, T_2)$ &
+$\bigO{m \log\left(\frac n m + 1\right)}$ &
+$\bigO{\log(n + m)}$
+\\
+$\sml{difference}~(T_1, T_2)$ &
+$\bigO{m \log\left(\frac n m + 1\right)}$ &
+$\bigO{\log(n + m)}$
+\\
+$\sml{restrict}~(T, S)$ &
+$\bigO{m \log\left(\frac n m + 1\right)}$ &
+$\bigO{\log(n + m)}$
+\\
+$\sml{subtract}~(T, S)$ &
+$\bigO{m \log\left(\frac n m + 1\right)}$ &
+$\bigO{\log(n + m)}$
+\end{tabular}
+\end{costspec}
+
+\begin{costspec}[Miscellaous]
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{toSeq}~T$ & $\bigO{|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{domain}~T$ & $\bigO{|T|}$ & $\bigO{\log|T|}$ \\
+$\sml{range}~T$ & $\bigO{|T|}$ & $\bigO{\log|T|}$
+\end{tabular}
+\end{costspec}
+
