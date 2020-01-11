@@ -1,0 +1,33 @@
+\documentclass[openany]{book}
+%% Include all packages and only the packages here
+\usepackage{templates/packages}
+
+% Define diderot environments, do not modify.
+\usepackage{templates/diderot}
+
+% Include all commands/macors and only those here.
+% Do not include packages in preamble.
+\input{templates/preamble}
+
+% Leave out chapter numbers from section numbers
+\renewcommand*\thesection{\arabic{section}}
+% number up to and including subsubsection
+\setcounter{secnumdepth}{3}
+
+\begin{document}
+\include{seq-interface/main}
+\include{array-seq/main}
+\include{key-interface/main}
+\include{bst-interface/main}
+\include{treap-bst/main}
+\include{set-interface/main}
+\include{ordset-interface/main}
+\include{table-interface/main}
+\include{ordtable-interface/main}
+\include{treap-table/main}
+\include{aug-ordtable-interface/main}
+\include{treap-aug-table/main}
+\include{st-seq-interface/main}
+\include{st-seq/main}
+
+\end{document}
