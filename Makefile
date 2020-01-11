@@ -120,19 +120,19 @@ upload_xml_pdf_attach:
 
 
 # Chapter: overview
-seq-interface: \
-  seq-interface/seq-interface.pdf \
-  seq-interface/seq-interface.xml
+sequences: \
+  sequences/interface.pdf \
+  sequences/interface.xml \
+  sequences/arrays.pdf \
+  sequences/arrays.xml \
 
-upload_seq-interface: NO=1 
-upload_seq-interface: FILE=seq-interface/seq-interface
-upload_seq-interface: seq-interface/seq-interface.xml seq-interface/seq-interface.pdf upload_xml_pdf
 
-# Policies
-policies: \
-  policies/policies.pdf \
-  policies/policies.xml
+upload_sequences_interface: NO=1 
+upload_sequences_interface: FILE=sequences/interface
+upload_sequences_interface: sequences/interface.xml sequences/interface.pdf upload_xml_pdf
 
-upload_policies: NO=2
-upload_policies: FILE=policies/policies
-upload_policies: policies/policies.xml policies/policies.pdf upload_xml_pdf
+
+upload_sequences_arrays: NO=2 
+upload_sequences_arrays: FILE=sequences/arrays
+upload_sequences_arrays: sequences/arrays.xml sequences/arrays.pdf upload_xml_pdf
+
