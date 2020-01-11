@@ -8,7 +8,7 @@ FLAG_DBG = -d
 
 # Course and Book Settings
 LABEL_COURSE="CMU:Pittsburgh, PA:15210:Spring:2019-20"
-LABEL_TEXTBOOK="MISC"
+LABEL_TEXTBOOK="LIBDOC"
 
 # Set up some variables
 NO=0
@@ -120,13 +120,13 @@ upload_xml_pdf_attach:
 
 
 # Chapter: overview
-overview: \
-  overview/overview.pdf \
-  overview/overview.xml
+seq-interface: \
+  seq-interface/seq-interface.pdf \
+  seq-interface/seq-interface.xml
 
-upload_overview: NO=1 
-upload_overview: FILE=overview/overview
-upload_overview: overview/overview.xml overview/overview.pdf upload_xml_pdf
+upload_seq-interface: NO=1 
+upload_seq-interface: FILE=seq-interface/seq-interface
+upload_seq-interface: seq-interface/seq-interface.xml seq-interface/seq-interface.pdf upload_xml_pdf
 
 # Policies
 policies: \
