@@ -63,6 +63,7 @@ When $|s| \geq 2$, \sml{splitMid s} is logically equivalent to
 \section{Cost Specification}
 
 \begin{costspec}[Constant-Work Operations]
+
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{nth}~s~i$ & $\bigoh 1$ & $\bigoh 1$ \\
@@ -78,6 +79,7 @@ $\sml{splitMid}~s$ & $\bigoh 1$ & $\bigoh 1$
 \end{costspec}
 
 \begin{costspec}[Tabulate]
+
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 %
@@ -96,6 +98,7 @@ $\displaystyle \max_{i = 0}^{n-1} \cspan{f(i)}$ \\
 % \end{costspec}
 
 \begin{costspec}[Map]
+
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 %
@@ -107,6 +110,7 @@ $\displaystyle \max_{x \in s} \cspan{f(x)}$ \\
 \end{costspec}
 
 \begin{costspec}[Filter]
+
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 %
@@ -118,6 +122,7 @@ $\displaystyle \bigoh{\log{|s|}} + \max_{x \in s} \cspan{p(x)}$ \\
 \end{costspec}
 
 \begin{costspec}[Concatenation]
+
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 %
@@ -133,6 +138,7 @@ $\displaystyle \bigoh{\log{|s|}}$
 \end{costspec}
 
 \begin{costspec}[Zip]
+
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 %
@@ -179,6 +185,7 @@ $\displaystyle \bigoh{\log{|s|}}$
 \end{costspec}
 
 \begin{costspec}[Updates]
+
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 %
@@ -218,6 +225,7 @@ $\displaystyle \bigoh{\log{|s|}}$ \\
 \end{costspec}
 
 \begin{costspec}[Miscellaneous]
+
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 %
