@@ -1,4 +1,6 @@
 build/
-*_core.tex
-*_core.dex
+*.tex
 *.html
+*.aux
+*.log
+*.blg
