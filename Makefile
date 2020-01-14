@@ -1,19 +1,31 @@
+## BEGIN: DIDEROT SETUP
+
+# Import course information
+include ../diderot-course-information
+
+# Label for textbook
+LABEL_TEXTBOOK="LIBDOC"
+
 GUIDE_DIR = ../../diderot-guide
 DIDEROT_ADMIN = ../../diderot-cli/diderot_admin
+
+## END: DIDEROT SETUP
+
+
+# Set up some variables
+NO=0
+FILE=""
+ATTACH=""
+
+
+######################################################################
+## Begin: Setup
 
 PDFLATEX = pdflatex
 LATEX = latex
 FLAG_VERBOSE = -v 
 FLAG_DBG = -d 
 
-# Course and Book Settings
-LABEL_COURSE="CMU:Pittsburgh, PA:15210:Spring:2019-20"
-LABEL_TEXTBOOK="LIBDOC"
-
-# Set up some variables
-NO=0
-FILE=""
-ATTACH=""
 
 
 PREAMBLE = ./templates/preamble-diderot.tex
@@ -35,7 +47,9 @@ endif
 
 
 DC = $(DC_HOME)/dc 
-DCDBG = $(DC_HOME)/dc.dbg 
+
+## End: Setup
+######################################################################
 
 
 default: pdf
