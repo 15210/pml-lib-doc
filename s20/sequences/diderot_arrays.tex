@@ -1,5 +1,12 @@
 \chapter{ArraySequence}
 \label{ch:array-seq}
+
+\begin{cluster}
+\label{grp:grm:array-seq::arraysequence}
+
+\begin{gram}
+\label{grm:array-seq::arraysequence}
+\label{ch:array-seq}
 \begin{preamble}
 The \sml{ArraySequence} structure implements the \sml{SEQUENCE} interface
 with \sml{type 'a t = 'a ArraySlice.slice}. This permits constant-time
@@ -7,63 +14,31 @@ implementations of a number of crucial operations such as \sml{nth} and
 \sml{subseq}.
 \end{preamble}
 
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:array-seq::implementation-defined-behavior}
+
 \begin{gram}[Implementation-Defined Behavior]
+\label{grm:array-seq::implementation-defined-behavior}
 When $|s| \geq 2$, \sml{splitMid s} is logically equivalent to
 \[
   \sml{PAIR (take s (n div 2), drop s (n div 2))}
 \]
-\end{gram}
 
-%% \begin{gram}[Quick Links]
-%% THIS IS INCOMPLETE. UPDATE THE LINKS. THE FIRST PART OF HREF's SHOULD POINT TO LABELS DEFINED FOR EACH COST SPEC.
-%% \begin{tabular}{llll}
-%% \href{cost:array-seq::basics}{\sml{nth}}
-%% &
-%% \href{cost:array-seq::basics}{\sml{length}}
-%% &
-%% \href{cost:array-seq::basics}{\sml{empty}}
-%% &
-%% \href{cost:array-seq::basics}{\sml{singleton}}
-%% \\
-%% \href{cost:array-seq::basics}{\sml{subseq}}
-%% &
-%% \href{cost:array-seq::basics}{\sml{take}}
-%% &
-%% \href{cost:array-seq::basics}{\sml{drop}}
-%% &
-%% \href{cost:array-seq::basics}{\sml{splitHead}}
-%% \\
-%% \href{cost:array-seq::basics}{\sml{splitMid}}
-%% &
-%% \href{cost:array-seq::tabulate}{\sml{tabulate}}
-%% &
-%% \href{cost:array-seq::map}{\sml{map}}
-%% &
-%% \href{cost:array-seq::filter}{\sml{filter}}
-%% \\
-%% \href{cost:array-seq::concat}{\sml{append}}
-%% &
-%% \href{cost:array-seq::concat}{\sml{flatten}}
-%% &
-%% \href{cost:array-seq::zip}{\sml{zip}}
-%% &
-%% \href{cost:array-seq::zip}{\sml{zipWith}}
-%% \\
-%% \href{cost:array-seq::iterate}{\sml{iterate}}
-%% &
-%% \href{cost:array-seq::aggregate}{\sml{reduce}}
-%% &
-%% \href{cost:array-seq::aggregate}{\sml{scan}}
-%% &
-%% \href{cost:array-seq::aggregate}{\sml{scanIncl}}
-%% \\
-%% \end{tabular}
-%% \end{gram}
+\end{gram}
+\end{cluster}
+
 
 \section{Cost Specification}
+\label{sec:array-seq::cost-specification}
+
+\begin{cluster}
+\label{grp:cst:array-seq::constant-work-operations}
 
 \begin{costspec}[Constant-Work Operations]
-
+\label{cst:array-seq::constant-work-operations}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
 $\sml{nth}~s~i$ & $\bigoh 1$ & $\bigoh 1$ \\
@@ -76,90 +51,101 @@ $\sml{drop}~s~n$ & $\bigoh 1$ & $\bigoh 1$ \\
 $\sml{splitHead}~s$ & $\bigoh 1$ & $\bigoh 1$ \\
 $\sml{splitMid}~s$ & $\bigoh 1$ & $\bigoh 1$
 \end{tabular}
+
 \end{costspec}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:cst:array-seq::tabulate}
 
 \begin{costspec}[Tabulate]
-
+\label{cst:array-seq::tabulate}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\sml{tabulate}~f~n$ &
 $\displaystyle \sum_{i = 0}^{n-1} \cwork{f(i)}$ &
 $\displaystyle \max_{i = 0}^{n-1} \cspan{f(i)}$ \\
-%
 \end{tabular}
+
 \end{costspec}
+\end{cluster}
 
-% \begin{costspec}[Size-Preserving Operations]
-% \begin{tabular}{c|c|c}
-% & \textbf{Work} & \textbf{Span} \\
-
-% \end{tabular}
-% \end{costspec}
+\begin{cluster}
+\label{grp:cst:array-seq::map}
 
 \begin{costspec}[Map]
-
+\label{cst:array-seq::map}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\{\sml{map},\sml{mapIdx}\}~f~s$ &
 $\displaystyle \sum_{x \in s} \cwork{f(x)}$ &
 $\displaystyle \max_{x \in s} \cspan{f(x)}$ \\
-%
 \end{tabular}
+
 \end{costspec}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:cst:array-seq::filter}
 
 \begin{costspec}[Filter]
-
+\label{cst:array-seq::filter}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\{\sml{filter},\sml{filterIdx}\}~p~s$ &
 $\displaystyle \sum_{x \in s} \cwork{p(x)}$ &
 $\displaystyle \bigoh{\log{|s|}} + \max_{x \in s} \cspan{p(x)}$ \\
-%
 \end{tabular}
+
 \end{costspec}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:cst:array-seq::concatenation}
 
 \begin{costspec}[Concatenation]
-
+\label{cst:array-seq::concatenation}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\sml{append}~(s,t)$ &
 $\displaystyle \bigoh{|s| + |t|}$ &
 $\displaystyle \bigoh 1$ \\
-%
 $\sml{flatten}~s$ &
 $\displaystyle \bigoh{|s| + \sum_{x \in s} |x|}$ &
 $\displaystyle \bigoh{\log{|s|}}$
-%
 \end{tabular}
+
 \end{costspec}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:cst:array-seq::zip}
 
 \begin{costspec}[Zip]
-
+\label{cst:array-seq::zip}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\sml{zip}~(s,t)$ &
 $\displaystyle \bigoh{\min(|s|,|t|)}$ &
 $\displaystyle \bigoh 1$ \\
-%
 $\sml{zipWith}~f~(s,t)$ &
 $\displaystyle \sum_{i = 0}^{\min(|s|,|t|)-1} \cwork{f(s[i],t[i])}$ &
 $\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \cspan{f(s[i],t[i])}$
-%
 \end{tabular}
+
 \end{costspec}
+\end{cluster}
 
 \begin{flex}
+\label{grp:grm:array-seq::iteration}
+
+\begin{gram}
+\label{grm:array-seq::iteration}
 \begin{costspec}[Iteration]
 In the following, $b_i$ is the result of the iteration after the first $i$
 elements.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\sml{iterate}~f~b_0~s$ &
 $\displaystyle \sum_{i = 0}^{|s|-1} \cwork{f(b_i, s[i])}$ &
 $\displaystyle \sum_{i = 0}^{|s|-1} \cspan{f(b_i, s[i])}$
@@ -169,89 +155,97 @@ $\displaystyle \sum_{i = 0}^{|s|-1} \cspan{f(b_i, s[i])}$
 $\sml{iteratePrefixes}$ and $\sml{iteratePrefixesIncl}$ have the same cost
 specification.
 \end{note}
+
+\end{gram}
 \end{flex}
 
+\begin{cluster}
+\label{grp:cst:array-seq::parallel-aggregation}
+
 \begin{costspec}[Parallel Aggregation]
+\label{cst:array-seq::parallel-aggregation}
 The following assume $\cwork{f(\cdot)}$ and $\cspan{f(\cdot)}$ are $\bigoh 1$. If not,
 refer directly to the implementation.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\{\sml{reduce},\sml{scan},\sml{scanIncl}\}~f~b~s$ &
 $\displaystyle \bigoh{|s|}$ &
 $\displaystyle \bigoh{\log{|s|}}$
-%
 \end{tabular}
+
 \end{costspec}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:cst:array-seq::updates}
 
 \begin{costspec}[Updates]
-
+\label{cst:array-seq::updates}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\sml{update}~(s,(i,x))$ &
 $\bigoh{|s|}$ &
 $\bigoh 1$ \\
-%
 $\sml{inject}~(s,u)$ &
 $\bigoh{|s| + |u|}$ &
 $\bigoh{\log d(u)}$ \\
-%
 $\sml{ninject}~(s,u)$ &
 $\bigoh{|s| + |u|}$ &
 $\bigoh{1}$ \\
-%
 \end{tabular}
 
 The degree $d(u)$ of an update sequence $u$ is the maximum number of
 updates that target the same index.
+
 \end{costspec}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:cst:array-seq::comparisons-and-sorting}
 
 \begin{costspec}[Comparisons and Sorting]
+\label{cst:array-seq::comparisons-and-sorting}
 The following assume that $\cwork{c(\cdot)}$ and $\cspan{c(\cdot)}$ are $\bigoh 1$.
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\{\sml{sort},\sml{collect}\}~c~s$ &
 $\displaystyle \bigoh{|s|\log{|s|}}$ &
 $\displaystyle \bigoh{\log^2{|s|}}$ \\
-%
 $\sml{merge}~c~(s,t)$ &
 $\displaystyle \bigoh{|s| + |t|}$ &
 $\displaystyle \bigoh{\log\left(|s| + |t|\right)}$ \\
-%
 $\sml{collate}~c~(s,t)$ &
 $\displaystyle \bigoh{|s| + |t|}$ &
 $\displaystyle \bigoh{\log\left(\min\left(|s| + |t|\right)\right)}$ \\
-%
 $\sml{argmax}~c~s$ &
 $\displaystyle \bigoh{|s|}$ &
 $\displaystyle \bigoh{\log{|s|}}$ \\
-%
 \end{tabular}
+
 \end{costspec}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:cst:array-seq::miscellaneous}
 
 \begin{costspec}[Miscellaneous]
-
+\label{cst:array-seq::miscellaneous}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-%
 $\sml{rev}~s$ &
 $\displaystyle \bigoh{|s|}$ &
 $\displaystyle \bigoh 1$ \\
-%
 $\sml{enum}~s$ &
 $\displaystyle \bigoh{|s|}$ &
 $\displaystyle \bigoh 1$ \\
-%
 $\sml{toList}~s$ &
 $\bigoh{|s|}$ &
 $\bigoh{|s|}$ \\
-%
 $\sml{fromList}~l$ &
 $\bigoh{|l|}$ &
 $\bigoh{|l|}$ \\
-%
 \end{tabular}
+
 \end{costspec}
+\end{cluster}
 
