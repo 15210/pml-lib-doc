@@ -340,20 +340,20 @@ Concatenate two sequences.
 \begin{flex}
 \label{grp:grm:seq-interface::flatten}
 
-\begin{gram}
-\label{grm:seq-interface::flatten}
 \begin{gram}[flatten]
-\label{gr:flatten}
+\label{grm:seq-interface::flatten}
 \begin{verbatim}
 val flatten : 'a seq seq -> 'a seq
 \end{verbatim}
 Concatenate many sequences into one, in the order they are given.
-\end{gram}
-\begin{example}
-Flattening $\cseq{\cseq{1,2},\cseq{},\cseq{3}}$ results in $\cseq{1,2,3}$.
-\end{example}
 
 \end{gram}
+
+\begin{example}
+\label{xmpl:seq-interface::flattening}
+Flattening $\cseq{\cseq{1,2},\cseq{},\cseq{3}}$ results in $\cseq{1,2,3}$.
+
+\end{example}
 \end{flex}
 
 \begin{cluster}
