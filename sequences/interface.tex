@@ -1,3 +1,8 @@
+%% TODO:
+%%   - change labels so that they have the form
+%%     ch:seq-interface::<label>
+%%     That is, the chapter label is included in the label
+%%
 \chapter{Sequence Interface}
 \label{ch:seq-interface}
 \begin{preamble}
@@ -226,13 +231,15 @@ Concatenate two sequences.
 
 \begin{flex}
 \begin{gram}[flatten]
-\label{gr:flatten}
+\label{grm:seq-interface::flatten}
 \begin{verbatim}
 val flatten : 'a seq seq -> 'a seq
 \end{verbatim}
 Concatenate many sequences into one, in the order they are given.
 \end{gram}
+
 \begin{example}
+\label{xmpl:seq-interface::flattening}
 Flattening $\cseq{\cseq{1,2},\cseq{},\cseq{3}}$ results in $\cseq{1,2,3}$.
 \end{example}
 \end{flex}
