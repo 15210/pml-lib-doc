@@ -139,9 +139,8 @@ $\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \cspan{f(s[i],t[i])}$
 \begin{flex}
 \label{grp:grm:array-seq::iteration}
 
-\begin{gram}
-\label{grm:array-seq::iteration}
 \begin{costspec}[Iteration]
+\label{grm:array-seq::iteration}
 In the following, $b_i$ is the result of the iteration after the first $i$
 elements.
 \begin{tabular}{c|c|c}
@@ -150,13 +149,15 @@ $\sml{iterate}~f~b_0~s$ &
 $\displaystyle \sum_{i = 0}^{|s|-1} \cwork{f(b_i, s[i])}$ &
 $\displaystyle \sum_{i = 0}^{|s|-1} \cspan{f(b_i, s[i])}$
 \end{tabular}
+
 \end{costspec}
+
 \begin{note}
+\label{nt:array-seq::iterateprefixes}
 $\sml{iteratePrefixes}$ and $\sml{iteratePrefixesIncl}$ have the same cost
 specification.
-\end{note}
 
-\end{gram}
+\end{note}
 \end{flex}
 
 \begin{cluster}

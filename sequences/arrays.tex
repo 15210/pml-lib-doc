@@ -154,6 +154,7 @@ $\displaystyle \max_{i = 0}^{\min(|s|,|t|)-1} \cspan{f(s[i],t[i])}$
 \end{costspec}
 
 \begin{flex}
+
 \begin{costspec}[Iteration]
 In the following, $b_i$ is the result of the iteration after the first $i$
 elements.
@@ -165,10 +166,12 @@ $\displaystyle \sum_{i = 0}^{|s|-1} \cwork{f(b_i, s[i])}$ &
 $\displaystyle \sum_{i = 0}^{|s|-1} \cspan{f(b_i, s[i])}$
 \end{tabular}
 \end{costspec}
+
 \begin{note}
 $\sml{iteratePrefixes}$ and $\sml{iteratePrefixesIncl}$ have the same cost
 specification.
 \end{note}
+
 \end{flex}
 
 \begin{costspec}[Parallel Aggregation]
