@@ -138,8 +138,13 @@ sequences: \
   sequences/interface.pdf \
   sequences/interface.xml \
   sequences/arrays.pdf \
-  sequences/arrays.xml \
+  sequences/arrays.xml
 
+st-sequences: \
+  st-sequences/interface.pdf \
+  st-sequences/interface.xml \
+  st-sequences/implementation.pdf \
+  st-sequences/implementation.xml
 
 upload_sequences_interface: NO=1 
 upload_sequences_interface: FILE=sequences/interface
@@ -150,3 +155,10 @@ upload_sequences_arrays: NO=2
 upload_sequences_arrays: FILE=sequences/arrays
 upload_sequences_arrays: sequences/arrays.xml sequences/arrays.pdf upload_xml_pdf
 
+upload_stseq_interface: NO=3
+upload_stseq_interface: FILE=st-sequences/interface
+upload_stseq_interface: st-sequences/interface.xml st-sequences/interface.pdf upload_xml_pdf
+
+upload_stseq_implementation: NO=4
+upload_stseq_implementation: FILE=st-sequences/implementation
+upload_stseq_implementation: st-sequences/implementation.xml st-sequences/implementation.pdf upload_xml_pdf
