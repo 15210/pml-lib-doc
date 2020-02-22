@@ -1,0 +1,151 @@
+\chapter{Key Interfaces}
+\label{ch:key-interface}
+
+\begin{cluster}
+\label{grp:grm:key-interface::eqkey}
+
+\begin{gram}
+\label{grm:key-interface::eqkey}
+\label{ch:key-interface}
+\begin{preamble}
+The \sml{EQKEY}, \sml{ORDKEY}, and \sml{HASHKEY} signatures specify abstract
+key types which support various forms of equality testing and comparison.
+\end{preamble}
+
+\end{gram}
+\end{cluster}
+
+
+\section{Summary}
+\label{sec:key-interface::summary}
+
+\begin{cluster}
+\label{grp:grm:key-interface::signature}
+
+\begin{gram}
+\label{grm:key-interface::signature}
+The \sml{EQKEY} signature specifies a key which can only be tested for
+equality.
+\begin{verbatim}
+signature EQKEY =
+sig
+  type t
+  val equal : t * t -> bool
+  val toString : t -> string
+end
+\end{verbatim}
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:key-interface::ordkey}
+
+\begin{gram}
+\label{grm:key-interface::ordkey}
+The \sml{ORDKEY} signature specifies a key which, in addition to supporting
+equality, is also totally ordered. Any structure which ascribes to \sml{ORKEY}
+also implicitly ascribes to \sml{EQKEY}.
+\begin{verbatim}
+signature ORDKEY =
+sig
+  include EQKEY
+  val compare : t * t -> order
+end
+\end{verbatim}
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:key-interface::hashkey}
+
+\begin{gram}
+\label{grm:key-interface::hashkey}
+The \sml{HASHKEY} signature specifies a key which additionally offers a
+pseudo-random hashing operation. Any structure which ascribes to \sml{HASHKEY}
+also implicitly ascribes to both \sml{ORDKEY} and \sml{EQKEY}.
+\begin{verbatim}
+signature HASHKEY =
+sig
+  include ORDKEY
+  val hash : t -> int
+end
+\end{verbatim}
+
+\end{gram}
+\end{cluster}
+
+
+\section{Types and Values}
+\label{sec:key-interface::types-and-values}
+
+\begin{cluster}
+\label{grp:grm:key-interface::type}
+
+\begin{gram}
+\label{grm:key-interface::type}
+\begin{verbatim}
+type t
+\end{verbatim}
+The abstract key type.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:key-interface::equal}
+
+\begin{gram}[equal]
+\label{grm:key-interface::equal}
+\begin{verbatim}
+val equal : t * t -> bool
+\end{verbatim}
+Determine whether or not the arguments are considered equal. This function is
+reflexive, symmetric, and transitive.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:key-interface::tostring}
+
+\begin{gram}[toString]
+\label{grm:key-interface::tostring}
+\begin{verbatim}
+val toString : t -> string
+\end{verbatim}
+Return a string representation of the key.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:key-interface::compare}
+
+\begin{gram}[compare]
+\label{grm:key-interface::compare}
+\begin{verbatim}
+val compare : t * t -> order
+\end{verbatim}
+Return one of \sml{LESS}, \sml{EQUAL}, or \sml{GREATER} as appropriate for
+the argument pair. This operation is transitive. It is also consistent:
+\sml{compare(x,y) = EQUAL} if and only if \sml{equal(x,y)}, and
+\sml{compare(x,y) = LESS} if and only if \sml{compare(y,x) = GREATER}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:key-interface::hash}
+
+\begin{gram}[hash]
+\label{grm:key-interface::hash}
+\begin{verbatim}
+val hash : t -> int
+\end{verbatim}
+Return a pseudo-random hash.
+
+\end{gram}
+\end{cluster}
+

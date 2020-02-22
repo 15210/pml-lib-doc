@@ -23,8 +23,8 @@ ATTACH=""
 
 PDFLATEX = pdflatex
 LATEX = latex
-FLAG_VERBOSE = -v 
-FLAG_DBG = -d 
+FLAG_VERBOSE = -v
+FLAG_DBG = -d
 
 
 
@@ -46,7 +46,7 @@ else
 endif
 
 
-DC = $(DC_HOME)/dc 
+DC = $(DC_HOME)/dc
 
 ## End: Setup
 ######################################################################
@@ -54,18 +54,18 @@ DC = $(DC_HOME)/dc
 
 default: pdf
 
-FORCE: 
+FORCE:
 
 .PHONY: book html pdf
 
 html: FORCE
 	$(PANDOC) -s book-html.tex > book.html
 
-clean: 
-	rm *.aux *.idx *.log *.out *.toc */*.aux */*.idx */*.log */*.out 
+clean:
+	rm *.aux *.idx *.log *.out *.toc */*.aux */*.idx */*.log */*.out
 
-reset: 
-	make clean; rm *.pdf; rm*.html; rm  *~; rm */*~; rm  \#*\#; rm */\#*\#; 
+reset:
+	make clean; rm *.pdf; rm*.html; rm  *~; rm */*~; rm  \#*\#; rm */\#*\#;
 
 
 
@@ -115,19 +115,19 @@ endif
 ######################################################################
 ## BEGIN: PDF
 ######################################################################
-book: 
-	$(PDFLATEX) --jobname="book" '\input{book}' ; 
+book:
+	$(PDFLATEX) --jobname="book" '\input{book}' ;
 	$(PDFLATEX) --jobname="book" '\input{book}' ; \
 
 %.pdf : %.tex book
 	$(PDFLATEX) --shell-escape --jobname="target" "\includeonly{$*}\input{book} ";
 	mv target.pdf $@
 
-upload_xml_pdf: 
+upload_xml_pdf:
 	-$(DIDEROT_ADMIN) create_chapter $(LABEL_COURSE) $(LABEL_TEXTBOOK) --number $(NO)
 	$(DIDEROT_ADMIN) upload_chapter $(LABEL_COURSE) $(LABEL_TEXTBOOK) --chapter_number $(NO) --xml $(FILE).xml --xml_pdf $(FILE).pdf
 
-upload_xml_pdf_attach: 
+upload_xml_pdf_attach:
 	-$(DIDEROT_ADMIN) create_chapter $(LABEL_COURSE) $(LABEL_TEXTBOOK) --number $(NO)
 	$(DIDEROT_ADMIN) upload_chapter $(LABEL_COURSE) $(LABEL_TEXTBOOK) --chapter_number $(NO) --xml $(FILE).xml --xml_pdf $(FILE).pdf --attach $(ATTACH)
 
@@ -146,12 +146,15 @@ st-sequences: \
   st-sequences/implementation.pdf \
   st-sequences/implementation.xml
 
-upload_sequences_interface: NO=1 
+keys: \
+  keys/interface.pdf \
+  keys/interface.xml
+
+upload_sequences_interface: NO=1
 upload_sequences_interface: FILE=sequences/interface
 upload_sequences_interface: sequences/interface.xml sequences/interface.pdf upload_xml_pdf
 
-
-upload_sequences_arrays: NO=2 
+upload_sequences_arrays: NO=2
 upload_sequences_arrays: FILE=sequences/arrays
 upload_sequences_arrays: sequences/arrays.xml sequences/arrays.pdf upload_xml_pdf
 
@@ -162,3 +165,7 @@ upload_stseq_interface: st-sequences/interface.xml st-sequences/interface.pdf up
 upload_stseq_implementation: NO=4
 upload_stseq_implementation: FILE=st-sequences/implementation
 upload_stseq_implementation: st-sequences/implementation.xml st-sequences/implementation.pdf upload_xml_pdf
+
+upload_keys_interface: NO=5
+upload_keys_interface: FILE=keys/interface
+upload_keys_interface: keys/interface.xml keys/interface.pdf upload_xml_pdf
