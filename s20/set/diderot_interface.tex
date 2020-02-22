@@ -1,0 +1,326 @@
+\chapter{Set Interface}
+\label{ch:set-interface}
+
+\begin{cluster}
+\label{grp:prmbl:set-interface::interface}
+
+\begin{preamble}
+\label{prmbl:set-interface::interface}
+The \sml{SET} interface specifies an unordered collection of items. Sets do not
+contain duplicates, and are not polymorphic: the type of their elements is
+given by the \sml{Key} substructure.
+
+\end{preamble}
+\end{cluster}
+
+
+\section{Summary}
+\label{sec:set-interface::summary}
+
+\begin{cluster}
+\label{grp:grm:set-interface::signature}
+
+\begin{gram}
+\label{grm:set-interface::signature}
+\begin{verbatim}
+signature SET =
+sig
+  structure Key : EQKEY
+  structure Seq : SEQUENCE
+
+  type t
+  type set = t
+
+  val size : set -> int
+  val toString : set -> string
+  val toSeq : set -> Key.t Seq.t
+
+  val empty : unit -> set
+  val singleton : Key.t -> set
+  val fromSeq : Key.t Seq.t -> set
+
+  val find : set -> Key.t -> bool
+  val insert : set * Key.t -> set
+  val delete : set * Key.t -> set
+
+  val filterKey : (Key.t -> bool) -> set -> set
+
+  val reduceKey : (Key.t * Key.t -> Key.t) -> Key.t -> set -> Key.t
+  val iterateKey : ('a * Key.t -> 'a) -> 'a -> set -> 'a
+
+  val union : set * set -> set
+  val intersection : set * set -> set
+  val difference : set * set -> set
+
+  val $ : Key.t -> set
+end
+\end{verbatim}
+
+\end{gram}
+\end{cluster}
+
+
+\section{Substructures}
+\label{sec:set-interface::substructures}
+
+\begin{cluster}
+\label{grp:grm:set-interface::structure}
+
+\begin{gram}
+\label{grm:set-interface::structure}
+\begin{verbatim}
+structure Key : EQKEY
+\end{verbatim}
+The \sml{Key} substructure defines the type of elements in a set, which may be
+compared for equality.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::sequence}
+
+\begin{gram}
+\label{grm:set-interface::sequence}
+\begin{verbatim}
+structure Seq : SEQUENCE
+\end{verbatim}
+The \sml{Seq} substructure defines the underlying sequence type, so that we
+may convert sets to and from sequences.
+
+\end{gram}
+\end{cluster}
+
+
+\section{Types}
+\label{sec:set-interface::types}
+
+\begin{cluster}
+\label{grp:grm:set-interface::type}
+
+\begin{gram}
+\label{grm:set-interface::type}
+\begin{verbatim}
+type t
+type set = t
+\end{verbatim}
+The abstract set type. The alias \sml{set} is for readability in the
+signature.
+
+\end{gram}
+\end{cluster}
+
+
+\section{Values}
+\label{sec:set-interface::values}
+
+\begin{cluster}
+\label{grp:grm:set-interface::size}
+
+\begin{gram}[size]
+\label{grm:set-interface::size}
+\begin{verbatim}
+val size : set -> int
+\end{verbatim}
+The number of elements in a set.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::tostring}
+
+\begin{gram}[toString]
+\label{grm:set-interface::tostring}
+\begin{verbatim}
+val toString : set -> string
+\end{verbatim}
+Evaluates to a string representation of the set. Each element is converted to
+a string via \sml{Key.toString}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::toseq}
+
+\begin{gram}[toSeq]
+\label{grm:set-interface::toseq}
+\begin{verbatim}
+val toSeq : set -> Key.t Seq.t
+\end{verbatim}
+Return a sequence of all keys in a set. The ordering of the elements in the
+returned sequence is implementation-defined.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::empty}
+
+\begin{gram}[empty]
+\label{grm:set-interface::empty}
+\begin{verbatim}
+val empty : unit -> set
+\end{verbatim}
+Construct the empty set.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:gr:set-interface:singleton}
+
+\begin{gram}[singleton]
+\label{gr:set-interface:singleton}
+\begin{verbatim}
+val singleton : Key.t -> set
+\end{verbatim}
+Construct the singleton set containing only the provided key.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::fromseq}
+
+\begin{gram}[fromSeq]
+\label{grm:set-interface::fromseq}
+\begin{verbatim}
+val fromSeq : Key.t Seq.t -> set
+\end{verbatim}
+Return the set of all elements of a sequence.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::find}
+
+\begin{gram}[find]
+\label{grm:set-interface::find}
+\begin{verbatim}
+val find : set -> Key.t -> bool
+\end{verbatim}
+\sml{find s k} returns whether or not $k$ is a member of the set $s$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::insert}
+
+\begin{gram}[insert]
+\label{grm:set-interface::insert}
+\begin{verbatim}
+val insert : set * Key.t -> set
+\end{verbatim}
+\sml{insert (s, k)} evaluates to the set $s \cup \{k\}$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::delete}
+
+\begin{gram}[delete]
+\label{grm:set-interface::delete}
+\begin{verbatim}
+val delete : set * Key.t -> set
+\end{verbatim}
+\sml{delete (s, k)} evaluates to the set $s \setminus \{k\}$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::filterkey}
+
+\begin{gram}[filterKey]
+\label{grm:set-interface::filterkey}
+\begin{verbatim}
+val filterKey : (Key.t -> bool) -> set -> set
+\end{verbatim}
+\sml{filterKey p s} evaluates to the set $\{x \in s \mathbin| p(x) \}$
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::reducekey}
+
+\begin{gram}[reduceKey]
+\label{grm:set-interface::reducekey}
+\begin{verbatim}
+val reduceKey : (Key.t * Key.t -> Key.t) -> Key.t -> set -> Key.t
+\end{verbatim}
+\sml{reduceKey f b s} is logically equivalent to \sml{Seq.reduce f b (toSeq s)}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::iteratekey}
+
+\begin{gram}[iterateKey]
+\label{grm:set-interface::iteratekey}
+\begin{verbatim}
+val iterateKey : ('a * Key.t -> 'a) -> 'a -> set -> 'a
+\end{verbatim}
+\sml{iterateKey f b s} is logically equivalent to \sml{Seq.iterate f b (toSeq s)}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::union}
+
+\begin{gram}[union]
+\label{grm:set-interface::union}
+\begin{verbatim}
+val union : set * set -> set
+\end{verbatim}
+\sml{union a b} evaluates to the set $a \cup b$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::intersection}
+
+\begin{gram}[intersection]
+\label{grm:set-interface::intersection}
+\begin{verbatim}
+val intersection : set * set -> set
+\end{verbatim}
+\sml{intersection a b} evaluates to the set $a \cap b$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::difference}
+
+\begin{gram}[difference]
+\label{grm:set-interface::difference}
+\begin{verbatim}
+val difference : set * set -> set
+\end{verbatim}
+\sml{difference a b} evaluates to the set $a \setminus b$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:set-interface::alias}
+
+\begin{gram}[\$]
+\label{grm:set-interface::alias}
+\begin{verbatim}
+val $ : Key.t -> set
+\end{verbatim}
+An alias for \ref{gr:set-interface:singleton}.
+
+\end{gram}
+\end{cluster}
+

@@ -1,0 +1,520 @@
+\chapter{OrdSet Interface}
+\label{ch:ordset-interface}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::ordset}
+
+\begin{gram}
+\label{grm:ordset-interface::ordset}
+\label{ch:ordset-interface}
+\begin{preamble}
+The \sml{ORDSET} interface specifies an ordered collection of items. These sets
+do not contain duplicates, and are not polymorphic: the type of their
+elements is given by the \sml{Key} substructure.
+\end{preamble}
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:nt:ordset-interface::ordset}
+
+\begin{note}
+\label{nt:ordset-interface::ordset}
+The \sml{ORDSET} signature is identical to \sml{SET} except for the following.
+\begin{itemize}
+  \item The \sml{Key} substructure now ascribes to \sml{ORDKEY}.
+  \item There is additional functionality relying upon the ordering of keys,
+  such as \sml{split}, \sml{join}, and \sml{getRange}.
+  \item The \sml{toSeq} function now specifies that it returns keys in sorted order.
+\end{itemize}
+
+\end{note}
+\end{cluster}
+
+
+\section{Summary}
+\label{sec:ordset-interface::summary}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::signature}
+
+\begin{gram}
+\label{grm:ordset-interface::signature}
+\begin{verbatim}
+signature ORDSET =
+sig
+  structure Key : ORDKEY
+  structure Seq : SEQUENCE
+
+  type t
+  type set = t
+
+  exception Order
+
+  val size : set -> int
+  val toString : set -> string
+  val toSeq : set -> Key.t Seq.t
+
+  val empty : unit -> set
+  val singleton : Key.t -> set
+  val fromSeq : Key.t Seq.t -> set
+
+  val find : set -> Key.t -> bool
+  val insert : set * Key.t -> set
+  val delete : set * Key.t -> set
+
+  val filterKey : (Key.t -> bool) -> set -> set
+
+  val reduceKey : (Key.t * Key.t -> Key.t) -> Key.t -> set -> Key.t
+  val iterateKey : ('a * Key.t -> 'a) -> 'a -> set -> 'a
+
+  val union : set * set -> set
+  val intersection : set * set -> set
+  val difference : set * set -> set
+
+  val $ : Key.t -> set
+
+  (* ordered sets begins here *)
+  val first : set -> Key.t option
+  val last : set -> Key.t option
+
+  val prev : set * Key.t -> Key.t option
+  val next : set * Key.t -> Key.t option
+
+  val split : set * Key.t -> set * bool * set
+  val join : set * set -> set
+
+  val getRange : set -> Key.t * Key.t -> set
+
+  val rank : set * Key.t -> int
+  val select : set * int -> Key.t option
+  val splitRank : set * int -> set * set
+end
+\end{verbatim}
+
+\end{gram}
+\end{cluster}
+
+
+\section{Substructures}
+\label{sec:ordset-interface::substructures}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::structure}
+
+\begin{gram}
+\label{grm:ordset-interface::structure}
+\begin{verbatim}
+structure Key : ORDKEY
+\end{verbatim}
+The \sml{Key} substructure defines the type of elements in a set, which are
+totally ordered according to the provided comparison function.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::sequence}
+
+\begin{gram}
+\label{grm:ordset-interface::sequence}
+\begin{verbatim}
+structure Seq : SEQUENCE
+\end{verbatim}
+The \sml{Seq} substructure defines a sequence type for use with
+\ref{gr:ordset-interface:toSeq} and \ref{gr:ordset-interface:fromSeq}.
+
+\end{gram}
+\end{cluster}
+
+
+\section{Types}
+\label{sec:ordset-interface::types}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::type}
+
+\begin{gram}
+\label{grm:ordset-interface::type}
+\begin{verbatim}
+type t
+type set = t
+\end{verbatim}
+The abstract set type. The alias \sml{set} is for readability in the
+signature.
+
+\end{gram}
+\end{cluster}
+
+
+\section{Exceptions}
+\label{sec:ordset-interface::exceptions}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::exception}
+
+\begin{gram}
+\label{grm:ordset-interface::exception}
+\begin{verbatim}
+exception Order
+\end{verbatim}
+\sml{Order} is raised when the ordering invariant would be violated.
+
+\end{gram}
+\end{cluster}
+
+
+\section{Values}
+\label{sec:ordset-interface::values}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::size}
+
+\begin{gram}[size]
+\label{grm:ordset-interface::size}
+\begin{verbatim}
+val size : set -> int
+\end{verbatim}
+The number of elements in a set.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::tostring}
+
+\begin{gram}[toString]
+\label{grm:ordset-interface::tostring}
+\begin{verbatim}
+val toString : set -> string
+\end{verbatim}
+Evaluates to a string representation of the set. Each element is converted to
+a string via \sml{Key.toString}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:gr:ordset-interface:toSeq}
+
+\begin{gram}[toSeq]
+\label{gr:ordset-interface:toSeq}
+\begin{verbatim}
+val toSeq : set -> Key.t Seq.t
+\end{verbatim}
+Return a sequence of all keys in a set, in sorted order.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::empty}
+
+\begin{gram}[empty]
+\label{grm:ordset-interface::empty}
+\begin{verbatim}
+val empty : unit -> set
+\end{verbatim}
+Construct the empty set.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:gr:ordset-interface:singleton}
+
+\begin{gram}[singleton]
+\label{gr:ordset-interface:singleton}
+\begin{verbatim}
+val singleton : Key.t -> set
+\end{verbatim}
+Construct the singleton set containing only the provided key.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:gr:ordset-interface:fromSeq}
+
+\begin{gram}[fromSeq]
+\label{gr:ordset-interface:fromSeq}
+\begin{verbatim}
+val fromSeq : Key.t Seq.t -> set
+\end{verbatim}
+Return the set of all elements of a sequence.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::find}
+
+\begin{gram}[find]
+\label{grm:ordset-interface::find}
+\begin{verbatim}
+val find : set -> Key.t -> bool
+\end{verbatim}
+\sml{find s k} returns whether or not $k$ is a member of the set $s$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::insert}
+
+\begin{gram}[insert]
+\label{grm:ordset-interface::insert}
+\begin{verbatim}
+val insert : set * Key.t -> set
+\end{verbatim}
+\sml{insert (s, k)} evaluates to the set $s \cup \{k\}$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::delete}
+
+\begin{gram}[delete]
+\label{grm:ordset-interface::delete}
+\begin{verbatim}
+val delete : set * Key.t -> set
+\end{verbatim}
+\sml{delete (s, k)} evaluates to the set $s \setminus \{k\}$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::filterkey}
+
+\begin{gram}[filterKey]
+\label{grm:ordset-interface::filterkey}
+\begin{verbatim}
+val filterKey : (Key.t -> bool) -> set -> set
+\end{verbatim}
+\sml{filterKey p s} evaluates to the set $\{x \in s \mathbin| p(x) \}$
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::reducekey}
+
+\begin{gram}[reduceKey]
+\label{grm:ordset-interface::reducekey}
+\begin{verbatim}
+val reduceKey : (Key.t * Key.t -> Key.t) -> Key.t -> set -> Key.t
+\end{verbatim}
+\sml{reduceKey f b s} is logically equivalent to \sml{Seq.reduce f b (toSeq s)}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::iteratekey}
+
+\begin{gram}[iterateKey]
+\label{grm:ordset-interface::iteratekey}
+\begin{verbatim}
+val iterateKey : ('a * Key.t -> 'a) -> 'a -> set -> 'a
+\end{verbatim}
+\sml{iterateKey f b s} is logically equivalent to \sml{Seq.iterate f b (toSeq s)}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::union}
+
+\begin{gram}[union]
+\label{grm:ordset-interface::union}
+\begin{verbatim}
+val union : set * set -> set
+\end{verbatim}
+\sml{union a b} evaluates to the set $a \cup b$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::intersection}
+
+\begin{gram}[intersection]
+\label{grm:ordset-interface::intersection}
+\begin{verbatim}
+val intersection : set * set -> set
+\end{verbatim}
+\sml{intersection a b} evaluates to the set $a \cap b$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::difference}
+
+\begin{gram}[difference]
+\label{grm:ordset-interface::difference}
+\begin{verbatim}
+val difference : set * set -> set
+\end{verbatim}
+\sml{difference a b} evaluates to the set $a \setminus b$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::alias}
+
+\begin{gram}[\$]
+\label{grm:ordset-interface::alias}
+\begin{verbatim}
+val $ : Key.t -> set
+\end{verbatim}
+An alias for \ref{gr:ordset-interface:singleton}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::first}
+
+\begin{gram}[first]
+\label{grm:ordset-interface::first}
+\begin{verbatim}
+val first : set -> Key.t option
+\end{verbatim}
+Return the least element of the set, or \sml{NONE} if the set is empty.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::last}
+
+\begin{gram}[last]
+\label{grm:ordset-interface::last}
+\begin{verbatim}
+val last : set -> Key.t option
+\end{verbatim}
+Return the greatest element of the set, or \sml{NONE} if the set is empty.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::prev}
+
+\begin{gram}[prev]
+\label{grm:ordset-interface::prev}
+\begin{verbatim}
+val prev : set * Key.t -> Key.t option
+\end{verbatim}
+\sml{prev (s, k)} evaluates to $\max \{ k' \in s \mathbin| k' < k \}$, or
+\sml{NONE} if there is no such element.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::next}
+
+\begin{gram}[next]
+\label{grm:ordset-interface::next}
+\begin{verbatim}
+val next : set * Key.t -> Key.t option
+\end{verbatim}
+\sml{next (s, k)} evaluates to $\min \{ k' \in s \mathbin| k' > k \}$, or
+\sml{NONE} if there is no such element.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::split}
+
+\begin{gram}[split]
+\label{grm:ordset-interface::split}
+\begin{verbatim}
+val split : set * Key.t -> set * bool * set
+\end{verbatim}
+\sml{split (s, k)} evaluates to $(\ell, m, r)$ where $\ell$ is the set of elements
+in $s$ which are smaller than $k$, $r$ is the set of elements in $s$ which
+are greater than $k$, and $m$ indicates whether or not $k$ is a member of $s$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::join}
+
+\begin{gram}[join]
+\label{grm:ordset-interface::join}
+\begin{verbatim}
+val join : set * set -> set
+\end{verbatim}
+For sets $a$ and $b$ where the largest element of $a$ is strictly smaller than
+the smallest element of $b$, \sml{join (a, b)} evaluates to $a \cup b$.
+Otherwise it raises \sml{Order}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::getrange}
+
+\begin{gram}[getRange]
+\label{grm:ordset-interface::getrange}
+\begin{verbatim}
+val getRange : set -> Key.t * Key.t -> set
+\end{verbatim}
+\sml{getRange s (x, y)} evaluates to the set
+$\{ k \in s \mathbin| x \leq k \leq y \}$
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::rank}
+
+\begin{gram}[rank]
+\label{grm:ordset-interface::rank}
+\begin{verbatim}
+val rank : set * Key.t -> int
+\end{verbatim}
+\sml{rank (s, k)} evaluates to $\left| \{ k' \in s \mathbin| k' < k \}\right|$,
+the number of elements in $s$ which are strictly smaller than $k$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::select}
+
+\begin{gram}[select]
+\label{grm:ordset-interface::select}
+\begin{verbatim}
+val select : set * int -> Key.t option
+\end{verbatim}
+\sml{select (s, i)} returns the $i^\text{th}$ smallest element of $s$, or
+\sml{NONE} if either $i < 0$ or $i \geq |s|$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordset-interface::splitrank}
+
+\begin{gram}[splitRank]
+\label{grm:ordset-interface::splitrank}
+\begin{verbatim}
+val splitRank : set * int -> set * set
+\end{verbatim}
+\sml{splitRank (s, i)} evalutes to $(\ell,r)$ where $\ell$ is the set of the
+$i$ smallest elements of $s$, and $r$ is the set of the $|s|-i$ largest
+elements of $s$. Raises \sml{Fail} if either $i < 0$ or $i \geq |s|$.
+
+\end{gram}
+\end{cluster}
+

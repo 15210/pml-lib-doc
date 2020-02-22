@@ -156,6 +156,14 @@ bst: \
   bst/treap.pdf \
   bst/treap.xml
 
+set: \
+  set/interface.pdf \
+  set/interface.xml
+
+ordset: \
+  ordset/interface.pdf \
+  ordset/interface.xml
+
 upload_sequences_interface: NO=1
 upload_sequences_interface: FILE=sequences/interface
 upload_sequences_interface: sequences/interface.xml sequences/interface.pdf upload_xml_pdf
@@ -183,3 +191,11 @@ upload_bst_interface: bst/interface.xml bst/interface.pdf upload_xml_pdf
 upload_bst_treap: NO=7
 upload_bst_treap: FILE=bst/treap
 upload_bst_treap: bst/treap.xml bst/treap.pdf upload_xml_pdf
+
+upload_set_interface: NO=8
+upload_set_interface: FILE=set/interface
+upload_set_interface: set/interface.xml set/interface.pdf upload_xml_pdf
+
+upload_ordset_interface: NO=9
+upload_ordset_interface: FILE=ordset/interface
+upload_ordset_interface: ordset/interface.xml ordset/interface.pdf upload_xml_pdf
