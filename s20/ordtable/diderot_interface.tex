@@ -1,0 +1,720 @@
+\chapter{OrdTable Interface}
+\label{ch:ordtable-interface}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::ordtable}
+
+\begin{gram}
+\label{grm:ordtable-interface::ordtable}
+\label{ch:ordtable-interface}
+\begin{preamble}
+The \sml{ORDTABLE} interface specifies a mapping from keys to values, written
+$\{k_1 \mapsto v_1, k_2 \mapsto v_2, \ldots\}$. Tables do not have duplicate
+keys, so there is a unique associated value for each key in the domain of
+a table. The key type is given by the \sml{Key} substructure, and the value
+type is polymorphic.
+\end{preamble}
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:nt:ordtable-interface::ordtable}
+
+\begin{note}
+\label{nt:ordtable-interface::ordtable}
+The \sml{ORDTABLE} signature is identical to \sml{TABLE} except for the following.
+\begin{itemize}
+  \item The \sml{Key} substructure now ascribes to \sml{ORDKEY}.
+  \item There is additional functionality relying upon the ordering of keys,
+  such as \sml{split}, \sml{join}, and \sml{getRange}.
+  \item The \sml{toSeq} function now specifies that it returns keys in sorted order.
+\end{itemize}
+
+\end{note}
+\end{cluster}
+
+
+\section{Summary}
+\label{sec:ordtable-interface::summary}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::signature}
+
+\begin{gram}
+\label{grm:ordtable-interface::signature}
+\begin{verbatim}
+signature ORDTABLE =
+sig
+  structure Key : ORDKEY
+  structure Seq : SEQUENCE
+
+  type 'a t
+  type 'a table = 'a t
+
+  structure Set : ORDSET where Key = Key and Seq = Seq
+
+  exception Order
+
+  val size : 'a table -> int
+  val domain : 'a table -> Set.t
+  val range : 'a table -> 'a Seq.t
+  val toString : ('a -> string) -> 'a table -> string
+  val toSeq : 'a table -> (Key.t * 'a) Seq.t
+
+  val find : 'a table -> Key.t -> 'a option
+  val insert : 'a table * (Key.t * 'a) -> 'a table
+  val insertWith : ('a * 'a -> 'a) -> 'a table * (Key.t * 'a) -> 'a table
+  val delete : 'a table * Key.t -> 'a table
+
+  val empty : unit -> 'a table
+  val singleton : Key.t * 'a -> 'a table
+  val tabulate : (Key.t -> 'a) -> Set.t -> 'a table
+  val collect : (Key.t * 'a) Seq.t -> 'a Seq.t table
+  val fromSeq : (Key.t * 'a) Seq.t -> 'a table
+
+  val map : ('a -> 'b) -> 'a table -> 'b table
+  val mapKey : (Key.t * 'a -> 'b) -> 'a table -> 'b table
+  val filter : ('a -> bool) -> 'a table -> 'a table
+  val filterKey : (Key.t * 'a -> bool) -> 'a table -> 'a table
+
+  val reduce : ('a * 'a -> 'a) -> 'a -> 'a table -> 'a
+  val iterate : ('b * 'a -> 'b) -> 'b -> 'a table -> 'b
+  val iteratePrefixes : ('b * 'a -> 'b) -> 'b -> 'a table -> ('b table * 'b)
+
+  val union : ('a * 'a -> 'a) -> ('a table * 'a table) -> 'a table
+  val intersection : ('a * 'b -> 'c) -> 'a table * 'b table -> 'c table
+  val difference : 'a table * 'b table -> 'a table
+
+  val restrict : 'a table * Set.t -> 'a table
+  val subtract : 'a table * Set.t -> 'a table
+
+  val $ : (Key.t * 'a) -> 'a table
+
+  (* ordered tables begins here *)
+  val first : 'a table -> (Key.t * 'a) option
+  val last : 'a table -> (Key.t * 'a) option
+
+  val prev : 'a table * Key.t -> (Key.t * 'a) option
+  val next : 'a table * Key.t -> (Key.t * 'a) option
+
+  val split : 'a table * Key.t -> 'a table * 'a option * 'a table
+  val join : 'a table * 'a table -> 'a table
+
+  val getRange : 'a table -> Key.t * Key.t -> 'a table
+
+  val rank : 'a table * Key.t -> int
+  val select : 'a table * int -> (Key.t * 'a) option
+  val splitRank : 'a table * int -> 'a table * 'a table
+end
+\end{verbatim}
+
+\end{gram}
+\end{cluster}
+
+
+\section{Substructures}
+\label{sec:ordtable-interface::substructures}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::structure}
+
+\begin{gram}
+\label{grm:ordtable-interface::structure}
+\begin{verbatim}
+structure Key : ORDKEY
+\end{verbatim}
+The \sml{Key} substructure defines the type of keys in a table, which are
+totally ordered according to the provided comparison function.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::sequence}
+
+\begin{gram}
+\label{grm:ordtable-interface::sequence}
+\begin{verbatim}
+structure Seq : SEQUENCE
+\end{verbatim}
+The \sml{Seq} substructure defines the underlying sequence type, so that we
+may convert tables to and from sequences.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::ordset}
+
+\begin{gram}
+\label{grm:ordtable-interface::ordset}
+\begin{verbatim}
+structure Set : ORDSET
+\end{verbatim}
+The \sml{Set} substructure contains operations on ordered sets with elements of
+type \sml{Key.t}.
+
+\end{gram}
+\end{cluster}
+
+
+\section{Types}
+\label{sec:ordtable-interface::types}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::type}
+
+\begin{gram}
+\label{grm:ordtable-interface::type}
+\begin{verbatim}
+type 'a t
+type 'a table = 'a t
+\end{verbatim}
+The abstract table type with values of type \sml{'a}. The alias \sml{table} is
+for readability in the signature.
+
+\end{gram}
+\end{cluster}
+
+
+\section{Exceptions}
+\label{sec:ordtable-interface::exceptions}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::exception}
+
+\begin{gram}
+\label{grm:ordtable-interface::exception}
+\begin{verbatim}
+exception Order
+\end{verbatim}
+\sml{Order} is raised when the ordering invariant would be violated.
+
+\end{gram}
+\end{cluster}
+
+
+\section{Values}
+\label{sec:ordtable-interface::values}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::size}
+
+\begin{gram}[size]
+\label{grm:ordtable-interface::size}
+\begin{verbatim}
+val size : 'a table -> int
+\end{verbatim}
+The number of key-value pairs in a table.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::domain}
+
+\begin{gram}[domain]
+\label{grm:ordtable-interface::domain}
+\begin{verbatim}
+val domain : 'a table -> Set.t
+\end{verbatim}
+Return the set of all keys in a table.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::range}
+
+\begin{gram}[range]
+\label{grm:ordtable-interface::range}
+\begin{verbatim}
+val range : 'a table -> 'a Seq.t
+\end{verbatim}
+Return a sequence of all values in a table. The order of the elements is
+implementation-defined.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::tostring}
+
+\begin{gram}[toString]
+\label{grm:ordtable-interface::tostring}
+\begin{verbatim}
+val toString : ('a -> string) -> 'a table -> string
+\end{verbatim}
+\sml{toString f t} returns a string representation of $t$. Each key is converted
+to a string via \sml{Key.toString} and each value is converted via $f$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::toseq}
+
+\begin{gram}[toSeq]
+\label{grm:ordtable-interface::toseq}
+\begin{verbatim}
+val toSeq : 'a table -> (Key.t * 'a) Seq.t
+\end{verbatim}
+Return a sequence of all key-value pairs in a table, sorted by key.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::find}
+
+\begin{gram}[find]
+\label{grm:ordtable-interface::find}
+\begin{verbatim}
+val find : 'a table -> Key.t -> 'a option
+\end{verbatim}
+\sml{find t k} returns \sml{SOME v} if $(k \mapsto v) \in t$, and \sml{NONE}
+otherwise.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::insert}
+
+\begin{gram}[insert]
+\label{grm:ordtable-interface::insert}
+\begin{verbatim}
+val insert : 'a table * (Key.t * 'a) -> 'a table
+\end{verbatim}
+\sml{insert (t, (k, v))} returns $t \cup \{k \mapsto v\}$. If $k$ is already
+in $t$, then the new value $v$ is given precedence. It is logically equivalent
+to \sml{insertWith (fn (\_, v) => v) (t, (k, v))}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::insertwith}
+
+\begin{gram}[insertWith]
+\label{grm:ordtable-interface::insertwith}
+\begin{verbatim}
+val insertWith : ('a * 'a -> 'a) -> 'a table * (Key.t * 'a) -> 'a table
+\end{verbatim}
+\sml{insertWith f (t, (k, v))} returns $t \cup \{k \mapsto v\}$ if $k$ is not
+already a member of $t$, and otherwise it returns $t \cup \{k \mapsto f(v',v)\}$
+where $k \mapsto v'$ is already in $t$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::delete}
+
+\begin{gram}[delete]
+\label{grm:ordtable-interface::delete}
+\begin{verbatim}
+val delete : 'a table * Key.t -> 'a table
+\end{verbatim}
+\sml{delete (t, k)} removes the key $k$ from $t$ only if $k$ is a member of $t$.
+That is, if $(k \mapsto v) \in t$ then it returns
+$t \setminus \{(k \mapsto v)\}$, otherwise it returns $t$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::empty}
+
+\begin{gram}[empty]
+\label{grm:ordtable-interface::empty}
+\begin{verbatim}
+val empty : unit -> 'a table
+\end{verbatim}
+Construct the empty table.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:gr:ordtable-interface:singleton}
+
+\begin{gram}[singleton]
+\label{gr:ordtable-interface:singleton}
+\begin{verbatim}
+val singleton : Key.t * 'a -> 'a table
+\end{verbatim}
+\sml{singleton (k, v)} constructs the singleton table $\{k \mapsto v\}$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::tabulate}
+
+\begin{gram}[tabulate]
+\label{grm:ordtable-interface::tabulate}
+\begin{verbatim}
+val tabulate : (Key.t -> 'a) -> Set.t -> 'a table
+\end{verbatim}
+\sml{tabulate f s} evaluates to the table $\{(k \mapsto f(k)) : k \in s\}$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::collect}
+
+\begin{gram}[collect]
+\label{grm:ordtable-interface::collect}
+\begin{verbatim}
+val collect : (Key.t * 'a) Seq.t -> 'a Seq.t table
+\end{verbatim}
+\sml{collect s} takes a sequence of key-value pairs and produces a table where
+each unique key $k$ is paired with
+$\langle v : (k',v) \in s \mathbin| k' = k \rangle$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::fromseq}
+
+\begin{gram}[fromSeq]
+\label{grm:ordtable-interface::fromseq}
+\begin{verbatim}
+val fromSeq : (Key.t * 'a) Seq.t -> 'a table
+\end{verbatim}
+Return the table representation of a sequence of key-value pairs. If there are
+duplicate keys, then it takes the value associated with the first occurence in
+the sequence.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::map}
+
+\begin{gram}[map]
+\label{grm:ordtable-interface::map}
+\begin{verbatim}
+val map : ('a -> 'b) -> 'a table -> 'b table
+\end{verbatim}
+\sml{map f t} evaluates to $\{k \mapsto f(v) : (k \mapsto v) \in t\}$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::mapkey}
+
+\begin{gram}[mapKey]
+\label{grm:ordtable-interface::mapkey}
+\begin{verbatim}
+val mapKey : (Key.t * 'a -> 'b) -> 'a table -> 'b table
+\end{verbatim}
+\sml{mapKey f t} evaluates to $\{k \mapsto f(k, v) : (k \mapsto v) \in t\}$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::filter}
+
+\begin{gram}[filter]
+\label{grm:ordtable-interface::filter}
+\begin{verbatim}
+val filter : ('a -> bool) -> 'a table -> 'a table
+\end{verbatim}
+\sml{filter p t} produces a table containing all $(k \mapsto v) \in t$ which
+satisfies $p(v)$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::filterkey}
+
+\begin{gram}[filterKey]
+\label{grm:ordtable-interface::filterkey}
+\begin{verbatim}
+val filterKey : (Key.t * 'a -> bool) -> 'a table -> 'a table
+\end{verbatim}
+\sml{filterKey p t} produces a table containing all $(k \mapsto v) \in t$ which
+satisfies $p(k,v)$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::reduce}
+
+\begin{gram}[reduce]
+\label{grm:ordtable-interface::reduce}
+\begin{verbatim}
+val reduce : ('a * 'a -> 'a) -> 'a -> 'a table -> 'a
+\end{verbatim}
+\sml{reduce f b t} is logically equivalent to \sml{Seq.reduce f b (range t)}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::iterate}
+
+\begin{gram}[iterate]
+\label{grm:ordtable-interface::iterate}
+\begin{verbatim}
+val iterate : ('b * 'a -> 'b) -> 'b -> 'a table -> 'b
+\end{verbatim}
+\sml{iterate f b t} is logically equivalent to \sml{Seq.iterate f b (range t)}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::iterateprefixes}
+
+\begin{gram}[iteratePrefixes]
+\label{grm:ordtable-interface::iterateprefixes}
+\begin{verbatim}
+val iteratePrefixes : ('b * 'a -> 'b) -> 'b -> 'a table -> ('b table * 'b)
+\end{verbatim}
+\sml{iteratePrefixes f b t} is logically equivalent to
+\sml{(fromSeq p, x)} where \sml{(p,x) = Seq.iteratePrefixes f b (range t)}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::union}
+
+\begin{gram}[union]
+\label{grm:ordtable-interface::union}
+\begin{verbatim}
+val union : ('a * 'a -> 'a) -> ('a table * 'a table) -> 'a table
+\end{verbatim}
+\sml{union f (a, b)} evaluates to $a \cup b$. For keys $k$ where $(k \mapsto v) \in a$
+and $(k \mapsto w) \in b$, the result contains $k \mapsto f(v,w)$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::intersection}
+
+\begin{gram}[intersection]
+\label{grm:ordtable-interface::intersection}
+\begin{verbatim}
+val intersection : ('a * 'b -> 'c) -> 'a table * 'b table -> 'c table
+\end{verbatim}
+\sml{intersection f (a, b)} evaluates to $a \cap b$. Every intersecting key
+$k$ is mapped to $f(v,w)$ where $(k \mapsto v) \in a$ and $(k \mapsto w) \in b$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::difference}
+
+\begin{gram}[difference]
+\label{grm:ordtable-interface::difference}
+\begin{verbatim}
+val difference : 'a table * 'b table -> 'a table
+\end{verbatim}
+\sml{difference (a, b)} evaluates to $a \setminus b$. The values in the output
+are taken from $a$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::restrict}
+
+\begin{gram}[restrict]
+\label{grm:ordtable-interface::restrict}
+\begin{verbatim}
+val restrict : 'a table * Set.t -> 'a table
+\end{verbatim}
+\sml{restrict (t, s)} returns the table of $\{(k \mapsto v) \in t \mathbin| k \in s\}$.
+It is therefore essentially an intersection. The name is motivated by the
+notion of restricting a function to a smaller domain, where we interpret a table
+as a function.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::subtract}
+
+\begin{gram}[subtract]
+\label{grm:ordtable-interface::subtract}
+\begin{verbatim}
+val subtract : 'a table * Set.t -> 'a table
+\end{verbatim}
+\sml{subtract (t, s)} returns the table of
+$\{(k \mapsto v) \in t \mathbin| k \not\in s\}$.
+The name is motivated by the notion of a domain subtraction on a function.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::table}
+
+\begin{gram}[\$]
+\label{grm:ordtable-interface::table}
+\begin{verbatim}
+val $ : (Key.t * 'a) -> 'a table
+\end{verbatim}
+An alias for \ref{gr:ordtable-interface:singleton}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::first}
+
+\begin{gram}[first]
+\label{grm:ordtable-interface::first}
+\begin{verbatim}
+val first : 'a table -> (Key.t * 'a) option
+\end{verbatim}
+Return the smallest key (together with its associated value) of a table, or
+\sml{NONE} if the table is empty.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::last}
+
+\begin{gram}[last]
+\label{grm:ordtable-interface::last}
+\begin{verbatim}
+val last : 'a table -> (Key.t * 'a) option
+\end{verbatim}
+Return the largest key (together with its associated value) of a table, or
+\sml{NONE} if the table is empty.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::prev}
+
+\begin{gram}[prev]
+\label{grm:ordtable-interface::prev}
+\begin{verbatim}
+val prev : 'a table * Key.t -> (Key.t * 'a) option
+\end{verbatim}
+\sml{prev (t, k)} returns the largest key (together with its associated value)
+in $t$
+which is strictly smaller than $k$, or \sml{NONE} if there is no such key.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::next}
+
+\begin{gram}[next]
+\label{grm:ordtable-interface::next}
+\begin{verbatim}
+val next : 'a table * Key.t -> (Key.t * 'a) option
+\end{verbatim}
+\sml{next (t, k)} returns the smallest key (together with its associated value)
+in $t$
+which is strictly greater than $k$, or \sml{NONE} if there is no such key.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::split}
+
+\begin{gram}[split]
+\label{grm:ordtable-interface::split}
+\begin{verbatim}
+val split : 'a table * Key.t -> 'a table * 'a option * 'a table
+\end{verbatim}
+\sml{split (t, k)} evaluates to $(\ell, v, r)$ where $\ell$ consists of all
+key-value pairs with keys strictly smaller than $k$, $r$ consists of all key-value
+pairs with keys strictly greater than $k$, and $v$ is $k$'s associated value
+in $t$ (or \sml{NONE} if $k$ is not present in $t$).
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::join}
+
+\begin{gram}[join]
+\label{grm:ordtable-interface::join}
+\begin{verbatim}
+val join : 'a table * 'a table -> 'a table
+\end{verbatim}
+Given tables $a$ and $b$ where all keys in $a$ are strictly smaller than all
+keys in $b$, \sml{join (a, b)} evaluates to $a \cup b$. Otherwise, it raises
+\sml{Order}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::getrange}
+
+\begin{gram}[getRange]
+\label{grm:ordtable-interface::getrange}
+\begin{verbatim}
+val getRange : 'a table -> Key.t * Key.t -> 'a table
+\end{verbatim}
+\sml{getRange t (x, y)} evaluates to $\{(k \mapsto v) \in t \mathbin| x \leq k \leq y\}$
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::rank}
+
+\begin{gram}[rank]
+\label{grm:ordtable-interface::rank}
+\begin{verbatim}
+val rank : 'a table * Key.t -> int
+\end{verbatim}
+\sml{rank (t, k)} evaluates to the number of keys in $t$ which are strictly
+smaller than $k$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::select}
+
+\begin{gram}[select]
+\label{grm:ordtable-interface::select}
+\begin{verbatim}
+val select : 'a table * int -> (Key.t * 'a) option
+\end{verbatim}
+\sml{select (t, i)} evaluates to the $i^\text{th}$ smallest key (and its
+associated value), or \sml{NONE} if either $i < 0$ or $i \geq |t|$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:ordtable-interface::splitrank}
+
+\begin{gram}[splitRank]
+\label{grm:ordtable-interface::splitrank}
+\begin{verbatim}
+val splitRank : 'a table * int -> 'a table * 'a table
+\end{verbatim}
+\sml{splitRank (t, i)} evalutes to $(\ell,r)$ where $\ell$ consists of the $i$
+keys of $t$, and $r$ is the set of the $|t|-i$ largest
+keys of $t$. Raises \sml{Fail} if either $i < 0$ or $i \geq |t|$.
+
+\end{gram}
+\end{cluster}
+

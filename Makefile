@@ -164,6 +164,14 @@ ordset: \
   ordset/interface.pdf \
   ordset/interface.xml
 
+table: \
+  table/interface.pdf \
+  table/interface.xml
+
+ordtable: \
+  ordtable/interface.pdf \
+  ordtable/interface.xml
+
 upload_sequences_interface: NO=1
 upload_sequences_interface: FILE=sequences/interface
 upload_sequences_interface: sequences/interface.xml sequences/interface.pdf upload_xml_pdf
@@ -199,3 +207,11 @@ upload_set_interface: set/interface.xml set/interface.pdf upload_xml_pdf
 upload_ordset_interface: NO=9
 upload_ordset_interface: FILE=ordset/interface
 upload_ordset_interface: ordset/interface.xml ordset/interface.pdf upload_xml_pdf
+
+upload_table_interface: NO=10
+upload_table_interface: FILE=table/interface
+upload_table_interface: table/interface.xml table/interface.pdf upload_xml_pdf
+
+upload_ordtable_interface: NO=11
+upload_ordtable_interface: FILE=ordtable/interface
+upload_ordtable_interface: ordtable/interface.xml ordtable/interface.pdf upload_xml_pdf

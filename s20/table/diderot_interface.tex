@@ -1,0 +1,525 @@
+\chapter{Table Interface}
+\label{ch:table-interface}
+
+\begin{cluster}
+\label{grp:grm:table-interface::table}
+
+\begin{gram}
+\label{grm:table-interface::table}
+\label{ch:table-interface}
+\begin{preamble}
+The \sml{TABLE} interface specifies a mapping from keys to values, written
+$\{k_1 \mapsto v_1, k_2 \mapsto v_2, \ldots\}$. Tables do not have duplicate
+keys, so there is a unique associated value for each key in the domain of
+a table. The key type is given by the \sml{Key} substructure, and the value
+type is polymorphic.
+\end{preamble}
+
+\end{gram}
+\end{cluster}
+
+
+\section{Summary}
+\label{sec:table-interface::summary}
+
+\begin{cluster}
+\label{grp:grm:table-interface::signature}
+
+\begin{gram}
+\label{grm:table-interface::signature}
+\begin{verbatim}
+signature TABLE =
+sig
+  structure Key : EQKEY
+  structure Seq : SEQUENCE
+
+  type 'a t
+  type 'a table = 'a t
+
+  structure Set : SET where Key = Key and Seq = Seq
+
+  val size : 'a table -> int
+  val domain : 'a table -> Set.t
+  val range : 'a table -> 'a Seq.t
+  val toString : ('a -> string) -> 'a table -> string
+  val toSeq : 'a table -> (Key.t * 'a) Seq.t
+
+  val find : 'a table -> Key.t -> 'a option
+  val insert : 'a table * (Key.t * 'a) -> 'a table
+  val insertWith : ('a * 'a -> 'a) -> 'a table * (Key.t * 'a) -> 'a table
+  val delete : 'a table * Key.t -> 'a table
+
+  val empty : unit -> 'a table
+  val singleton : Key.t * 'a -> 'a table
+  val tabulate : (Key.t -> 'a) -> Set.t -> 'a table
+  val collect : (Key.t * 'a) Seq.t -> 'a Seq.t table
+  val fromSeq : (Key.t * 'a) Seq.t -> 'a table
+
+  val map : ('a -> 'b) -> 'a table -> 'b table
+  val mapKey : (Key.t * 'a -> 'b) -> 'a table -> 'b table
+  val filter : ('a -> bool) -> 'a table -> 'a table
+  val filterKey : (Key.t * 'a -> bool) -> 'a table -> 'a table
+
+  val reduce : ('a * 'a -> 'a) -> 'a -> 'a table -> 'a
+  val iterate : ('b * 'a -> 'b) -> 'b -> 'a table -> 'b
+  val iteratePrefixes : ('b * 'a -> 'b) -> 'b -> 'a table -> ('b table * 'b)
+
+  val union : ('a * 'a -> 'a) -> ('a table * 'a table) -> 'a table
+  val intersection : ('a * 'b -> 'c) -> 'a table * 'b table -> 'c table
+  val difference : 'a table * 'b table -> 'a table
+
+  val restrict : 'a table * Set.t -> 'a table
+  val subtract : 'a table * Set.t -> 'a table
+
+  val $ : (Key.t * 'a) -> 'a table
+end
+\end{verbatim}
+
+\end{gram}
+\end{cluster}
+
+
+\section{Substructures}
+\label{sec:table-interface::substructures}
+
+\begin{cluster}
+\label{grp:grm:table-interface::structure}
+
+\begin{gram}
+\label{grm:table-interface::structure}
+\begin{verbatim}
+structure Key : EQKEY
+\end{verbatim}
+The \sml{Key} substructure defines the type of keys in a table, which may be
+compared for equality.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::sequence}
+
+\begin{gram}
+\label{grm:table-interface::sequence}
+\begin{verbatim}
+structure Seq : SEQUENCE
+\end{verbatim}
+The \sml{Seq} substructure defines the underlying sequence type, so that we
+may convert tables to and from sequences.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::substructure}
+
+\begin{gram}
+\label{grm:table-interface::substructure}
+\begin{verbatim}
+structure Set : SET
+\end{verbatim}
+The \sml{Set} substructure contains operations on sets with elements of type
+\sml{Key.t}.
+
+\end{gram}
+\end{cluster}
+
+
+\section{Types}
+\label{sec:table-interface::types}
+
+\begin{cluster}
+\label{grp:grm:table-interface::type}
+
+\begin{gram}
+\label{grm:table-interface::type}
+\begin{verbatim}
+type 'a t
+type 'a table = 'a t
+\end{verbatim}
+The abstract table type with values of type \sml{'a}. The alias \sml{table} is
+for readability in the signature.
+
+\end{gram}
+\end{cluster}
+
+
+\section{Values}
+\label{sec:table-interface::values}
+
+\begin{cluster}
+\label{grp:grm:table-interface::size}
+
+\begin{gram}[size]
+\label{grm:table-interface::size}
+\begin{verbatim}
+val size : 'a table -> int
+\end{verbatim}
+The number of key-value pairs in a table.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::domain}
+
+\begin{gram}[domain]
+\label{grm:table-interface::domain}
+\begin{verbatim}
+val domain : 'a table -> Set.t
+\end{verbatim}
+Return the set of all keys in a table.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::range}
+
+\begin{gram}[range]
+\label{grm:table-interface::range}
+\begin{verbatim}
+val range : 'a table -> 'a Seq.t
+\end{verbatim}
+Return a sequence of all values in a table. The order of the elements is
+implementation-defined.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::tostring}
+
+\begin{gram}[toString]
+\label{grm:table-interface::tostring}
+\begin{verbatim}
+val toString : ('a -> string) -> 'a table -> string
+\end{verbatim}
+\sml{toString f t} returns a string representation of $t$. Each key is converted
+to a string via \sml{Key.toString} and each value is converted via $f$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::toseq}
+
+\begin{gram}[toSeq]
+\label{grm:table-interface::toseq}
+\begin{verbatim}
+val toSeq : 'a table -> (Key.t * 'a) Seq.t
+\end{verbatim}
+Return a sequence of all key-value pairs in a table. The order of the sequence
+is implementation-defined.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::find}
+
+\begin{gram}[find]
+\label{grm:table-interface::find}
+\begin{verbatim}
+val find : 'a table -> Key.t -> 'a option
+\end{verbatim}
+\sml{find t k} returns \sml{SOME v} if $(k \mapsto v) \in t$, and \sml{NONE}
+otherwise.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::insert}
+
+\begin{gram}[insert]
+\label{grm:table-interface::insert}
+\begin{verbatim}
+val insert : 'a table * (Key.t * 'a) -> 'a table
+\end{verbatim}
+\sml{insert (t, (k, v))} returns $t \cup \{k \mapsto v\}$. If $k$ is already
+in $t$, then the new value $v$ is given precedence. It is logically equivalent
+to \sml{insertWith (fn (\_, v) => v) (t, (k, v))}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::insertwith}
+
+\begin{gram}[insertWith]
+\label{grm:table-interface::insertwith}
+\begin{verbatim}
+val insertWith : ('a * 'a -> 'a) -> 'a table * (Key.t * 'a) -> 'a table
+\end{verbatim}
+\sml{insertWith f (t, (k, v))} returns $t \cup \{k \mapsto v\}$ if $k$ is not
+already a member of $t$, and otherwise it returns $t \cup \{k \mapsto f(v',v)\}$
+where $k \mapsto v'$ is already in $t$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::delete}
+
+\begin{gram}[delete]
+\label{grm:table-interface::delete}
+\begin{verbatim}
+val delete : 'a table * Key.t -> 'a table
+\end{verbatim}
+\sml{delete (t, k)} removes the key $k$ from $t$ only if $k$ is a member of $t$.
+That is, if $(k \mapsto v) \in t$ then it returns
+$t \setminus \{(k \mapsto v)\}$, otherwise it returns $t$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::empty}
+
+\begin{gram}[empty]
+\label{grm:table-interface::empty}
+\begin{verbatim}
+val empty : unit -> 'a table
+\end{verbatim}
+Construct the empty table.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:gr:table-interface:singleton}
+
+\begin{gram}[singleton]
+\label{gr:table-interface:singleton}
+\begin{verbatim}
+val singleton : Key.t * 'a -> 'a table
+\end{verbatim}
+\sml{singleton (k, v)} constructs the singleton table $\{k \mapsto v\}$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::tabulate}
+
+\begin{gram}[tabulate]
+\label{grm:table-interface::tabulate}
+\begin{verbatim}
+val tabulate : (Key.t -> 'a) -> Set.t -> 'a table
+\end{verbatim}
+\sml{tabulate f s} evaluates to the table $\{(k \mapsto f(k)) : k \in s\}$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::collect}
+
+\begin{gram}[collect]
+\label{grm:table-interface::collect}
+\begin{verbatim}
+val collect : (Key.t * 'a) Seq.t -> 'a Seq.t table
+\end{verbatim}
+\sml{collect s} takes a sequence of key-value pairs and produces a table where
+each unique key $k$ is paired with
+$\langle v : (k',v) \in s \mathbin| k' = k \rangle$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::fromseq}
+
+\begin{gram}[fromSeq]
+\label{grm:table-interface::fromseq}
+\begin{verbatim}
+val fromSeq : (Key.t * 'a) Seq.t -> 'a table
+\end{verbatim}
+Return the table representation of a sequence of key-value pairs. If there are
+duplicate keys, then it takes the value associated with the first occurence in
+the sequence.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::map}
+
+\begin{gram}[map]
+\label{grm:table-interface::map}
+\begin{verbatim}
+val map : ('a -> 'b) -> 'a table -> 'b table
+\end{verbatim}
+\sml{map f t} evaluates to $\{k \mapsto f(v) : (k \mapsto v) \in t\}$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::mapkey}
+
+\begin{gram}[mapKey]
+\label{grm:table-interface::mapkey}
+\begin{verbatim}
+val mapKey : (Key.t * 'a -> 'b) -> 'a table -> 'b table
+\end{verbatim}
+\sml{mapKey f t} evaluates to $\{k \mapsto f(k, v) : (k \mapsto v) \in t\}$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::filter}
+
+\begin{gram}[filter]
+\label{grm:table-interface::filter}
+\begin{verbatim}
+val filter : ('a -> bool) -> 'a table -> 'a table
+\end{verbatim}
+\sml{filter p t} produces a table containing all $(k \mapsto v) \in t$ which
+satisfies $p(v)$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::filterkey}
+
+\begin{gram}[filterKey]
+\label{grm:table-interface::filterkey}
+\begin{verbatim}
+val filterKey : (Key.t * 'a -> bool) -> 'a table -> 'a table
+\end{verbatim}
+\sml{filterKey p t} produces a table containing all $(k \mapsto v) \in t$ which
+satisfies $p(k,v)$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::reduce}
+
+\begin{gram}[reduce]
+\label{grm:table-interface::reduce}
+\begin{verbatim}
+val reduce : ('a * 'a -> 'a) -> 'a -> 'a table -> 'a
+\end{verbatim}
+\sml{reduce f b t} is logically equivalent to \sml{Seq.reduce f b (range t)}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::iterate}
+
+\begin{gram}[iterate]
+\label{grm:table-interface::iterate}
+\begin{verbatim}
+val iterate : ('b * 'a -> 'b) -> 'b -> 'a table -> 'b
+\end{verbatim}
+\sml{iterate f b t} is logically equivalent to \sml{Seq.iterate f b (range t)}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::iterateprefixes}
+
+\begin{gram}[iteratePrefixes]
+\label{grm:table-interface::iterateprefixes}
+\begin{verbatim}
+val iteratePrefixes : ('b * 'a -> 'b) -> 'b -> 'a table -> ('b table * 'b)
+\end{verbatim}
+\sml{iteratePrefixes f b t} is logically equivalent to
+\sml{(fromSeq p, x)} where \sml{(p,x) = Seq.iteratePrefixes f b (range t)}.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::union}
+
+\begin{gram}[union]
+\label{grm:table-interface::union}
+\begin{verbatim}
+val union : ('a * 'a -> 'a) -> ('a table * 'a table) -> 'a table
+\end{verbatim}
+\sml{union f (a, b)} evaluates to $a \cup b$. For keys $k$ where $(k \mapsto v) \in a$
+and $(k \mapsto w) \in b$, the result contains $k \mapsto f(v,w)$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::intersection}
+
+\begin{gram}[intersection]
+\label{grm:table-interface::intersection}
+\begin{verbatim}
+val intersection : ('a * 'b -> 'c) -> 'a table * 'b table -> 'c table
+\end{verbatim}
+\sml{intersection f (a, b)} evaluates to $a \cap b$. Every intersecting key
+$k$ is mapped to $f(v,w)$ where $(k \mapsto v) \in a$ and $(k \mapsto w) \in b$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::difference}
+
+\begin{gram}[difference]
+\label{grm:table-interface::difference}
+\begin{verbatim}
+val difference : 'a table * 'b table -> 'a table
+\end{verbatim}
+\sml{difference (a, b)} evaluates to $a \setminus b$. The values in the output
+are taken from $a$.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::restrict}
+
+\begin{gram}[restrict]
+\label{grm:table-interface::restrict}
+\begin{verbatim}
+val restrict : 'a table * Set.t -> 'a table
+\end{verbatim}
+\sml{restrict (t, s)} returns the table of $\{(k \mapsto v) \in t \mathbin| k \in s\}$.
+It is therefore essentially an intersection. The name is motivated by the
+notion of restricting a function to a smaller domain, where we interpret a table
+as a function.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::subtract}
+
+\begin{gram}[subtract]
+\label{grm:table-interface::subtract}
+\begin{verbatim}
+val subtract : 'a table * Set.t -> 'a table
+\end{verbatim}
+\sml{subtract (t, s)} returns the table of
+$\{(k \mapsto v) \in t \mathbin| k \not\in s\}$.
+The name is motivated by the notion of a domain subtraction on a function.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:grm:table-interface::alias}
+
+\begin{gram}[\$]
+\label{grm:table-interface::alias}
+\begin{verbatim}
+val $ : (Key.t * 'a) -> 'a table
+\end{verbatim}
+An alias for \ref{gr:table-interface:singleton}.
+
+\end{gram}
+\end{cluster}
+
