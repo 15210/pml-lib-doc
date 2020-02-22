@@ -170,7 +170,9 @@ table: \
 
 ordtable: \
   ordtable/interface.pdf \
-  ordtable/interface.xml
+  ordtable/interface.xml \
+  ordtable/treap.pdf \
+  ordtable/treap.xml
 
 upload_sequences_interface: NO=1
 upload_sequences_interface: FILE=sequences/interface
@@ -215,3 +217,7 @@ upload_table_interface: table/interface.xml table/interface.pdf upload_xml_pdf
 upload_ordtable_interface: NO=11
 upload_ordtable_interface: FILE=ordtable/interface
 upload_ordtable_interface: ordtable/interface.xml ordtable/interface.pdf upload_xml_pdf
+
+upload_ordtable_treap: NO=12
+upload_ordtable_treap: FILE=ordtable/treap
+upload_ordtable_treap: ordtable/treap.xml ordtable/treap.pdf upload_xml_pdf
