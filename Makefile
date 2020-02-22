@@ -174,6 +174,12 @@ ordtable: \
   ordtable/treap.pdf \
   ordtable/treap.xml
 
+aug-ordtable: \
+  aug-ordtable/interface.pdf \
+  aug-ordtable/interface.xml \
+  aug-ordtable/treap.pdf \
+  aug-ordtable/treap.xml
+
 upload_sequences_interface: NO=1
 upload_sequences_interface: FILE=sequences/interface
 upload_sequences_interface: sequences/interface.xml sequences/interface.pdf upload_xml_pdf
@@ -221,3 +227,11 @@ upload_ordtable_interface: ordtable/interface.xml ordtable/interface.pdf upload_
 upload_ordtable_treap: NO=12
 upload_ordtable_treap: FILE=ordtable/treap
 upload_ordtable_treap: ordtable/treap.xml ordtable/treap.pdf upload_xml_pdf
+
+upload_augordtable_interface: NO=13
+upload_augordtable_interface: FILE=aug-ordtable/interface
+upload_augordtable_interface: aug-ordtable/interface.xml aug-ordtable/interface.pdf upload_xml_pdf
+
+upload_augordtable_treap: NO=14
+upload_augordtable_treap: FILE=aug-ordtable/treap
+upload_augordtable_treap: aug-ordtable/treap.xml aug-ordtable/treap.pdf upload_xml_pdf
