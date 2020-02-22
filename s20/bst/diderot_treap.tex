@@ -1,0 +1,89 @@
+\chapter{MkTreap}
+\label{ch:treap-bst}
+
+\begin{cluster}
+\label{grp:grm:treap-bst::implements}
+
+\begin{gram}
+\label{grm:treap-bst::implements}
+\label{ch:treap-bst}
+\begin{preamble}
+Implements the \sml{BST} signature with treaps. Keys are hashed in order to
+generate pseudo-random priorities.
+\begin{verbatim}
+functor MkTreap (structure Key : HASHKEY) :> BST where Key = Key
+\end{verbatim}
+\end{preamble}
+
+\end{gram}
+\end{cluster}
+
+
+\section{Cost Specification}
+\label{sec:treap-bst::cost-specification}
+
+\begin{cluster}
+\label{grp:grm:treap-bst::costs}
+
+\begin{gram}
+\label{grm:treap-bst::costs}
+The following costs assume that the work and span of \sml{Key.compare}
+and \sml{Key.hash} are constant.
+
+\end{gram}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:cst:treap-bst::constant-work-operations}
+
+\begin{costspec}[Constant-Work Operations]
+\label{cst:treap-bst::constant-work-operations}
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{expose}~T$ & $\bigoh{1}$ & $\bigoh{1}$ \\
+$\sml{size}~T$ & $\bigoh{1}$ & $\bigoh{1}$ \\
+$\sml{empty}~()$ & $\bigoh{1}$ & $\bigoh{1}$ \\
+$\sml{singleton}~(k,v)$ & $\bigoh{1}$ & $\bigoh{1}$
+\end{tabular}
+
+\end{costspec}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:cost:treap:join}
+
+\begin{costspec}[Join]
+\label{cost:treap:join}
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{join}~(A,B)$ & $\bigoh {\log\left(|A| + |B|\right)}$ & $\bigoh {\log\left(|A| + |B|\right)}$ \\
+$\sml{joinMid}~(A,(k,v),B)$ & $\bigoh {\log\left(|A| + |B|\right)}$ & $\bigoh {\log\left(|A| + |B|\right)}$
+\end{tabular}
+
+\end{costspec}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:cost:treap:split}
+
+\begin{costspec}[Split]
+\label{cost:treap:split}
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{split}~(T,k)$ & $\bigoh {\log|T|}$ & $\bigoh {\log|T|}$
+\end{tabular}
+
+\end{costspec}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:nt:treap-bst::costs}
+
+\begin{note}
+\label{nt:treap-bst::costs}
+The costs of \ref{cost:treap:join} and \ref{cost:treap:split} are with
+high probability.
+
+\end{note}
+\end{cluster}
+

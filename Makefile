@@ -150,6 +150,12 @@ keys: \
   keys/interface.pdf \
   keys/interface.xml
 
+bst: \
+  bst/interface.pdf \
+  bst/interface.xml \
+  bst/treap.pdf \
+  bst/treap.xml
+
 upload_sequences_interface: NO=1
 upload_sequences_interface: FILE=sequences/interface
 upload_sequences_interface: sequences/interface.xml sequences/interface.pdf upload_xml_pdf
@@ -169,3 +175,11 @@ upload_stseq_implementation: st-sequences/implementation.xml st-sequences/implem
 upload_keys_interface: NO=5
 upload_keys_interface: FILE=keys/interface
 upload_keys_interface: keys/interface.xml keys/interface.pdf upload_xml_pdf
+
+upload_bst_interface: NO=6
+upload_bst_interface: FILE=bst/interface
+upload_bst_interface: bst/interface.xml bst/interface.pdf upload_xml_pdf
+
+upload_bst_treap: NO=7
+upload_bst_treap: FILE=bst/treap
+upload_bst_treap: bst/treap.xml bst/treap.pdf upload_xml_pdf
