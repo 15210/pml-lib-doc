@@ -1,0 +1,98 @@
+{
+  "book" : "LIBDOC",
+  "parts": [
+    {
+      "number": 1,
+      "title": "All",
+      "label": "part:all"
+    }
+  ],
+
+  "chapters": [
+    {
+       "number": 1,
+       "part": 1,
+       "xml": "sequences/interface.xml",
+       "xml_pdf": "sequences/interface.pdf"
+    },
+    {
+       "number": 2,
+       "part": 1,
+  		 "xml": "sequences/arrays.xml",
+       "xml_pdf": "sequences/arrays.pdf"
+    },
+    {
+       "number": 3,
+       "part": 1,
+       "xml": "st-sequences/interface.xml",
+       "xml_pdf": "st-sequences/interface.pdf"
+    },
+    {
+       "number": 4,
+       "part": 1,
+       "xml": "st-sequences/implementation.xml",
+       "xml_pdf": "st-sequences/implementation.pdf"
+    },
+    {
+       "number": 5,
+       "part": 1,
+       "xml": "keys/interface.xml",
+       "xml_pdf": "keys/interface.pdf"
+    },
+    {
+       "number": 6,
+       "part": 1,
+       "xml": "bst/interface.xml",
+       "xml_pdf": "bst/interface.pdf"
+    },
+    {
+       "number": 7,
+       "part": 1,
+       "xml": "bst/treap.xml",
+       "xml_pdf": "bst/treap.pdf"
+    },
+    {
+       "number": 8,
+       "part": 1,
+       "xml": "set/interface.xml",
+       "xml_pdf": "set/interface.pdf"
+    },
+    {
+       "number": 9,
+       "part": 1,
+       "xml": "ordset/interface.xml",
+       "xml_pdf": "ordset/interface.pdf"
+    },
+    {
+       "number": 10,
+       "part": 1,
+       "xml": "table/interface.xml",
+       "xml_pdf": "table/interface.pdf"
+    },
+    {
+       "number": 11,
+       "part": 1,
+       "xml": "ordtable/interface.xml",
+       "xml_pdf": "ordtable/interface.pdf"
+    },
+    {
+       "number": 12,
+       "part": 1,
+       "xml": "ordtable/treap.xml",
+       "xml_pdf": "ordtable/treap.pdf"
+    },
+    {
+       "number": 13,
+       "part": 1,
+       "xml": "aug-ordtable/interface.xml",
+       "xml_pdf": "aug-ordtable/interface.pdf",
+       "attachments": ["analysis/media-asymptotics/*.jpg"]
+    },
+    {
+       "number": 14,
+       "part": 1,
+       "xml": "aug-ordtable/treap.xml",
+       "xml_pdf": "aug-ordtable/treap.pdf"
+    }
+   ]
+}
