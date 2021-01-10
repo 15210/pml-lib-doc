@@ -235,3 +235,14 @@ upload_augordtable_interface: aug-ordtable/interface.xml aug-ordtable/interface.
 upload_augordtable_treap: NO=14
 upload_augordtable_treap: FILE=aug-ordtable/treap
 upload_augordtable_treap: aug-ordtable/treap.xml aug-ordtable/treap.pdf upload_xml_pdf
+
+all: \
+sequences \
+st-sequences \
+keys \
+bst \
+set \
+ordset \
+table \
+ordtable \
+aug-ordtable
