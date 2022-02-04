@@ -184,6 +184,12 @@ aug-ordtable: \
   aug-ordtable/treap.pdf \
   aug-ordtable/treap.xml
 
+primitives: \
+	primitives/interface.pdf \
+	primitives/interface.xml \
+	primitives/implementation.pdf \
+	primitives/implementation.xml
+
 upload_sequences_interface: NO=1
 upload_sequences_interface: FILE=sequences/interface
 upload_sequences_interface: sequences/interface.xml sequences/interface.pdf upload_xml_pdf
