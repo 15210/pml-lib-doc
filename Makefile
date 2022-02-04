@@ -1,7 +1,7 @@
 ## BEGIN: DIDEROT SETUP
 
 # Import course information
-include ../diderot-course-information
+#include ../diderot-course-information
 
 # Label for textbook
 LABEL_TEXTBOOK="LIBDOC"
@@ -149,6 +149,10 @@ st-sequences: \
 keys: \
   keys/interface.pdf \
   keys/interface.xml
+
+elements: \
+  elements/elements.pdf \
+  elements/elements.xml
 
 bst: \
   bst/interface.pdf \

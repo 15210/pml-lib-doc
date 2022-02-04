@@ -1,0 +1,26 @@
+\chapter{Elements}
+\label{ch:elt-structures}
+
+\begin{preamble}
+Implements an element with the given type.
+
+\begin{verbatim}
+structure UnitElt : ELEMENT  where type t = unit
+\end{verbatim}
+
+\begin{verbatim}
+structure BoolElt : ELEMENT  where type t = bool
+\end{verbatim}
+
+\end{preamble}
+
+\section{Cost Specification}
+\include{elements/unit.tex}
+\include{elements/bool.tex}
+\include{elements/int.tex}
+\include{elements/real.tex}
+\include{elements/string.tex}
+\include{elements/option.tex}
+\include{elements/pair.tex}
+\include{elements/triple.tex}
+\include{elements/sequence.tex}

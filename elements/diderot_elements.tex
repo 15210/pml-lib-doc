@@ -1,0 +1,41 @@
+\chapter{Elements}
+\label{ch:elt-structures}
+
+\begin{cluster}
+\label{grp:prmbl:elt-structures::implements}
+
+\begin{preamble}
+\label{prmbl:elt-structures::implements}
+Implements an element with the given type.
+
+\begin{verbatim}
+structure UnitElt : ELEMENT  where type t = unit
+\end{verbatim}
+
+\begin{verbatim}
+structure BoolElt : ELEMENT  where type t = bool
+\end{verbatim}
+
+\end{preamble}
+\end{cluster}
+
+
+\section{Cost Specification}
+\label{sec:elt-structures::cost-specification}
+
+\begin{cluster}
+\label{grp:cost:unit}
+
+\begin{costspec}[UnitElt]
+\label{cost:unit}
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{equal}~(A,B)$ & $\bigoh {(1)}$ & $\bigoh {1}$ \\
+$\sml{compare}~(A,B)$ & $\bigoh {1}$ & $\bigoh {1}$ \\
+$\sml{hash}~(A,B)$ & $\bigoh {1}$ & $\bigoh {1}$ \\
+$\sml{toString}~(A,B)$ & $\bigoh {1}$ & $\bigoh {1}$ \\
+\end{tabular}
+
+\end{costspec}
+\end{cluster}
+
