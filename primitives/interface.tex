@@ -1,2 +1,52 @@
-\chapter{PRIMITIVES Interfaces}
+\chapter{Primitives Interface}
 \label{ch:primitives-interface}
+
+\begin{preamble}
+  The \sml{PRIMITIVES} signature provides a few ``primitive'' operations for parallel evaluation.
+\end{preamble}
+
+\section{Summary}
+\begin{gram}
+\begin{verbatim}
+signature PRIMITIVES =
+sig
+  val par  : (unit -> 'a) * (unit -> 'b) -> ('a * 'b)
+  val par3 : (unit -> 'a) * (unit -> 'b) * (unit -> 'c) -> ('a * 'b * 'c)
+  val par4 : (unit -> 'a) * (unit -> 'b) * (unit -> 'c) * (unit -> 'd) -> ('a * 'b * 'c * 'd)
+  val parTab : int * (int -> 'a) -> (int -> 'a)
+end  
+\end{verbatim}
+\end{gram}
+
+\section{Values}
+\begin{gram}[par]
+\label{gr:primitives-interface:par}
+\begin{verbatim}
+val par  : (unit -> 'a) * (unit -> 'b) -> ('a * 'b)
+\end{verbatim}
+\sml{par (f, g)} evaluates $f$ and $g$ in parallel. It is logically equivalent to \sml{(f(), g())}.
+\end{gram}
+
+\begin{gram}[par3]
+\label{gr:primitives-interface:par3}
+\begin{verbatim}
+val par3 : (unit -> 'a) * (unit -> 'b) * (unit -> 'c) -> ('a * 'b * 'c)
+\end{verbatim}
+\sml{par3 (f, g, h)} evaluates $f$, $g$, and $h$ in parallel. It is logically equivalent to \sml{(f(), g(), h())}.
+\end{gram}
+
+\begin{gram}[par4]
+\label{gr:primitives-interface:par4}
+\begin{verbatim}
+val par4 : (unit -> 'a) * (unit -> 'b) * (unit -> 'c) * (unit -> 'd) -> ('a * 'b * 'c * 'd)
+\end{verbatim}
+\sml{par4 (f, g, h, i)} evaluates $f$, $g$, $h$, and $i$ in parallel. It is logically equivalent to \sml{(f(), g(), h(), i())}.
+\end{gram}
+
+\begin{gram}[parTab]
+\label{gr:primitives-interface:parTab}
+\begin{verbatim}
+val parTab : int * (int -> 'a) -> (int -> 'a)
+\end{verbatim}
+\sml{parTab (n, f)} evaluates $f(i)$ for every $0 \le i < n$ in parallel. It is logically equivalent to \sml{f}.
+\end{gram}
