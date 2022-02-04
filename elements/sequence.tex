@@ -1,0 +1,11 @@
+\begin{costspec}[MkSeqElt]
+\label{cost:sequence}
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{equal}~(A,B)$ & $\bigoh{\sum_i W_{\text{equal}}(A[i], A[j])}$ & $\bigoh {\max_i S_{\text{equal}} (A[i], B[i])}$ \\
+$\sml{compare}~(A,B)$ & $\bigoh{\sum_i W_{\text{compare}}(A[i], A[j])}$ & $\bigoh {\max_i S_{\text{compare}} (A[i], B[i])}$ \\
+$\sml{hash}~(A)$ & $\bigoh{\sum_i W_{\text{hash}}(A[i])}$ & $\bigoh {\max_i S_{\text{hash}} (A[i])}$ \\
+$\sml{toString}~(A)$ & $\bigoh{\sum_i W_{\text{toString}}(A[i])}$ & $\bigoh {\max_i S_{\text{toString}} (A[i])}$ \\
+\end{tabular}
+\end{costspec}
+        

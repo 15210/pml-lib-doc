@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<segment name='chapter'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='nestingmode'>
+all
+</field> <!-- nestingmode -->
+<field name='title'>
+<![CDATA[
+Elements
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Elements
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+ch:elt-structures
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='nestingmode'>
+all
+</field> <!-- nestingmode -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:prmbl:elt-structures::implements
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<atom name='preamble'>
+<field name='pl'>
+...NOT.PROVIDED.PL...
+</field> <!-- pl -->
+<field name='pl_version'>
+...NOT.PROVIDED.PL_VERSION...
+</field> <!-- pl_version -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
+<field name='label'>
+prmbl:elt-structures::implements
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='body'>
+<![CDATA[
+<p>Implements an element with the given type.</p>
+<pre><code>structure UnitElt : ELEMENT  where type t = unit  </code></pre>
+<pre><code>structure BoolElt : ELEMENT  where type t = bool  </code></pre>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+Implements an element with the given type.
+
+\begin{verbatim}
+structure UnitElt : ELEMENT  where type t = unit
+\end{verbatim}
+
+\begin{verbatim}
+structure BoolElt : ELEMENT  where type t = bool
+\end{verbatim}
+]]>
+</field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
+</atom> <!-- preamble -->
+
+</segment> <!-- cluster -->
+
+
+<segment name='section'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='nestingmode'>
+all
+</field> <!-- nestingmode -->
+<field name='title'>
+<![CDATA[
+Cost Specification
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+Cost Specification
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+sec:elt-structures::cost-specification
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='nestingmode'>
+all
+</field> <!-- nestingmode -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:cost:unit
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<atom name='costspec'>
+<field name='pl'>
+...NOT.PROVIDED.PL...
+</field> <!-- pl -->
+<field name='pl_version'>
+...NOT.PROVIDED.PL_VERSION...
+</field> <!-- pl_version -->
+<field name='title'>
+<![CDATA[
+UnitElt
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+UnitElt
+]]>
+</field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
+<field name='label'>
+cost:unit
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='body'>
+<![CDATA[
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span
+class="math inline">\(\texttt{equal}~(A,B)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({(1)}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({1}\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span
+class="math inline">\(\texttt{compare}~(A,B)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({1}\right)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span
+class="math inline">\(\texttt{hash}~(A,B)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({1}\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span
+class="math inline">\(\texttt{toString}~(A,B)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({1}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({1}\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\label{cost:unit}
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{equal}~(A,B)$ & $\bigoh {(1)}$ & $\bigoh {1}$ \\
+$\sml{compare}~(A,B)$ & $\bigoh {1}$ & $\bigoh {1}$ \\
+$\sml{hash}~(A,B)$ & $\bigoh {1}$ & $\bigoh {1}$ \\
+$\sml{toString}~(A,B)$ & $\bigoh {1}$ & $\bigoh {1}$ \\
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
+</atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='nestingmode'>
+all
+</field> <!-- nestingmode -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:cost:string
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<atom name='costspec'>
+<field name='pl'>
+...NOT.PROVIDED.PL...
+</field> <!-- pl -->
+<field name='pl_version'>
+...NOT.PROVIDED.PL_VERSION...
+</field> <!-- pl_version -->
+<field name='title'>
+<![CDATA[
+StringElt
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+StringElt
+]]>
+</field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
+<field name='label'>
+cost:string
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='body'>
+<![CDATA[
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span
+class="math inline">\(\texttt{equal}~(A,B)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|A|
++ |B|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|A|
++ |B|}\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span
+class="math inline">\(\texttt{compare}~(A,B)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|A|
++ |B|}\right)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O\left({|A|
++ |B|}\right)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span
+class="math inline">\(\texttt{hash}~(A)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({|A|}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({|A|}\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span
+class="math inline">\(\texttt{toString}~(A)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({|A|}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({|A|}\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\label{cost:string}
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{equal}~(A,B)$ & $\bigoh{|A| + |B|}$ & $\bigoh {|A| + |B|}$ \\
+$\sml{compare}~(A,B)$ & $\bigoh {|A| + |B|}$ & $\bigoh {|A| + |B|}$ \\
+$\sml{hash}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
+$\sml{toString}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
+</atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+<segment name='cluster'>
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='nestingmode'>
+all
+</field> <!-- nestingmode -->
+<field name='title'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+...NOT.PROVIDED.TITLE...
+]]>
+</field> <!-- title_src -->
+<field name='label'>
+grp:cost:sequence
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+
+<atom name='costspec'>
+<field name='pl'>
+...NOT.PROVIDED.PL...
+</field> <!-- pl -->
+<field name='pl_version'>
+...NOT.PROVIDED.PL_VERSION...
+</field> <!-- pl_version -->
+<field name='title'>
+<![CDATA[
+MkSeqElt
+]]>
+</field> <!-- title -->
+<field name='title_src'>
+<![CDATA[
+MkSeqElt
+]]>
+</field> <!-- title_src -->
+<field name='cover'>
+...NOT.PROVIDED.COVER...
+</field> <!-- cover -->
+<field name='sound'>
+...NOT.PROVIDED.SOUND...
+</field> <!-- sound -->
+<field name='label'>
+cost:sequence
+</field> <!-- label -->
+<field name='depend'>
+...NOT.PROVIDED.DEPEND...
+</field> <!-- depend -->
+<field name='point_value'>
+0.0
+</field> <!-- point_value -->
+<field name='body'>
+<![CDATA[
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Work</strong></td>
+<td style="text-align: center;"><strong>Span</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span
+class="math inline">\(\texttt{equal}~(A,B)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({\sum_i W_{\text{equal}}(A[i],
+A[j])}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({\max_i S_{\text{equal}} (A[i],
+B[i])}\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span
+class="math inline">\(\texttt{compare}~(A,B)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({\sum_i W_{\text{compare}}(A[i],
+A[j])}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({\max_i S_{\text{compare}} (A[i],
+B[i])}\right)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span
+class="math inline">\(\texttt{hash}~(A)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({\sum_i
+W_{\text{hash}}(A[i])}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({\max_i S_{\text{hash}}
+(A[i])}\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span
+class="math inline">\(\texttt{toString}~(A)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({\sum_i
+W_{\text{toString}}(A[i])}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(O\left({\max_i S_{\text{toString}}
+(A[i])}\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+]]>
+</field> <!-- body -->
+<field name='body_src'>
+<![CDATA[
+\label{cost:sequence}
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{equal}~(A,B)$ & $\bigoh{\sum_i W_{\text{equal}}(A[i], A[j])}$ & $\bigoh {\max_i S_{\text{equal}} (A[i], B[i])}$ \\
+$\sml{compare}~(A,B)$ & $\bigoh{\sum_i W_{\text{compare}}(A[i], A[j])}$ & $\bigoh {\max_i S_{\text{compare}} (A[i], B[i])}$ \\
+$\sml{hash}~(A)$ & $\bigoh{\sum_i W_{\text{hash}}(A[i])}$ & $\bigoh {\max_i S_{\text{hash}} (A[i])}$ \\
+$\sml{toString}~(A)$ & $\bigoh{\sum_i W_{\text{toString}}(A[i])}$ & $\bigoh {\max_i S_{\text{toString}} (A[i])}$ \\
+\end{tabular}
+]]>
+</field> <!-- body_src -->
+
+<field name='caption'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption -->
+<field name='caption_src'>
+<![CDATA[
+...NOT.PROVIDED.CAPTION...
+]]>
+</field> <!-- caption_src -->
+</atom> <!-- costspec -->
+
+</segment> <!-- cluster -->
+
+
+</segment> <!-- section -->
+
+</segment> <!-- chapter -->

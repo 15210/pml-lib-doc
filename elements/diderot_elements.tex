@@ -39,3 +39,35 @@ $\sml{toString}~(A,B)$ & $\bigoh {1}$ & $\bigoh {1}$ \\
 \end{costspec}
 \end{cluster}
 
+\begin{cluster}
+\label{grp:cost:string}
+
+\begin{costspec}[StringElt]
+\label{cost:string}
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{equal}~(A,B)$ & $\bigoh{|A| + |B|}$ & $\bigoh {|A| + |B|}$ \\
+$\sml{compare}~(A,B)$ & $\bigoh {|A| + |B|}$ & $\bigoh {|A| + |B|}$ \\
+$\sml{hash}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
+$\sml{toString}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
+\end{tabular}
+
+\end{costspec}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:cost:sequence}
+
+\begin{costspec}[MkSeqElt]
+\label{cost:sequence}
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{equal}~(A,B)$ & $\bigoh{\sum_i W_{\text{equal}}(A[i], A[j])}$ & $\bigoh {\max_i S_{\text{equal}} (A[i], B[i])}$ \\
+$\sml{compare}~(A,B)$ & $\bigoh{\sum_i W_{\text{compare}}(A[i], A[j])}$ & $\bigoh {\max_i S_{\text{compare}} (A[i], B[i])}$ \\
+$\sml{hash}~(A)$ & $\bigoh{\sum_i W_{\text{hash}}(A[i])}$ & $\bigoh {\max_i S_{\text{hash}} (A[i])}$ \\
+$\sml{toString}~(A)$ & $\bigoh{\sum_i W_{\text{toString}}(A[i])}$ & $\bigoh {\max_i S_{\text{toString}} (A[i])}$ \\
+\end{tabular}
+
+\end{costspec}
+\end{cluster}
+

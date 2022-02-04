@@ -1,0 +1,11 @@
+\begin{costspec}[StringElt]
+\label{cost:string}
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{equal}~(A,B)$ & $\bigoh{|A| + |B|}$ & $\bigoh {|A| + |B|}$ \\
+$\sml{compare}~(A,B)$ & $\bigoh {|A| + |B|}$ & $\bigoh {|A| + |B|}$ \\
+$\sml{hash}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
+$\sml{toString}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
+\end{tabular}
+\end{costspec}
+    
