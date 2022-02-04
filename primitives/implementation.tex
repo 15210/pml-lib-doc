@@ -1,2 +1,17 @@
 \chapter{Primitives}
 \label{ch:primitives}
+
+\begin{preamble}
+Implements the \sml{PRIMITIVES} signature.
+\end{preamble}
+
+\section{Cost Specification}
+\begin{costspec}
+\begin{tabular}{ccc}
+  & \textbf{Work} & \textbf{Span} \\
+$\sml{par}~(f,g)$ & $\bigoh{W_f(n) + W_g(n)}$ & $\bigoh{\max(S_f(n), S_g(n))}$ \\
+$\sml{par3}~(f,g,h)$ & $\bigoh{W_f(n) + W_g(n) + W_h(n)}$ & $\bigoh{\max(S_f(n), S_g(n), S_h(n))}$ \\
+$\sml{par4}~(f,g,h,i)$ & $\bigoh{W_f(n) + W_g(n) + W_h(n) + W_i(n)}$ & $\bigoh{\max(S_f(n), S_g(n), S_h(n)), S_i(n)}$ \\
+$\sml{parTab}~(n,f)$ & $\bigoh{\sum\limits_{i=0}^{n-1} W_f(i)}$ & $\bigoh{\max\limits_{i=0}^{n-1} S_f(i)}$
+\end{tabular}
+\end{costspec}
