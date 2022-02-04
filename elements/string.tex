@@ -2,10 +2,10 @@
 \label{cost:string}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{equal}~(A,B)$ & $\bigoh{|A| + |B|}$ & $\bigoh {|A| + |B|}$ \\
-$\sml{compare}~(A,B)$ & $\bigoh {|A| + |B|}$ & $\bigoh {|A| + |B|}$ \\
-$\sml{hash}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
-$\sml{toString}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
+$\sml{equal}~(A,B)$ & $\displaystyle \bigoh{\min(|A|, |B|)}$ & $\displaystyle \bigoh {\min(|A|, |B|)}$ \\
+$\sml{compare}~(A,B)$ & $\displaystyle \bigoh {\min(|A|, |B|)}$ & $\displaystyle \bigoh {\min(|A|, |B|)}$ \\
+$\sml{hash}~(A)$ & $\displaystyle \bigoh {|A|}$ & $\displaystyle \bigoh {|A|}$ \\
+$\sml{toString}~(A)$ & $\displaystyle \bigoh {|A|}$ & $\displaystyle \bigoh {|A|}$ \\
 \end{tabular}
 \end{costspec}
     

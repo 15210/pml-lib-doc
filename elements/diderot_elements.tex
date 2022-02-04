@@ -46,10 +46,10 @@ $\sml{toString}~(A,B)$ & $\bigoh {1}$ & $\bigoh {1}$ \\
 \label{cost:string}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{equal}~(A,B)$ & $\bigoh{|A| + |B|}$ & $\bigoh {|A| + |B|}$ \\
-$\sml{compare}~(A,B)$ & $\bigoh {|A| + |B|}$ & $\bigoh {|A| + |B|}$ \\
-$\sml{hash}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
-$\sml{toString}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
+$\sml{equal}~(A,B)$ & $\displaystyle \bigoh{\min(|A|, |B|)}$ & $\displaystyle \bigoh {\min(|A|, |B|)}$ \\
+$\sml{compare}~(A,B)$ & $\displaystyle \bigoh {\min(|A|, |B|)}$ & $\displaystyle \bigoh {\min(|A|, |B|)}$ \\
+$\sml{hash}~(A)$ & $\displaystyle \bigoh {|A|}$ & $\displaystyle \bigoh {|A|}$ \\
+$\sml{toString}~(A)$ & $\displaystyle \bigoh {|A|}$ & $\displaystyle \bigoh {|A|}$ \\
 \end{tabular}
 
 \end{costspec}
@@ -62,10 +62,10 @@ $\sml{toString}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
 \label{cost:sequence}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{equal}~(A,B)$ & $\bigoh{\sum_i W_{\text{equal}}(A[i], A[j])}$ & $\bigoh {\max_i S_{\text{equal}} (A[i], B[i])}$ \\
-$\sml{compare}~(A,B)$ & $\bigoh{\sum_i W_{\text{compare}}(A[i], A[j])}$ & $\bigoh {\max_i S_{\text{compare}} (A[i], B[i])}$ \\
-$\sml{hash}~(A)$ & $\bigoh{\sum_i W_{\text{hash}}(A[i])}$ & $\bigoh {\max_i S_{\text{hash}} (A[i])}$ \\
-$\sml{toString}~(A)$ & $\bigoh{\sum_i W_{\text{toString}}(A[i])}$ & $\bigoh {\max_i S_{\text{toString}} (A[i])}$ \\
+$\sml{equal}~(A,B)$ & $\displaystyle \bigoh{\sum_{i=0}^{\min(|A|, |B|) - 1} W_{\sml{equal}}(A[i], B[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{\min(|A|, |B|) - 1} S_{\sml{equal}} (A[i], B[i])}$ \\
+$\sml{compare}~(A,B)$ & $\displaystyle \bigoh{\sum_{i=0}^{\min(|A|, |B|) - 1} W_{\sml{compare}}(A[i], B[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{\min(|A|, |B|) - 1} S_{\sml{compare}} (A[i], B[i])}$ \\
+$\sml{hash}~(A)$ & $\displaystyle \bigoh{\sum_{i=0}^{|A| - 1} W_{\sml{hash}}(A[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{|A| - 1} S_{\sml{hash}} (A[i])}$ \\
+$\sml{toString}~(A)$ & $\displaystyle \bigoh{\sum_{i=0}^{|A| - 1} W_{\sml{toString}}(A[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{|A| - 1} S_{\sml{tS}} (A[i])}$ \\
 \end{tabular}
 
 \end{costspec}

@@ -335,34 +335,38 @@ cost:string
 <tr class="even">
 <td style="text-align: center;"><span
 class="math inline">\(\texttt{equal}~(A,B)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(O\left({|A|
-+ |B|}\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(O\left({|A|
-+ |B|}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\displaystyle O\left({\min(|A|,
+|B|)}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\displaystyle O\left({\min(|A|,
+|B|)}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span
 class="math inline">\(\texttt{compare}~(A,B)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(O\left({|A|
-+ |B|}\right)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(O\left({|A|
-+ |B|}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\displaystyle O\left({\min(|A|,
+|B|)}\right)\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\displaystyle O\left({\min(|A|,
+|B|)}\right)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span
 class="math inline">\(\texttt{hash}~(A)\)</span></td>
 <td style="text-align: center;"><span
-class="math inline">\(O\left({|A|}\right)\)</span></td>
+class="math inline">\(\displaystyle O\left({|A|}\right)\)</span></td>
 <td style="text-align: center;"><span
-class="math inline">\(O\left({|A|}\right)\)</span></td>
+class="math inline">\(\displaystyle O\left({|A|}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span
 class="math inline">\(\texttt{toString}~(A)\)</span></td>
 <td style="text-align: center;"><span
-class="math inline">\(O\left({|A|}\right)\)</span></td>
+class="math inline">\(\displaystyle O\left({|A|}\right)\)</span></td>
 <td style="text-align: center;"><span
-class="math inline">\(O\left({|A|}\right)\)</span></td>
+class="math inline">\(\displaystyle O\left({|A|}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -373,10 +377,10 @@ class="math inline">\(O\left({|A|}\right)\)</span></td>
 \label{cost:string}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{equal}~(A,B)$ & $\bigoh{|A| + |B|}$ & $\bigoh {|A| + |B|}$ \\
-$\sml{compare}~(A,B)$ & $\bigoh {|A| + |B|}$ & $\bigoh {|A| + |B|}$ \\
-$\sml{hash}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
-$\sml{toString}~(A)$ & $\bigoh {|A|}$ & $\bigoh {|A|}$ \\
+$\sml{equal}~(A,B)$ & $\displaystyle \bigoh{\min(|A|, |B|)}$ & $\displaystyle \bigoh {\min(|A|, |B|)}$ \\
+$\sml{compare}~(A,B)$ & $\displaystyle \bigoh {\min(|A|, |B|)}$ & $\displaystyle \bigoh {\min(|A|, |B|)}$ \\
+$\sml{hash}~(A)$ & $\displaystyle \bigoh {|A|}$ & $\displaystyle \bigoh {|A|}$ \\
+$\sml{toString}~(A)$ & $\displaystyle \bigoh {|A|}$ & $\displaystyle \bigoh {|A|}$ \\
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
@@ -464,41 +468,41 @@ cost:sequence
 <td style="text-align: center;"><span
 class="math inline">\(\texttt{equal}~(A,B)\)</span></td>
 <td style="text-align: center;"><span
-class="math inline">\(O\left({\sum_i W_{\text{equal}}(A[i],
-A[j])}\right)\)</span></td>
+class="math inline">\(\displaystyle O\left({\sum_{i=0}^{\min(|A|, |B|) -
+1} W_{\texttt{equal}}(A[i], B[i])}\right)\)</span></td>
 <td style="text-align: center;"><span
-class="math inline">\(O\left({\max_i S_{\text{equal}} (A[i],
-B[i])}\right)\)</span></td>
+class="math inline">\(\displaystyle O\left({\max_{i=0}^{\min(|A|, |B|) -
+1} S_{\texttt{equal}} (A[i], B[i])}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span
 class="math inline">\(\texttt{compare}~(A,B)\)</span></td>
 <td style="text-align: center;"><span
-class="math inline">\(O\left({\sum_i W_{\text{compare}}(A[i],
-A[j])}\right)\)</span></td>
+class="math inline">\(\displaystyle O\left({\sum_{i=0}^{\min(|A|, |B|) -
+1} W_{\texttt{compare}}(A[i], B[i])}\right)\)</span></td>
 <td style="text-align: center;"><span
-class="math inline">\(O\left({\max_i S_{\text{compare}} (A[i],
-B[i])}\right)\)</span></td>
+class="math inline">\(\displaystyle O\left({\max_{i=0}^{\min(|A|, |B|) -
+1} S_{\texttt{compare}} (A[i], B[i])}\right)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span
 class="math inline">\(\texttt{hash}~(A)\)</span></td>
 <td style="text-align: center;"><span
-class="math inline">\(O\left({\sum_i
-W_{\text{hash}}(A[i])}\right)\)</span></td>
+class="math inline">\(\displaystyle O\left({\sum_{i=0}^{|A| - 1}
+W_{\texttt{hash}}(A[i])}\right)\)</span></td>
 <td style="text-align: center;"><span
-class="math inline">\(O\left({\max_i S_{\text{hash}}
-(A[i])}\right)\)</span></td>
+class="math inline">\(\displaystyle O\left({\max_{i=0}^{|A| - 1}
+S_{\texttt{hash}} (A[i])}\right)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span
 class="math inline">\(\texttt{toString}~(A)\)</span></td>
 <td style="text-align: center;"><span
-class="math inline">\(O\left({\sum_i
-W_{\text{toString}}(A[i])}\right)\)</span></td>
+class="math inline">\(\displaystyle O\left({\sum_{i=0}^{|A| - 1}
+W_{\texttt{toString}}(A[i])}\right)\)</span></td>
 <td style="text-align: center;"><span
-class="math inline">\(O\left({\max_i S_{\text{toString}}
-(A[i])}\right)\)</span></td>
+class="math inline">\(\displaystyle O\left({\max_{i=0}^{|A| - 1}
+S_{\texttt{tS}} (A[i])}\right)\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -509,10 +513,10 @@ class="math inline">\(O\left({\max_i S_{\text{toString}}
 \label{cost:sequence}
 \begin{tabular}{c|c|c}
 & \textbf{Work} & \textbf{Span} \\
-$\sml{equal}~(A,B)$ & $\bigoh{\sum_i W_{\text{equal}}(A[i], A[j])}$ & $\bigoh {\max_i S_{\text{equal}} (A[i], B[i])}$ \\
-$\sml{compare}~(A,B)$ & $\bigoh{\sum_i W_{\text{compare}}(A[i], A[j])}$ & $\bigoh {\max_i S_{\text{compare}} (A[i], B[i])}$ \\
-$\sml{hash}~(A)$ & $\bigoh{\sum_i W_{\text{hash}}(A[i])}$ & $\bigoh {\max_i S_{\text{hash}} (A[i])}$ \\
-$\sml{toString}~(A)$ & $\bigoh{\sum_i W_{\text{toString}}(A[i])}$ & $\bigoh {\max_i S_{\text{toString}} (A[i])}$ \\
+$\sml{equal}~(A,B)$ & $\displaystyle \bigoh{\sum_{i=0}^{\min(|A|, |B|) - 1} W_{\sml{equal}}(A[i], B[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{\min(|A|, |B|) - 1} S_{\sml{equal}} (A[i], B[i])}$ \\
+$\sml{compare}~(A,B)$ & $\displaystyle \bigoh{\sum_{i=0}^{\min(|A|, |B|) - 1} W_{\sml{compare}}(A[i], B[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{\min(|A|, |B|) - 1} S_{\sml{compare}} (A[i], B[i])}$ \\
+$\sml{hash}~(A)$ & $\displaystyle \bigoh{\sum_{i=0}^{|A| - 1} W_{\sml{hash}}(A[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{|A| - 1} S_{\sml{hash}} (A[i])}$ \\
+$\sml{toString}~(A)$ & $\displaystyle \bigoh{\sum_{i=0}^{|A| - 1} W_{\sml{toString}}(A[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{|A| - 1} S_{\sml{tS}} (A[i])}$ \\
 \end{tabular}
 ]]>
 </field> <!-- body_src -->
