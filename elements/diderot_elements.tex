@@ -88,6 +88,39 @@ $\sml{toString}~(A)$ & $\displaystyle \bigoh {|A|}$ & $\displaystyle \bigoh {|A|
 \end{cluster}
 
 \begin{cluster}
+\label{grp:cost:pair}
+
+\begin{costspec}[MkPairElt]
+\label{cost:pair}
+\begin{tabular}{c|c|c}
+& \textbf{Work} & \textbf{Span} \\
+$\sml{equal}~((A_1, A_2),(B_1, B_2))$ & $\displaystyle \bigoh{W_{\sml{equal}} \left( A_1, B_1 \right) + W_{\sml{equal}} \left( A_2, B_2 \right)}$ & $\displaystyle \bigoh {\max \left( S_{\sml{equal}} \left( A_1, B_1 \right), S_{\sml{equal}} \left( A_2, B_2 \right) \right)}$ \\
+$\sml{compare}~((A_1, A_2), (B_1, B_2))$ & $\displaystyle \bigoh{W_{\sml{compare}} \left( A_1, B_1 \right) + W_{\sml{compare}} \left( A_2, B_2 \right)}$ & $\displaystyle \bigoh {\max \left( S_{\sml{compare}} \left( A_1, B_1 \right), S_{\sml{compare}} \left( A_2, B_2 \right) \right)}$ \\
+$\sml{hash}~(A_1, A_2)$ & $\displaystyle \bigoh{W_{\sml{hash}} \left( A_1 \right) + W_{\sml{hash}} \left( A_2 \right)}$ & $\displaystyle \bigoh {S_{\sml{hash}} \left( A_1 \right) + S_{\sml{hash}} \left( A_2 \right)}$ \\
+$\sml{toString}~(A_1, A_2)$ & $\displaystyle \bigoh{W_{\sml{toString}} \left( A_1 \right) + W_{\sml{toString}} \left( A_2 \right)}$ & $\displaystyle \bigoh {\max \left( S_{\sml{toString}} \left( A_1 \right), S_{\sml{toString}} \left( A_2 \right)\right)}$ \\
+\end{tabular}
+
+\end{costspec}
+\end{cluster}
+
+\begin{cluster}
+\label{grp:cost:triple}
+
+\begin{costspec}[MkTripleElt]
+    \label{cost:triple}
+    \begin{tabular}{c|c|c}
+    & \textbf{Work} & \textbf{Span} \\
+    $\sml{equal}~((A_1, A_2, A_3),(B_1, B_2, B_3))$ & $\displaystyle \bigoh{W_{\sml{equal}} \left( A_1, B_1 \right) + W_{\sml{equal}} \left( A_2, B_2 \right) + W_{\sml{equal}} \left( A_3, B_3 \right)}$ & $\displaystyle \bigoh {\max \left( S_{\sml{equal}} \left( A_1, B_1 \right), S_{\sml{equal}} \left( A_2, B_2 \right), S_{\sml{equal}} \left( A_3, B_3 \right) \right)}$ \\
+    $\sml{compare}~((A_1, A_2, A_3), (B_1, B_2, B_3))$ & $\displaystyle \bigoh{W_{\sml{compare}} \left( A_1, B_1 \right) + W_{\sml{compare}} \left( A_2, B_2 \right) + W_{\sml{compare}} \left( A_3, B_3 \right)}$ & $\displaystyle \bigoh {\max \left( S_{\sml{compare}} \left( A_1, B_1 \right), S_{\sml{compare}} \left( A_2, B_2 \right), S_{\sml{compare}} \left( A_3, B_3 \right) \right)}$ \\
+    $\sml{hash}~(A_1, A_2, A_3)$ & $\displaystyle \bigoh{W_{\sml{hash}} \left( A_1 \right) + W_{\sml{hash}} \left( A_2 \right) + W_{\sml{hash}} \left( A_3 \right)}$ & $\displaystyle \bigoh {S_{\sml{hash}} \left( A_1 \right) + S_{\sml{hash}} \left( A_2 \right) + S_{\sml{hash}} \left( A_3 \right)}$ \\
+    $\sml{toString}~(A_1, A_2)$ & $\displaystyle \bigoh{W_{\sml{toString}} \left( A_1 \right) + W_{\sml{toString}} \left( A_2 \right) + + W_{\sml{toString}} \left( A_3 \right)}$ & $\displaystyle \bigoh {\max \left( S_{\sml{toString}} \left( A_1 \right), S_{\sml{toString}} \left( A_2 \right), S_{\sml{toString}} \left( A_3 \right)\right)}$ \\
+    \end{tabular}
+    
+
+\end{costspec}
+\end{cluster}
+
+\begin{cluster}
 \label{grp:cost:sequence}
 
 \begin{costspec}[MkSeqElt]

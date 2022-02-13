@@ -5,7 +5,7 @@
 $\sml{equal}~(A,B)$ & $\displaystyle \bigoh{\sum_{i=0}^{\min(|A|, |B|) - 1} W_{\sml{equal}}(A[i], B[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{\min(|A|, |B|) - 1} S_{\sml{equal}} (A[i], B[i])}$ \\
 $\sml{compare}~(A,B)$ & $\displaystyle \bigoh{\sum_{i=0}^{\min(|A|, |B|) - 1} W_{\sml{compare}}(A[i], B[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{\min(|A|, |B|) - 1} S_{\sml{compare}} (A[i], B[i])}$ \\
 $\sml{hash}~(A)$ & $\displaystyle \bigoh{\sum_{i=0}^{|A| - 1} W_{\sml{hash}}(A[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{|A| - 1} S_{\sml{hash}} (A[i])}$ \\
-$\sml{toString}~(A)$ & $\displaystyle \bigoh{\sum_{i=0}^{|A| - 1} W_{\sml{toString}}(A[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{|A| - 1} S_{\sml{tS}} (A[i])}$ \\
+$\sml{toString}~(A)$ & $\displaystyle \bigoh{\sum_{i=0}^{|A| - 1} W_{\sml{toString}}(A[i])}$ & $\displaystyle \bigoh {\max_{i=0}^{|A| - 1} S_{\sml{toString}} (A[i])}$ \\
 \end{tabular}
 \end{costspec}
         
